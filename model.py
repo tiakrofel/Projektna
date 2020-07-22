@@ -6,51 +6,30 @@ class Knjigozer:
         self.prebrane = []
         self._moja_knjiznica = {}
 
-    def dodaj_neprebrano(self, naslov, avtor, zanr):
+    def dodaj_neprebrano(self, avtor, naslov, zanr):
         if (naslov, avtor) in self._moja_knjiznica:
             raise ValueError('Ta knjiga je že v tvoji knjižnici!')
         dodana = Neprebrana(naslov, avtor, zanr, self)
         self.neprebrane.append(dodana)
-        self._moja_knjiznica[(naslov, avtor)] = 0
+        self._moja_knjiznica[(avtor, naslov)] = 0
         return dodana
     
-    def dodaj_trenutno(self, neprebrana, strani, napredek=0):
-        izbrana = Trenutna(neprebrana, strani, napredek, self)
+    def dodaj_trenutno(self, neprebrana, napredek=0):
+        izbrana = Trenutna(neprebrana, napredek, self)
         self.trenutne.append(izbrana)
-        self._moja_knjiznica[(neprebrana.naslov, neprebrana.avtor)] = napredek 
+        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = napredek 
         self.neprebrane.remove(neprebrana)
         return izbrana
 
-    def dokoncana(self, datum, trenutna, ocena):
-        koncana = Prebrana(datum, trenutna, ocena, self)
+    def dokoncana(self, datum, trenutna, strani, ocena):
+        koncana = Prebrana(datum, trenutna, strani, ocena, self)
         self.prebrane.append(koncana)
-        self._moja_knjiznica[(trenutna.naslov, trenutna.avtor)] = trenutna.strani
+        self._moja_knjiznica[(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)] = strani
         self.trenutne.remove(trenutna)
         return f'Bravo! Knjiga {trenutna} je sedaj med tvojimi prebranimi knjigami!'
 
-    def slovarcek(self):
-        return {
-            'neprebrane': [{
-                'naslov': neprebrana.naslov,
-                'avtor': neprebrana.avtor,
-                'zanr': neprebrana.zanr,
-            } for neprebrana in self.neprebrane],
-            'trenutne': [{
-                'naslov': trenutna.neprebrana.naslov,
-                'avtor': trenutna.neprebrana.avtor,
-                'zanr': trenutna.neprebrana.zanr,
-                'strani': trenutna.strani,
-                'napredek': trenutna.napredek,
-            } for trenutna in self.trenutne],
-            'prebrane': [{
-                'datum': str(prebrana.datum),
-                'naslov': prebrana.trenutna.neprebrana.naslov,
-                'avtor': prebrana.trenutna.neprebrana.avtor,
-                'zanr': prebrana.trenutna.neprebrana.zanr,
-                'strani': prebrana.trenutna.strani,
-                'ocena': prebrana.ocena,
-            } for prebrana in self.prebrane],
-        }
+    def __str__(self):
+        return f'Neprebrane: {self.neprebrane}, trenutne: {self.trenutne}, prebrane: {self.prebrane}'
 
 class Neprebrana:
 
@@ -59,22 +38,40 @@ class Neprebrana:
         self.avtor = avtor
         self.zanr = zanr
         self.knjigozer = knjigozer
+    
+    def __repr__(self):
+        return f'<Neprebrana: {self}>'
+    
+    def __str__(self):
+        return f'{self.avtor}: {self.naslov}'
 
 
 class Trenutna:
 
-    def __init__(self, neprebrana, strani, napredek, knjigozer):
+    def __init__(self, neprebrana, napredek, knjigozer):
         self.neprebrana = neprebrana
-        self.strani = strani
         self.napredek = napredek
-        self.knjigozer = knjigozer 
+        self.knjigozer = knjigozer
+    
+    def __repr__(self):
+        return f'<Trenutno brana: {self}>'
+    
+    def __str__(self):
+        return f'{self.neprebrana.avtor}: {self.neprebrana.naslov}, stran {self.napredek}' 
     
 
 
 class Prebrana:
 
-    def __init__(self, datum, trenutna, ocena, knjigozer):
+    def __init__(self, datum, trenutna, strani, ocena, knjigozer):
         self.datum = datum
-        self.neprebrana = trenutna
+        self.trenutna = trenutna
+        self.strani = strani
         self.ocena = ocena
         self.knjigozer = knjigozer
+    
+    def __repr__(self):
+        return f'<Prebrana: {self}>'
+    
+    def __str__(self):
+        return f'{self.trenutna.neprebrana.avtor}: {self.trenutna.neprebrana.naslov}, {self.strani} strani'
