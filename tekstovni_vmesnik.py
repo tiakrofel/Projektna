@@ -3,15 +3,46 @@ from model import Knjigozer
 
 knjigozer = Knjigozer()
 
-neprebrana1 = knjigozer.dodaj_neprebrano('Donna Tartt', 'The Goldfinch')
+neprebrana1 = knjigozer.dodaj_neprebrano('Tartt, Donna', 'The Goldfinch')
 trenutna1 = knjigozer.izberi_trenutno(neprebrana1, 771)
 dokoncana1 = knjigozer.dokoncana(date(2019, 8, 20), trenutna1, '7/7') 
 
-neprebrana2 = knjigozer.dodaj_neprebrano('Neil Gaiman', 'The Graveyard Book')
+neprebrana2 = knjigozer.dodaj_neprebrano('Gaiman, Neil', 'The Graveyard Book')
 
-trenutna2 = knjigozer.dodaj_trenutno('Stephen Fry', 'Mythos', 416, 82)
+trenutna2 = knjigozer.dodaj_trenutno('Fry, Stephen', 'Mythos', 416, 82)
 
-dokoncana2 = knjigozer.dodaj_prebrano(date(2019, 7, 1), 'Madeline Miller', 'Circe', 393, '6/7')
+dokoncana2 = knjigozer.dodaj_prebrano(date(2019, 7, 1), 'Miller, Madeline', 'Circe', 393, '6/7')
+
+
+def krepko(niz):
+    return f'\033[1m{niz}\033[0m'
+
+def modro(niz):
+    return f'\033[1;94m{niz}\033[0m'
+
+def rdeče(niz):
+    return f'\033[1;91m{niz}\033[0m'
+
+
+#Osnutek:
+def zacetna_stran(): 
+    print(krepko('Pozdravljeni v programu knjigožer!'))
+    print('Vaša osebna knjižnica trenutno izgleda takole:')
+    print(f'Število knjig, ki ste jih že dokončali: {len(knjigozer.prebrane)}')
+    print(f'Število knjig, ki jih trenutno berete: {len(knjigozer.trenutne)}')
+    print(f'Število knjig, ki si jih želite prebrati: {len(knjigozer.neprebrane)}')
+    print('Izberite seznam, ki si ga želite podrobneje ogledati:')
+
+def ogled_knjiznice():
+    knjigozer._moja_knjiznica
+    
+
+def vnos_avtorja():
+    while True:
+        priimek = input('Vnesite priimek avtorja knjige: ')
+        ime = input('Vnesite ime avtorja knjige: ')
+        avtor = priimek + ', ' + ime
+        return avtor
 
 def stevilcni_vnos(pobuda):
     while True:
@@ -38,11 +69,11 @@ def izbira(seznam):
 
 def moznosti_uporabnika():
     while True: 
-        print('Izberite eno izmed naslednjih možnosti za urejanje osebne knjižnice: ')
+        print(krepko('Izberite eno izmed naslednjih možnosti za urejanje osebne knjižnice: '))
         moznosti = [
             'ogled vseh knjig v osebni knjižnici',
             'ogled trenutnih branj',
-            'posodobitev trenutnih branja',
+            'posodobitev trenutnih branj',
             'ogled neprebranih knjig',
             'urejanje neprebranih knjig',
             'ogled prebranih knjig',
@@ -68,14 +99,14 @@ def moznosti_uporabnika():
         elif izbrana_moznost == moznosti[6]:
             uredi_prebrane()
         elif izbrana_moznost == moznosti[7]:
-            print('Nasvidenje.')
+            print('Zapustili ste svojo osebno knjižnico.')
             break
         else:
             print('Izbrana možnost ni na voljo.')
 
 def posodobi_branje():
     while True:
-        print('Izberite eno izmed naslednjih možnosti za urejanje osebne knjižnice: ')
+        print('Izberite eno izmed naslednjih možnosti za urejanje vaših trenutnih branj: ')
         moznosti = [
             'začetek branja ene izmed knjig s seznama neprebranih',
             'začetek branja knjige, ki ni zabeležena na nobenem seznamu knjižnice',
@@ -110,7 +141,7 @@ def izberi_trenutno():
     print('Knjiga je bila prenešena k trenutnim branjem.')
 
 def dodaj_trenutno():
-    avtor = input('Vnesite avtorja knjige: ')
+    avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
     strani = stevilcni_vnos('Vnesite število strani knjige: ')
     napredek = stevilcni_vnos('Vnesite število že prebranih strani: ')
@@ -160,13 +191,13 @@ def uredi_neprebrane():
             print('Izbrana možnost ni na voljo.')
 
 def dodaj_neprebrano():
-    avtor = input('Vnesite avtorja knjige: ')
+    avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
     knjigozer.dodaj_neprebrano(avtor, naslov)
     print('Knjiga je bila dodana med neprebrane knjige.')
 
 def najdi_neprebrano():
-    avtor = input('Vnesite avtorja knjige: ')
+    avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
     knjigozer.najdi_neprebrano(avtor, naslov)
     print('Ta knjiga je res na seznamu neprebranih.')
@@ -203,7 +234,7 @@ def uredi_prebrane():
 
 def dodaj_prebrano():
     datum = date.today()
-    avtor = input('Vnesite avtorja knjige: ')
+    avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
     strani = stevilcni_vnos('Vnesite število strani knjige: ')
     ocena = input('Na kratko ocenite knjigo: ')
@@ -220,7 +251,7 @@ def direktno_prebrana():
     print('Knjiga je bila prenešena k prebranim knjigam.')
 
 def najdi_prebrano():
-    avtor = input('Vnesite avtorja knjige: ')
+    avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
     knjigozer.najdi_prebrano(avtor, naslov)
     print('Ta knjiga je res na seznamu prebranih.')
