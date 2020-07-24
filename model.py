@@ -7,7 +7,8 @@ class Knjigozer:
         self._moja_knjiznica = {}
     
     def ogled_knjig(self):
-        print(self)
+        for (avtor, naslov) in self._moja_knjiznica:
+            print(f'{avtor}: {naslov}')
 
     def dodaj_neprebrano(self, avtor, naslov):
         if (naslov, avtor) in self._moja_knjiznica:
@@ -19,14 +20,13 @@ class Knjigozer:
     
     def najdi_neprebrano(self, avtor, naslov):
         if (avtor, naslov) not in self._moja_knjiznica:
-            raise ValueError('Ta knjiga še ni v tvoji knjižnici!')
+            raise ValueError('Te knjige ni v tvoji knjižnici.')
         elif Neprebrana(naslov, avtor, self) not in self.neprebrane:
-            raise ValueError('Ta knjiga je bodisi med trenutnimi branji bodisi med že prebranimi knjigami.')
+            raise ValueError('Ta knjiga je v tvoji knjižnici, vendar ne med neprebranimi knjigami.')
         return True
     
     def odstrani_neprebrano(self, neprebrana):
-        izbrisana = Neprebrana(neprebrana.naslov, neprebrana.avtor, self)
-        self.neprebrane.remove(izbrisana)
+        self.neprebrane.remove(neprebrana)
         del self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)]
     
     def dodaj_trenutno(self, avtor, naslov, strani, napredek=1):
@@ -35,13 +35,13 @@ class Knjigozer:
         prva = Neprebrana(naslov, avtor, self)
         spremenjena = Trenutna(prva, napredek, strani, self)
         self.trenutne.append(spremenjena)
-        self._moja_knjiznica[(prva.avtor, prva.naslov)] = napredek / strani
+        self._moja_knjiznica[(prva.avtor, prva.naslov)] = int(napredek) / int(strani)
         return spremenjena
 
     def izberi_trenutno(self, neprebrana, strani, napredek=1):
         izbrana = Trenutna(neprebrana, napredek, strani, self)
         self.trenutne.append(izbrana)
-        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = napredek / strani 
+        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = int(napredek) / int(strani) 
         self.neprebrane.remove(neprebrana)
         return izbrana
 
@@ -49,7 +49,7 @@ class Knjigozer:
         posodobljena = Trenutna(trenutna.neprebrana, napredek, trenutna.strani, self)
         self.trenutne.remove(trenutna)
         self.trenutne.append(posodobljena)
-        self._moja_knjiznica[(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)] = napredek / trenutna.strani
+        self._moja_knjiznica[(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)] = int(napredek) / int(trenutna.strani)
         return posodobljena
     
     def opuscena_trenutna(self, trenutna):
@@ -71,7 +71,7 @@ class Knjigozer:
         vmesna = Trenutna(neprebrana, 1, strani, self)
         direktna = Prebrana(datum, vmesna, ocena, self)
         self.prebrane.append(direktna)
-        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = strani
+        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = int(strani)
         self.neprebrane.remove(neprebrana)
         return direktna
 
@@ -82,7 +82,7 @@ class Knjigozer:
         naslednja = Trenutna(zacetna, 1, strani, self)
         finalna = Prebrana(datum, naslednja, ocena, self)
         self.prebrane.append(finalna)
-        self._moja_knjiznica[(zacetna.avtor, zacetna.naslov)] = strani
+        self._moja_knjiznica[(zacetna.avtor, zacetna.naslov)] = int(strani)
         return finalna   
     
     def najdi_prebrano(self, avtor, naslov):
@@ -95,12 +95,12 @@ class Knjigozer:
         return True
 
     def odstrani_prebrano(self, prebrana):
-        izbrisana = Prebrana(prebrana.datum, prebrana.trenutna, prebrana.ocena, self)
-        self.prebrane.remove(izbrisana)
+        self.prebrane.remove(prebrana)
         del self._moja_knjiznica[(prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)] 
 
     def __str__(self):
-        return f'Knjige v knjižnici: {self.neprebrane}, {self.trenutne}, {self.prebrane}'
+        return f'Neprebrane knjige: {self.neprebrane}, trenutna branja: {self.trenutne}, prebrane knjige: {self.prebrane}'
+
 
 class Neprebrana:
 
@@ -110,7 +110,7 @@ class Neprebrana:
         self.knjigozer = knjigozer
     
     def __repr__(self):
-        return f'<Neprebrana: {self}>'
+        return f'{self}'
     
     def __str__(self):
         return f'{self.avtor}: {self.naslov}'
@@ -125,7 +125,7 @@ class Trenutna:
         self.knjigozer = knjigozer
     
     def __repr__(self):
-        return f'<Trenutno brana: {self}>'
+        return f'{self}'
     
     def __str__(self):
         return f'{self.neprebrana.avtor}: {self.neprebrana.naslov}, stran {self.napredek} od {self.strani}' 
@@ -141,7 +141,7 @@ class Prebrana:
         self.knjigozer = knjigozer
     
     def __repr__(self):
-        return f'<Prebrana: {self}>'
+        return f'{self}'
     
     def __str__(self):
         return f'{self.trenutna.neprebrana.avtor}: {self.trenutna.neprebrana.naslov}, {self.trenutna.strani} strani'
