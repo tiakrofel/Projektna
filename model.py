@@ -5,56 +5,125 @@ class Knjigozer:
         self.trenutne = []
         self.prebrane = []
         self._moja_knjiznica = {}
+        self._slovar_neprebranih = {}
+        self._slovar_trenutnih = {}
+        self._slovar_prebranih = {}
+        self._kategorije_prebranih = {None: []}
         self._uspehi = {}
-        self._avtorji = {None: []}
 
     def ogled_knjig(self):
-        for (avtor, naslov) in sorted(self._moja_knjiznica):
-            if self._moja_knjiznica[(avtor, naslov)] == 0:
+        for avtor in sorted(self._slovar_neprebranih):
+            for naslov in self._slovar_neprebranih[avtor]:
                 print(f'{avtor}: {naslov}, neprebrana')
-            elif self._moja_knjiznica[(avtor, naslov)] < 1:
+        for avtor in sorted(self._slovar_trenutnih):
+            for naslov in self._slovar_trenutnih[avtor]:
                 print(f'{avtor}: {naslov}, trenutno branje')
-            else:
+        for avtor in sorted(self._slovar_prebranih):
+            for naslov in self._slovar_prebranih[avtor]:
                 print(f'{avtor}: {naslov}, prebrana')
 
+
+    def ogled_neprebranih(self):
+        for avtor in sorted(self._slovar_neprebranih):
+            for naslov in self._slovar_neprebranih[avtor]:
+                print(f'{avtor}: {naslov}')
+        
+    
+    def ogled_trenutnih(self):
+        for avtor in sorted(self._slovar_trenutnih):
+            for naslov in self._slovar_trenutnih[avtor]:
+                print(f'{avtor}: {naslov}')
+    
+
+    def ogled_prebranih(self):
+        for avtor in sorted(self._slovar_prebranih):
+            for naslov in self._slovar_prebranih[avtor]:
+                print(f'{avtor}: {naslov}')
+    
+
+    def ogled_kategorij(self):
+        for kategorija in self._kategorije_prebranih:
+            print(f'{kategorija}')
+
+
+    def ogled_knjig_kategorije(self, kategorija):
+        for (avtor, naslov) in self._kategorije_prebranih[kategorija]:
+            print(f'{avtor}: {naslov}')
+
+
+    def pri_dodajanju_neprebranih(self, avtor, naslov):
+        if avtor not in self._slovar_neprebranih:
+            self._slovar_neprebranih[avtor] = [naslov]
+        elif avtor in self._slovar_neprebranih:
+            self._slovar_neprebranih[avtor].append(naslov)
+    
+
+    def pri_brisanju_neprebranih(self, avtor, naslov):
+        if len(self._slovar_neprebranih[avtor]) == 1:
+            del self._slovar_neprebranih[avtor]
+        else:
+            self._slovar_neprebranih[avtor].remove(naslov)
+    
+
+    def pri_brisanju_trenutnih(self, avtor, naslov):
+        if len(self._slovar_trenutnih[avtor]) == 1:
+            del self._slovar_trenutnih[avtor]
+        else:
+            self._slovar_trenutnih[avtor].remove(naslov)
+    
+
+    def pri_brisanju_prebranih(self, avtor, naslov):
+        if len(self._slovar_prebranih[avtor]) == 1:
+            del self._slovar_prebranih[avtor]
+        else:
+            self._slovar_prebranih[avtor].remove(naslov)
+
+
+    def pri_dodajanju_trenutnih(self, avtor, naslov):
+        if avtor not in self._slovar_trenutnih:
+            self._slovar_trenutnih[avtor] = [naslov]
+        elif avtor in self._slovar_trenutnih:
+            self._slovar_trenutnih[avtor].append(naslov)
+    
+
+    def pri_dodajanju_prebranih(self, avtor, naslov):
+        if avtor not in self._slovar_prebranih:
+            self._slovar_prebranih[avtor] = [naslov]
+        elif avtor in self._slovar_prebranih:
+            self._slovar_prebranih[avtor].append(naslov)
+
+
     def dodaj_neprebrano(self, avtor, naslov):
-        if (naslov, avtor) in self._moja_knjiznica:
-            raise ValueError('Ta knjiga je že v vaši knjižnici!')
+        if (avtor, naslov) in self._moja_knjiznica:
+            if avtor in self._slovar_neprebranih:
+                raise ValueError('Ta knjiga je že med vašimi neprebranimi knjigami.')
+            elif (naslov, avtor) in self._slovar_trenutnih:
+                raise ValueError('Ta knjiga je že med vašimi trenutnimi branji.')
+            elif (naslov, avtor) in self._slovar_prebranih:
+                raise ValueError('Ta knjiga je že med vašimi prebranimi knjigami.')
         neprebrana = Neprebrana(naslov, avtor, self)
         self.neprebrane.append(neprebrana)
         self._moja_knjiznica[(avtor, naslov)] = 0
-        if avtor not in self._avtorji:
-            self._avtorji[avtor] = [naslov]
-        elif avtor in self._avtorji:
-            self._avtorji[avtor].append(naslov)
+        self.pri_dodajanju_neprebranih(avtor, naslov)
         return neprebrana
 
-    def najdi_neprebrano(self, avtor, naslov):
-        if (avtor, naslov) not in self._moja_knjiznica:
-            raise ValueError('Te knjige ni v tvoji knjižnici.')
-        elif Neprebrana(naslov, avtor, self) not in self.neprebrane:
-            raise ValueError(
-                'Ta knjiga sicer je v tvoji knjižnici, vendar ne med neprebranimi knjigami.')
-        return True
 
     def odstrani_neprebrano(self, neprebrana):
         self.neprebrane.remove(neprebrana)
         del self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)]
-        if len(self._avtorji[neprebrana.avtor]) == 1:
-            del self._avtorji[neprebrana.avtor]
-        else:
-            self._avtorji[neprebrana.avtor].remove(neprebrana.naslov)
+        self.pri_brisanju_neprebranih(neprebrana.avtor, neprebrana.naslov)
+
 
     def dodaj_trenutno(self, avtor, naslov, strani, napredek=1):
         if (naslov, avtor) in self._moja_knjiznica:
-            raise ValueError(
-                'Ta knjiga je že na enem izmed seznamov v tej knjižnici!')
+            raise ValueError('Ta knjiga je že na enem izmed seznamov v tej knjižnici!')
         prva = Neprebrana(naslov, avtor, self)
         spremenjena = Trenutna(prva, napredek, strani, self)
         self.trenutne.append(spremenjena)
-        self._moja_knjiznica[(prva.avtor, prva.naslov)
-                             ] = int(napredek) / int(strani)
+        self._moja_knjiznica[(prva.avtor, prva.naslov)] = int(napredek) / int(strani)
+        self.pri_dodajanju_trenutnih(avtor, naslov)
         return spremenjena
+
 
     def izberi_trenutno(self, neprebrana, strani, napredek=1):
         izbrana = Trenutna(neprebrana, napredek, strani, self)
@@ -62,7 +131,10 @@ class Knjigozer:
         self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = int(
             napredek) / int(strani)
         self.neprebrane.remove(neprebrana)
+        self.pri_dodajanju_trenutnih(neprebrana.avtor, neprebrana.naslov)
+        self.pri_brisanju_neprebranih(neprebrana.avtor, neprebrana.naslov)
         return izbrana
+
 
     def posodobi_trenutno(self, trenutna, napredek):
         posodobljena = Trenutna(trenutna.neprebrana,
@@ -73,6 +145,7 @@ class Knjigozer:
             napredek) / int(trenutna.strani)
         return posodobljena
 
+
     def opuscena_trenutna(self, trenutna):
         opuscena = Trenutna(trenutna.neprebrana,
                             trenutna.napredek, trenutna.strani, self)
@@ -82,7 +155,10 @@ class Knjigozer:
         self.trenutne.remove(trenutna)
         self._moja_knjiznica[(trenutna.neprebrana.avtor,
                               trenutna.neprebrana.naslov)] = 0
+        self.pri_dodajanju_neprebranih(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)
+        self.pri_brisanju_trenutnih(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)
         return opuscena
+
 
     def dokoncana(self, datum, trenutna, ocena):
         koncana = Prebrana(datum, trenutna, ocena, self)
@@ -92,42 +168,69 @@ class Knjigozer:
         self.trenutne.remove(trenutna)
         self._uspehi[(trenutna.neprebrana.avtor,
                       trenutna.neprebrana.naslov)] = datum
+        self.pri_dodajanju_prebranih(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)
+        self.pri_brisanju_trenutnih(trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)
         return koncana
+
 
     def direktno_prebrana(self, datum, neprebrana, strani, ocena):
         vmesna = Trenutna(neprebrana, 1, strani, self)
         direktna = Prebrana(datum, vmesna, ocena, self)
         self.prebrane.append(direktna)
         self.neprebrane.remove(neprebrana)
-        self._moja_knjiznica[(
-            neprebrana.avtor, neprebrana.naslov)] = int(strani)
+        self._moja_knjiznica[(neprebrana.avtor, neprebrana.naslov)] = int(strani)
         self._uspehi[(neprebrana.avtor, neprebrana.naslov)] = datum
+        self.pri_dodajanju_prebranih(neprebrana.avtor, neprebrana.naslov)
+        self.pri_dodajanju_neprebranih(neprebrana.avtor, neprebrana.naslov)
         return direktna
+
 
     def dodaj_prebrano(self, datum, avtor, naslov, strani, ocena):
         if (naslov, avtor) in self._moja_knjiznica:
-            raise ValueError(
-                'Ta knjiga je že na enem izmed seznamov v tej knjižnici!')
+            raise ValueError('Ta knjiga je že na enem izmed seznamov v tej knjižnici!')
         zacetna = Neprebrana(naslov, avtor, self)
         naslednja = Trenutna(zacetna, 1, strani, self)
         finalna = Prebrana(datum, naslednja, ocena, self)
         self.prebrane.append(finalna)
         self._moja_knjiznica[(zacetna.avtor, zacetna.naslov)] = int(strani)
+        self.pri_dodajanju_prebranih(avtor, naslov)
+        self._uspehi[(avtor, naslov)] = datum
         return finalna
 
-    def najdi_prebrano(self, avtor, naslov):
-        if (avtor, naslov) not in self._moja_knjiznica:
-            raise ValueError('Te knjige še ni v tvoji knjižnici.')
-        elif self._moja_knjiznica[(avtor, naslov)] == 0:
-            raise ValueError('Ta knjiga je med neprebranimi knjigami.')
-        elif self._moja_knjiznica[(avtor, naslov)] != 1:
-            raise ValueError('Ta knjiga je med trenutnimi branji.')
-        return True
 
     def odstrani_prebrano(self, prebrana):
         self.prebrane.remove(prebrana)
-        del self._moja_knjiznica[(
-            prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)]
+        del self._moja_knjiznica[(prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)]
+        self.pri_brisanju_prebranih(prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)
+
+
+    def nova_kategorija(self, kategorija):
+        if kategorija in self._kategorije_prebranih:
+            ValueError('Ta kategorija že obstaja!')
+        self._kategorije_prebranih[kategorija] = []
+        return True
+    
+
+    def v_kategorijo(self, kategorija, prebrana):
+        if kategorija not in self._kategorije_prebranih:
+            ValueError('Ta kategorija še ne obstaja!')
+        self._kategorije_prebranih[kategorija].append((prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov))
+        return True
+    
+
+    def iz_kategorije(self, kategorija, prebrana):
+        if kategorija not in self._kategorije_prebranih:
+            ValueError('Ta kategorija ne obstaja!')
+        elif prebrana not in self._kategorije_prebranih[kategorija]:
+            ValueError('Te knjige ni v tej kategoriji!')
+        self._kategorije_prebranih[kategorija].remove(prebrana)
+    
+
+    def odstrani_kategorijo(self, kategorija):
+        if kategorija not in self._kategorije_prebranih:
+            ValueError('Ta kategorija sploh ne obstaja!')
+        del self._kategorije_prebranih[kategorija]
+        
 
     def __str__(self):
         return f'Neprebrane knjige: {self.neprebrane}, trenutna branja: {self.trenutne}, prebrane knjige: {self.prebrane}'
