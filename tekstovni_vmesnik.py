@@ -1,19 +1,24 @@
 from datetime import date
 from model import Knjigozer
 
-knjigozer = Knjigozer()
+LOGO = '''
+88                      88  88                              88 88                                 
+88                      ""  ""                               """                                                              
+88                                                                                           
+88   ,d8   8b,dPPYba,   88  88   ,adPPYb,d8   ,adPPYba,   888888888   ,adPPYba,  8b,dPPYba,  
+88 ,a8"    88P'   `"8a  88  88  a8"    `Y88  a8"     "8a       a8P"  a8P_____88  88P'   "Y8  
+8888[      88       88  88  88  8b       88  8b       d8    ,d8P'    8PP"""""""  88          
+88`"Yba,   88       88  88  88  "8a,   ,d88  "8a,   ,a8"  ,d8"       "8b,   ,aa  88          
+88   `Y8a  88       88  88  88   `"YbbdP"Y8   `"YbbdP"'   888888888   `"Ybbd8"'  88          
+                       ,88       aa,    ,88                                                  
+                     888P"        "Y8bbdP"                                                   
+'''
+DATOTEKA_S_KNJIGAMI = 'knjiznica.json'
 
-neprebrana1 = knjigozer.dodaj_neprebrano('Tartt, Donna', 'The Goldfinch')
-trenutna1 = knjigozer.izberi_trenutno(neprebrana1, 771)
-dokoncana1 = knjigozer.dokoncana(date(2019, 8, 20), trenutna1, '7/7')
-
-neprebrana2 = knjigozer.dodaj_neprebrano('Gaiman, Neil', 'The Graveyard Book')
-
-trenutna2 = knjigozer.dodaj_trenutno('Fry, Stephen', 'Mythos', 416, 82)
-
-dokoncana2 = knjigozer.dodaj_prebrano(
-    date(2019, 7, 1), 'Miller, Madeline', 'Circe', 393, '6/7')
-
+try:
+    knjigozer = Knjigozer.nalozi_knjige(DATOTEKA_S_KNJIGAMI)
+except FileNotFoundError:
+    knjigozer = Knjigozer()
 
 def krepko(niz):
     return f'\033[1m{niz}\033[0m'
@@ -28,11 +33,10 @@ def rdeče(niz):
 
 
 def osnovni_podatki_knjiznice():
-    print(f'Število knjig, ki ste jih že prebrali: {len(knjigozer.prebrane)}')
+    print(f'Število knjig, ki si jih želite prebrati: {len(knjigozer.neprebrane)}')
     print(f'Število knjig, ki jih trenutno berete: {len(knjigozer.trenutne)}')
-    print(
-        f'Število knjig, ki si jih želite prebrati: {len(knjigozer.neprebrane)}')
-
+    print(f'Število knjig, ki ste jih že prebrali: {len(knjigozer.prebrane)}')
+    
 
 def uporabnikova_izbira(slovar):
     for kljuc in slovar:
@@ -53,7 +57,7 @@ def uporabnikova_izbira(slovar):
 
 def izbira(seznam):
     for zaporedna_st, besedilo in enumerate(seznam, 1):
-        print(f'{zaporedna_st}. {besedilo}')
+        print(f'{zaporedna_st}) {besedilo}')
     while True:
         izbrana_moznost = vnos_stevila('> ')
         if 1 <= izbrana_moznost <= len(seznam):
@@ -61,6 +65,7 @@ def izbira(seznam):
         else:
             if len(seznam) == 0:
                 print(rdeče('Na tem seznamu ni še nobenega objekta, ki bi ga lahko izbrali. \n'))
+                break
             elif len(seznam) == 1:
                 print(rdeče(
                     f'Ker je na tem seznamu le en objekt, lahko vnesete le število {len(seznam)}. \n'))
@@ -100,6 +105,8 @@ def vnos_napredka(strani):
 
 def zacetna_stran():
     print()
+    print(krepko(LOGO))
+    print()
     print(modro(krepko('Pozdravljeni v programu knjigožer! \n')))
     print('Če želite iz programa, pritisnite Ctrl-C. \n')
     osnovne_moznosti()
@@ -121,11 +128,12 @@ def osnovne_moznosti():
                 '3': ('prebrane knjige', urejanje_prebranih),
             }
             naslednji_korak = uporabnikova_izbira(slovar)
+            print(80 * '-')
             naslednji_korak()
         except KeyboardInterrupt:
             print()
             print('Zapustili ste svojo osebno knjižnico.')
-            return
+            break
 
 
 def ogled_knjig():
@@ -147,10 +155,18 @@ def urejanje_neprebranih():
                 '3': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
             }
             izbira = uporabnikova_izbira(slovar)
+            print(80 * '-')
             izbira()
+            print()
+            input('Pritisnite Enter za shranjevanje in vrnitev v osnovni meni...')
+            knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
             print(rdeče(e.args[0]))
             print()
+        except KeyboardInterrupt:
+            print()
+            print('Zapustili ste svojo osebno knjižnico.')
+            break
 
 
 def dodaj_neprebrano():
@@ -188,10 +204,18 @@ def urejanje_trenutnih():
                 '6': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
             }
             izbira = uporabnikova_izbira(slovar)
+            print(80 * '-')
             izbira()
+            print()
+            input('Pritisnite Enter za shranjevanje in vrnitev v osnovni meni...')
+            knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
             print(rdeče(e.args[0]))
             print()
+        except KeyboardInterrupt:
+            print()
+            print('Zapustili ste svojo osebno knjižnico.')
+            break
 
 
 def izberi_trenutno():
@@ -259,10 +283,18 @@ def urejanje_prebranih():
                 '5': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
             }
             izbira = uporabnikova_izbira(slovar)
+            print(80 * '-')
             izbira()
+            print()
+            input('Pritisnite Enter za shranjevanje in vrnitev v osnovni meni...')
+            knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
             print(rdeče(e.args[0]))
             print()
+        except KeyboardInterrupt:
+            print()
+            print('Zapustili ste svojo osebno knjižnico.')
+            break
 
 
 def dodaj_prebrano():
@@ -311,15 +343,22 @@ def urejanje_kategorij():
                 '7': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
             }
             izbira = uporabnikova_izbira(slovar)
+            print(80 * '-')
             izbira()
+            print()
+            input('Pritisnite Enter za shranjevanje in vrnitev v osnovni meni...')
+            knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
             print(rdeče(e.args[0]))
             print()
+        except KeyboardInterrupt:
+            print()
+            print('Zapustili ste svojo osebno knjižnico.')
+            break
 
 
 def ogled_knjig_kategorije():
     print()
-
     knjigozer.ogled_kategorij()
     print('Izberite kategorijo: ')
     kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
@@ -348,10 +387,13 @@ def iz_kategorije():
     print()
     print('Izberite kategorijo: ')
     kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
-    print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija}": ')
-    prebrana = izbira(knjigozer._kategorije_prebranih[kategorija])
-    knjigozer.iz_kategorije(kategorija, prebrana)
-    print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija}". \n'))
+    if len(knjigozer._kategorije_prebranih[kategorija]) == 0:
+        print(rdeče(f'V kategoriji "{kategorija}" ni nobene knjige!'))
+    else:
+        print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija}": ')
+        prebrana = izbira(knjigozer._kategorije_prebranih[kategorija])
+        knjigozer.iz_kategorije(kategorija, prebrana)
+        print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija}". \n'))
 
 
 def odstrani_kategorijo():
