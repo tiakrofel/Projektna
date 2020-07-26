@@ -8,7 +8,7 @@ class Knjigozer:
         self._slovar_neprebranih = {}
         self._slovar_trenutnih = {}
         self._slovar_prebranih = {}
-        self._kategorije_prebranih = {None: []}
+        self._kategorije_prebranih = {}
         self._uspehi = {}
 
     def ogled_knjig(self):
@@ -205,30 +205,20 @@ class Knjigozer:
 
 
     def nova_kategorija(self, kategorija):
-        if kategorija in self._kategorije_prebranih:
-            ValueError('Ta kategorija že obstaja!')
         self._kategorije_prebranih[kategorija] = []
-        return True
+        return []
     
 
     def v_kategorijo(self, kategorija, prebrana):
-        if kategorija not in self._kategorije_prebranih:
-            ValueError('Ta kategorija še ne obstaja!')
         self._kategorije_prebranih[kategorija].append((prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov))
         return True
     
 
     def iz_kategorije(self, kategorija, prebrana):
-        if kategorija not in self._kategorije_prebranih:
-            ValueError('Ta kategorija ne obstaja!')
-        elif prebrana not in self._kategorije_prebranih[kategorija]:
-            ValueError('Te knjige ni v tej kategoriji!')
         self._kategorije_prebranih[kategorija].remove(prebrana)
     
 
     def odstrani_kategorijo(self, kategorija):
-        if kategorija not in self._kategorije_prebranih:
-            ValueError('Ta kategorija sploh ne obstaja!')
         del self._kategorije_prebranih[kategorija]
         
 
