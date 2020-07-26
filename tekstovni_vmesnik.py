@@ -78,6 +78,7 @@ def vnos_avtorja():
 
 def vnos_stevila(spodbuda):
     while True:
+        print()
         stevilo = input(spodbuda)
         if stevilo.isdigit():
             return int(stevilo)
@@ -100,25 +101,31 @@ def vnos_napredka(strani):
 def zacetna_stran():
     print()
     print(modro(krepko('Pozdravljeni v programu knjigožer! \n')))
-    while True:
-        osnovne_moznosti()
+    print('Če želite iz programa, pritisnite Ctrl-C. \n')
+    osnovne_moznosti()
 
 
 def osnovne_moznosti():
-    print(krepko('Vaša osebna knjižnica trenutno izgleda takole: '))
-    print()
-    osnovni_podatki_knjiznice()
-    print()
-    ogled_knjig()
-    print()
-    print(krepko('Izberite seznam, ki si ga želite podrobneje ogledati ali posodobiti. \n'))
-    slovar = {
-        '1': ('neprebrane knjige', urejanje_neprebranih),
-        '2': ('trenutna branja', urejanje_trenutnih),
-        '3': ('prebrane knjige', urejanje_prebranih),
-    }
-    naslednji_korak = uporabnikova_izbira(slovar)
-    naslednji_korak()
+    while True:
+        try:
+            print(krepko('Vaša osebna knjižnica trenutno izgleda takole: '))
+            print()
+            osnovni_podatki_knjiznice()
+            print()
+            ogled_knjig()
+            print()
+            print(krepko('Izberite seznam, ki si ga želite podrobneje ogledati ali posodobiti. \n'))
+            slovar = {
+                '1': ('neprebrane knjige', urejanje_neprebranih),
+                '2': ('trenutna branja', urejanje_trenutnih),
+                '3': ('prebrane knjige', urejanje_prebranih),
+            }
+            naslednji_korak = uporabnikova_izbira(slovar)
+            naslednji_korak()
+        except KeyboardInterrupt:
+            print()
+            print('Zapustili ste svojo osebno knjižnico.')
+            return
 
 
 def ogled_knjig():
@@ -131,15 +138,19 @@ def urejanje_neprebranih():
     knjigozer.ogled_neprebranih()
     print()
     while True:
-        print(krepko('Vaše možnosti urejanja neprebranih knjig:'))
-        print()
-        slovar = {
-            '1': ('dodajte novo knjigo na seznam neprebranih', dodaj_neprebrano),
-            '2': ('izbrišite neprebrano knjigo iz knjižnice', odstrani_neprebrano),
-            '3': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
-        }
-        izbira = uporabnikova_izbira(slovar)
-        izbira()
+        try:
+            print(krepko('Vaše možnosti urejanja neprebranih knjig:'))
+            print()
+            slovar = {
+                '1': ('dodajte novo knjigo na seznam neprebranih', dodaj_neprebrano),
+                '2': ('izbrišite neprebrano knjigo iz knjižnice', odstrani_neprebrano),
+                '3': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
+            }
+            izbira = uporabnikova_izbira(slovar)
+            izbira()
+        except ValueError as e:
+            print(rdeče(e.args[0]))
+            print()
 
 
 def dodaj_neprebrano():
@@ -165,18 +176,22 @@ def urejanje_trenutnih():
     knjigozer.ogled_trenutnih()
     print()
     while True:
-        print(krepko('Vaše možnosti urejanja trenutnih branj:'))
-        print()
-        slovar = {
-            '1': ('med trenutna branja dodajte eno izmed vaših neprebranih knjig', izberi_trenutno),
-            '2': ('med trenutna branja dodajte eno izmed knjig, ki še ni zabeležena v vaši knjižnici', dodaj_trenutno),
-            '3': ('zabeležite napredek v enem izmed trenutnih branj', posodobi_trenutno),
-            '4': ('premaknite eno izmed trenutnih branj med prebrane knjige', dokoncana),
-            '5': ('premaknite eno izmed trenutnih branj nazaj med neprebrane knjige', opuscena_trenutna),
-            '6': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
-        }
-        izbira = uporabnikova_izbira(slovar)
-        izbira()
+        try:
+            print(krepko('Vaše možnosti urejanja trenutnih branj:'))
+            print()
+            slovar = {
+                '1': ('med trenutna branja dodajte eno izmed vaših neprebranih knjig', izberi_trenutno),
+                '2': ('med trenutna branja dodajte eno izmed knjig, ki še ni zabeležena v vaši knjižnici', dodaj_trenutno),
+                '3': ('zabeležite napredek v enem izmed trenutnih branj', posodobi_trenutno),
+                '4': ('premaknite eno izmed trenutnih branj med prebrane knjige', dokoncana),
+                '5': ('premaknite eno izmed trenutnih branj nazaj med neprebrane knjige', opuscena_trenutna),
+                '6': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
+            }
+            izbira = uporabnikova_izbira(slovar)
+            izbira()
+        except ValueError as e:
+            print(rdeče(e.args[0]))
+            print()
 
 
 def izberi_trenutno():
@@ -233,17 +248,21 @@ def urejanje_prebranih():
     knjigozer.ogled_prebranih()
     print()
     while True:
-        print(krepko('Vaše možnosti urejanja prebranih knjig: '))
-        print()
-        slovar = {
-            '1': ('dodajte novo knjigo na seznam prebranih', dodaj_prebrano),
-            '2': ('dodajte neprebrano knjigo na seznam prebranih', direktno_prebrana),
-            '3': ('izbrišite prebrano knjigo iz knjižnice', odstrani_prebrano),
-            '4': ('oglejte si vaše kategorije prebranih knjig in jih uredite', urejanje_kategorij),
-            '5': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
-        }
-        izbira = uporabnikova_izbira(slovar)
-        izbira()
+        try:
+            print(krepko('Vaše možnosti urejanja prebranih knjig: '))
+            print()
+            slovar = {
+                '1': ('dodajte novo knjigo na seznam prebranih', dodaj_prebrano),
+                '2': ('dodajte neprebrano knjigo na seznam prebranih', direktno_prebrana),
+                '3': ('izbrišite prebrano knjigo iz knjižnice', odstrani_prebrano),
+                '4': ('oglejte si vaše kategorije prebranih knjig in jih uredite', urejanje_kategorij),
+                '5': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
+            }
+            izbira = uporabnikova_izbira(slovar)
+            izbira()
+        except ValueError as e:
+            print(rdeče(e.args[0]))
+            print()
 
 
 def dodaj_prebrano():
@@ -278,41 +297,38 @@ def odstrani_prebrano():
 
 def urejanje_kategorij():
     while True:
-        print()
-        print(krepko('Vaše možnosti urejanja kategorij prebranih knjig:'))
-        print()
-        slovar = {
-            '1': ('oglejte si vse vaše kategorije prebranih knjig', ogled_kategorij),
-            '2': ('oglejte si prebrane knjige v določeni kategoriji', ogled_knjig_kategorije),
-            '3': ('dodajte novo kategorijo prebranih knjig', nova_kategorija),
-            '4': ('dodajte prebrano knjigo v eno izmed kategorij', v_kategorijo),
-            '5': ('odstranite prebrano knjigo iz ene izmed kategorij', iz_kategorije),
-            '6': ('izbrišite eno izmed vaših kategorij', odstrani_kategorijo),
-            '7': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
-        }
-        izbira = uporabnikova_izbira(slovar)
-        izbira()
+        try:
+            print()
+            print(krepko('Vaše možnosti urejanja kategorij prebranih knjig:'))
+            print()
+            slovar = {
+                '1': ('oglejte si vse vaše kategorije prebranih knjig', ogled_kategorij),
+                '2': ('oglejte si prebrane knjige v določeni kategoriji', ogled_knjig_kategorije),
+                '3': ('dodajte novo kategorijo prebranih knjig', nova_kategorija),
+                '4': ('dodajte prebrano knjigo v eno izmed kategorij', v_kategorijo),
+                '5': ('odstranite prebrano knjigo iz ene izmed kategorij', iz_kategorije),
+                '6': ('izbrišite eno izmed vaših kategorij', odstrani_kategorijo),
+                '7': ('vrnitev nazaj na začetni meni osebne knjižnice', osnovne_moznosti),
+            }
+            izbira = uporabnikova_izbira(slovar)
+            izbira()
+        except ValueError as e:
+            print(rdeče(e.args[0]))
+            print()
 
 
 def ogled_knjig_kategorije():
     print()
-    if len(knjigozer._kategorije_prebranih) < 1:
-        print(rdeče('Ustvarili niste še nobene kategorije prebranih knjig. \n'))
-    else:
-        print('Izberite kategorijo: ')
-        kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
-        if len(knjigozer._kategorije_prebranih[kategorija]) < 1:
-            print(rdeče('V to kategorijo niste dodali še nobene knjige. \n'))
-        else:
-            knjigozer.ogled_knjig_kategorije(kategorija)
+
+    knjigozer.ogled_kategorij()
+    print('Izberite kategorijo: ')
+    kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
+    knjigozer.ogled_knjig_kategorije(kategorija)
 
 
 def nova_kategorija():
     print()
     kategorija = input('Vnesite ime vaše nove kategorije: ')
-    if kategorija in knjigozer._kategorije_prebranih:
-        print(rdeče('Kategorija s tem imenom že obstaja.'))
-        nova_kategorija()
     knjigozer.nova_kategorija(kategorija)
     print(modro(
         f'Kategorija "{kategorija}" je bila uspešno dodana med vaše kategorije prebranih knjig. \n'))
@@ -348,8 +364,8 @@ def odstrani_kategorijo():
 
 def ogled_kategorij():
     print()
-    if len(knjigozer._kategorije_prebranih) < 1:
-        print(rdeče('Ustvarili niste še nobene kategorije prebranih knjig. \n'))
+    print('Vaše kategorije prebranih knjig: ')
+    print()
     knjigozer.ogled_kategorij()
 
 
