@@ -1,3 +1,5 @@
+import json
+
 class Knjigozer:
 
     def __init__(self):
@@ -225,6 +227,27 @@ class Knjigozer:
     def __str__(self):
         return f'Neprebrane knjige: {self.neprebrane}, trenutna branja: {self.trenutne}, prebrane knjige: {self.prebrane}'
 
+
+    def slovar_knjig(self):
+        return {
+            'neprebrane knjige': [{
+                'avtor': neprebrana.avtor,
+                'naslov': neprebrana.naslov,
+            } for neprebrana in self.neprebrane],
+            'trenutna branja': [{
+                'avtor': trenutna.neprebrana.avtor,
+                'naslov': trenutna.neprebrana.naslov,
+                'napredek': trenutna.napredek,
+                'strani': trenutna.strani,
+            } for trenutna in self.trenutne],
+            'prebrane knjige': [{
+                'avtor': prebrana.trenutna.neprebrana.avtor,
+                'naslov': prebrana.trenutna.neprebrana.naslov,
+                'strani': prebrana.trenutna.strani,
+                'datum': str(prebrana.datum),
+                'ocena': prebrana.ocena,
+            } for prebrana in self.prebrane]
+        }
 
 class Neprebrana:
 

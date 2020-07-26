@@ -1,3 +1,4 @@
+import json
 from datetime import date
 from model import Knjigozer
 
@@ -14,4 +15,6 @@ trenutna2 = knjigozer.dodaj_trenutno('Stephen Fry', 'Mythos', 416, 82)
 dokoncana2 = knjigozer.dodaj_prebrano(date(2019, 7, 1), 'Madeline Miller', 'Circe', 393, '6/7')
 
 
-print(knjigozer)
+knjiznica = knjigozer.slovar_knjig()
+with open('knjiznica.json', 'w') as datoteka:
+    json.dump(knjiznica, datoteka, ensure_ascii=False, indent=4)

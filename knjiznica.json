@@ -1,0 +1,32 @@
+{
+    "neprebrane knjige": [
+        {
+            "avtor": "Neil Gaiman",
+            "naslov": "The Graveyard Book"
+        }
+    ],
+    "trenutna branja": [
+        {
+            "avtor": "Stephen Fry",
+            "naslov": "Mythos",
+            "napredek": 82,
+            "strani": 416
+        }
+    ],
+    "prebrane knjige": [
+        {
+            "avtor": "Donna Tartt",
+            "naslov": "The Goldfinch",
+            "strani": 771,
+            "datum": "2019-08-20",
+            "ocena": "7/7"
+        },
+        {
+            "avtor": "Madeline Miller",
+            "naslov": "Circe",
+            "strani": 393,
+            "datum": "2019-07-01",
+            "ocena": "6/7"
+        }
+    ]
+}

@@ -111,7 +111,7 @@ def osnovne_moznosti():
     print()
     ogled_knjig()
     print()
-    print('Izberite seznam, ki si ga želite podrobneje ogledati ali posodobiti. \n')
+    print(krepko('Izberite seznam, ki si ga želite podrobneje ogledati ali posodobiti. \n'))
     slovar = {
         '1': ('neprebrane knjige', urejanje_neprebranih),
         '2': ('trenutna branja', urejanje_trenutnih),
@@ -325,7 +325,7 @@ def v_kategorijo():
     print(f'Izberite knjigo, ki jo želite dodati v kategorijo "{kategorija}": ')
     prebrana = izbira(knjigozer.prebrane)
     knjigozer.v_kategorijo(kategorija, prebrana)
-    print(modro(f'Knjiga je bila dodana v kategorijo {kategorija}. \n'))
+    print(modro(f'Knjiga je bila dodana v kategorijo "{kategorija}". \n'))
 
 
 def iz_kategorije():
@@ -335,7 +335,7 @@ def iz_kategorije():
     print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija}": ')
     prebrana = izbira(knjigozer._kategorije_prebranih[kategorija])
     knjigozer.iz_kategorije(kategorija, prebrana)
-    print(modro(f'Knjiga je bila izbrisana iz kategorije {kategorija}. \n'))
+    print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija}". \n'))
 
 
 def odstrani_kategorijo():
@@ -343,7 +343,7 @@ def odstrani_kategorijo():
     print('Izberite kategorijo, ki jo želite izbrisati: ')
     kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
     knjigozer.odstrani_kategorijo(kategorija)
-    print(modro(f'Kategorija {kategorija} je bila izbrisana. \n'))
+    print(modro(f'Kategorija "{kategorija}" je bila izbrisana. \n'))
 
 
 def ogled_kategorij():
