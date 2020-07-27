@@ -1,0 +1,30 @@
+<h1><pre>
+88                      88  88                              88 88                                 
+88                      ""  ""                               """                                                              
+88                                                                                          
+88   ,d8   8b,dPPYba,   88  88   ,adPPYb,d8   ,adPPYba,   888888888   ,adPPYba,  8b,dPPYba,  
+88 ,a8"    88P'   `"8a  88  88  a8"    `Y88  a8"     "8a       a8P"  a8P_____88  88P'   "Y8  
+8888[      88       88  88  88  8b       88  8b       d8    ,d8P'    8PP"""""""  88          
+88`"Yba,   88       88  88  88  "8a,   ,d88  "8a,   ,a8"  ,d8"       "8b,   ,aa  88          
+88   `Y8a  88       88  88  88   `"YbbdP"Y8   `"YbbdP"'   888888888   `"Ybbd8"'  88          
+                       ,88       aa,    ,88                                                  
+                     888P"        "Y8bbdP"                                                   
+</pre></h1>
+
+<h1>Neprebrane knjige</h1>
+<ul>
+    % for neprebrana in knjigozer.neprebrane:
+    <li>{{neprebrana.avtor}}: {{neprebrana.naslov}}</li>
+</ul>
+
+<h1>Trenutna branja</h1>
+<ul>
+    % for trenutna in knjigozer.trenutne:
+    <li>{{trenutna.neprebrana.avtor}}: {{trenutna.neprebrana.naslov}}</li>
+</ul>
+
+<h1>Prebrane knjige</h1>
+<ul>
+    % for prebrana in knjigozer.prebrane:
+    <li>{{prebrana.trenutna.neprebrana.avtor}}: {{prebrana.trenutna.neprebrana.naslov}}</li>
+</ul>
