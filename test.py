@@ -14,8 +14,9 @@ trenutna2 = knjigozer.dodaj_trenutno('Fry, Stephen', 'Mythos', 416, 82)
 
 dokoncana2 = knjigozer.dodaj_prebrano(date(2019, 7, 1), 'Miller, Madeline', 'Circe', 393, '6/7')
 
-knjigozer.nova_kategorija('Moje najljubše knjige')
-knjigozer.v_kategorijo('Moje najljubše knjige', dokoncana1)
+knjigozer.nova_kategorija('Najljubše')
+knjigozer.v_kategorijo('Najljubše', dokoncana1)
+knjigozer.v_kategorijo('Najljubše', dokoncana2)
 
 
 knjiznica = knjigozer.slovar_knjig()

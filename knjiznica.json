@@ -1,8 +1,8 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Clarke, Susanna",
-            "naslov": "Jonathan Strange & Mr Norrell"
+            "avtor": "Gaiman, Neil",
+            "naslov": "The Graveyard Book"
         }
     ],
     "trenutna branja": [
@@ -20,19 +20,7 @@
             "strani": 771,
             "datum": "2019-08-20",
             "ocena": "7/7",
-            "kategorije": [
-                "Moje najljubše knjige"
-            ]
-        },
-        {
-            "avtor": "Kay, Adam",
-            "naslov": "This Is Going To Hurt",
-            "strani": 299,
-            "datum": "2020-07-27",
-            "ocena": "6/7",
-            "kategorije": [
-                "Moje najljubše knjige"
-            ]
+            "kategorije": []
         },
         {
             "avtor": "Miller, Madeline",
@@ -40,19 +28,34 @@
             "strani": 393,
             "datum": "2019-07-01",
             "ocena": "6/7",
-            "kategorije": [
-                "Mitološke knjige"
-            ]
+            "kategorije": []
+        },
+        {
+            "avtor": "Bardugo, Leigh",
+            "naslov": "Ninth House",
+            "strani": 459,
+            "datum": "2020-07-27",
+            "ocena": "5/7",
+            "kategorije": []
         }
     ],
     "kategorije prebranih knjig": [
         {
-            "ime": "Moje najljubše knjige",
-            "število knjig": 2
-        },
-        {
-            "ime": "Mitološke knjige",
-            "število knjig": 1
+            "ime": "Favourites",
+            "knjige": [
+                {
+                    "knjiga": [
+                        "Tartt, Donna",
+                        "The Goldfinch"
+                    ]
+                },
+                {
+                    "knjiga": [
+                        "Bardugo, Leigh",
+                        "Ninth House"
+                    ]
+                }
+            ]
         }
     ]
 }
