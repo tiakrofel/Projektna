@@ -254,7 +254,7 @@ class Knjigozer:
         return kategorija
 
     def v_kategorijo(self, kategorija, prebrana):
-        if prebrana in self._kategorije_prebranih[kategorija]:
+        if kategorija in prebrana.kategorija:
             raise ValueError(f'Ta knjiga je že v kategoriji "{kategorija}"!')
         self._kategorije_prebranih[kategorija] += 1
         return self.posodobi_prebrano_nova(prebrana, kategorija)
@@ -263,7 +263,7 @@ class Knjigozer:
         self._kategorije_prebranih[kategorija] += 1
 
     def iz_kategorije(self, kategorija, prebrana):
-        if len(self._kategorije_prebranih[kategorija]) == 0:
+        if self._kategorije_prebranih[kategorija] == 0:
             raise ValueError(f'V kategoriji "{kategorija}" ni nobene knjige!')
         self._kategorije_prebranih[kategorija] -= 1
         self.posodobi_prebrano_stara(prebrana, kategorija)

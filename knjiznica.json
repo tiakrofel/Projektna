@@ -1,8 +1,8 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Gaiman, Neil",
-            "naslov": "The Graveyard Book"
+            "avtor": "Clarke, Susanna",
+            "naslov": "Jonathan Strange & Mr Norrell"
         }
     ],
     "trenutna branja": [
@@ -15,14 +15,6 @@
     ],
     "prebrane knjige": [
         {
-            "avtor": "Miller, Madeline",
-            "naslov": "Circe",
-            "strani": 393,
-            "datum": "2019-07-01",
-            "ocena": "6/7",
-            "kategorije": []
-        },
-        {
             "avtor": "Tartt, Donna",
             "naslov": "The Goldfinch",
             "strani": 771,
@@ -31,11 +23,35 @@
             "kategorije": [
                 "Moje najljubše knjige"
             ]
+        },
+        {
+            "avtor": "Kay, Adam",
+            "naslov": "This Is Going To Hurt",
+            "strani": 299,
+            "datum": "2020-07-27",
+            "ocena": "6/7",
+            "kategorije": [
+                "Moje najljubše knjige"
+            ]
+        },
+        {
+            "avtor": "Miller, Madeline",
+            "naslov": "Circe",
+            "strani": 393,
+            "datum": "2019-07-01",
+            "ocena": "6/7",
+            "kategorije": [
+                "Mitološke knjige"
+            ]
         }
     ],
     "kategorije prebranih knjig": [
         {
             "ime": "Moje najljubše knjige",
+            "število knjig": 2
+        },
+        {
+            "ime": "Mitološke knjige",
             "število knjig": 1
         }
     ]

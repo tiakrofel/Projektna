@@ -4,7 +4,7 @@ from model import Knjigozer
 LOGO = '''
 88                      88  88                              88 88                                 
 88                      ""  ""                               """                                                              
-88                                                                                           
+88                                                                                          
 88   ,d8   8b,dPPYba,   88  88   ,adPPYb,d8   ,adPPYba,   888888888   ,adPPYba,  8b,dPPYba,  
 88 ,a8"    88P'   `"8a  88  88  a8"    `Y88  a8"     "8a       a8P"  a8P_____88  88P'   "Y8  
 8888[      88       88  88  88  8b       88  8b       d8    ,d8P'    8PP"""""""  88          
@@ -56,6 +56,8 @@ def uporabnikova_izbira(slovar):
 
 
 def izbira(seznam):
+    if len(seznam) == 0:
+        print(rdeče('S tega seznama ne morete izbrati nobenega elementa, saj je prazen. Za izhod vnesite 0.'))
     for zaporedna_st, besedilo in enumerate(seznam, 1):
         print(f'{zaporedna_st}) {besedilo}')
     while True:
@@ -398,11 +400,15 @@ def iz_kategorije():
     print()
     print('Izberite kategorijo: ')
     kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
-    if len(knjigozer._kategorije_prebranih[kategorija]) == 0:
+    if knjigozer._kategorije_prebranih[kategorija] == 0:
         print(rdeče(f'V kategoriji "{kategorija}" ni nobene knjige!'))
     else:
         print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija}": ')
-        prebrana = izbira(knjigozer._kategorije_prebranih[kategorija])
+        seznam = []
+        for prebrana in knjigozer.prebrane:
+            if kategorija in prebrana.kategorija:
+                seznam.append(prebrana)
+        prebrana = izbira(seznam)
         knjigozer.iz_kategorije(kategorija, prebrana)
         print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija}". \n'))
 
