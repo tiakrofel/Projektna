@@ -1,38 +1,42 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Neil Gaiman",
+            "avtor": "Gaiman, Neil",
             "naslov": "The Graveyard Book"
         }
     ],
     "trenutna branja": [
         {
-            "avtor": "Stephen Fry",
+            "avtor": "Fry, Stephen",
             "naslov": "Mythos",
             "napredek": 82,
             "strani": 416
-        },
-        {
-            "avtor": "Kay, Adam",
-            "naslov": "This Is Going To Hurt",
-            "napredek": 200,
-            "strani": 299
         }
     ],
     "prebrane knjige": [
         {
-            "avtor": "Donna Tartt",
-            "naslov": "The Goldfinch",
-            "strani": 771,
-            "datum": "2019-08-20",
-            "ocena": "7/7"
-        },
-        {
-            "avtor": "Madeline Miller",
+            "avtor": "Miller, Madeline",
             "naslov": "Circe",
             "strani": 393,
             "datum": "2019-07-01",
-            "ocena": "6/7"
+            "ocena": "6/7",
+            "kategorije": []
+        },
+        {
+            "avtor": "Tartt, Donna",
+            "naslov": "The Goldfinch",
+            "strani": 771,
+            "datum": "2019-08-20",
+            "ocena": "7/7",
+            "kategorije": [
+                "Moje najljubše knjige"
+            ]
+        }
+    ],
+    "kategorije prebranih knjig": [
+        {
+            "ime": "Moje najljubše knjige",
+            "število knjig": 1
         }
     ]
 }
