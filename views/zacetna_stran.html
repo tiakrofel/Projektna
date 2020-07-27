@@ -1,3 +1,5 @@
+% rebase('osnova.html')
+
 <h1><pre>
 88                      88  88                              88 88                                 
 88                      ""  ""                               """                                                              
@@ -15,16 +17,25 @@
 <ul>
     % for neprebrana in knjigozer.neprebrane:
     <li>{{neprebrana.avtor}}: {{neprebrana.naslov}}</li>
+    % end
 </ul>
 
 <h1>Trenutna branja</h1>
 <ul>
     % for trenutna in knjigozer.trenutne:
     <li>{{trenutna.neprebrana.avtor}}: {{trenutna.neprebrana.naslov}}</li>
+    % end
 </ul>
 
 <h1>Prebrane knjige</h1>
 <ul>
     % for prebrana in knjigozer.prebrane:
     <li>{{prebrana.trenutna.neprebrana.avtor}}: {{prebrana.trenutna.neprebrana.naslov}}</li>
+    % end
 </ul>
+
+<form action="/dodaj/" method="POST">
+    Avtor: <input type="text" name="avtor">
+    Naslov: <input type="text" name="naslov">
+    <input type="submit" value="Dodajte k neprebranim knjigam">
+</form>

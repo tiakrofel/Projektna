@@ -13,5 +13,9 @@ except FileNotFoundError:
 def osnovna_stran():
     return bottle.template('zacetna_stran.html', knjigozer=knjigozer)
 
+@bottle.post('/dodaj/')
+def dodaj_neprebrano():
+    knjigozer.dodaj_neprebrano(bottle.request.forms.getunicode('avtor'), bottle.request.forms.getunicode('naslov'))
+    bottle.redirect('/')
 
 bottle.run(debug=True, reloader=True)
