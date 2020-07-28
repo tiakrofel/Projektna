@@ -54,10 +54,11 @@ class Knjigozer:
     def ogled_knjig_kategorije(self, kategorija):
         if len(self._kategorije_prebranih) == 0:
             raise ValueError('Najprej je potrebno kategorijo ustvariti!')
-        elif len(self._kategorije_prebranih[kategorija]) == 0:
+        elif self._kategorije_prebranih[kategorija] == 0:
             raise ValueError('V tej kategoriji ni še nobene knjige!')
-        for prebrana in self._kategorije_prebranih[kategorija]:
-            print(f'{prebrana.trenutna.neprebrana.avtor}: {prebrana.trenutna.neprebrana.naslov}')
+        for prebrana in self.prebrane:
+            if kategorija in prebrana.kategorija:
+                print(f'{prebrana.trenutna.neprebrana.avtor}: {prebrana.trenutna.neprebrana.naslov}')
 
     def pri_dodajanju_neprebranih(self, avtor, naslov):
         if avtor not in self._slovar_neprebranih:
@@ -253,22 +254,24 @@ class Knjigozer:
     def nova_kategorija(self, kategorija):
         if kategorija in self._kategorije_prebranih:
             raise ValueError('Kategorija s tem imenom že obstaja!')
-        self._kategorije_prebranih[kategorija] = []
+        self._kategorije_prebranih[kategorija] = 0
         return kategorija
 
     def v_kategorijo(self, kategorija, prebrana):
         if kategorija in prebrana.kategorija:
-            raise ValueError(f'Ta knjiga je že v kategoriji "{kategorija}"!')
-        dodati = self._iskalnik_prebranih[(prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)]
-        self._kategorije_prebranih[kategorija].append(dodati)
-        return dodati
+            return ValueError('Ta knjiga je že v tej kategoriji!')
+        self._kategorije_prebranih[kategorija] += 1
+        self.posodobi_prebrano_nova(prebrana, kategorija)
+        return self._kategorije_prebranih[kategorija]
     
+    def povecana_kategorija(self, kategorija):
+        self._kategorije_prebranih[kategorija] += 1
+        return self._kategorije_prebranih[kategorija]
 
     def iz_kategorije(self, kategorija, prebrana):
         if self._kategorije_prebranih[kategorija] == 0:
             raise ValueError(f'V kategoriji "{kategorija}" ni nobene knjige!')
-        odstraniti = self._iskalnik_prebranih[(prebrana.trenutna.neprebrana.avtor, prebrana.trenutna.neprebrana.naslov)]
-        self._kategorije_prebranih[kategorija].remove(odstraniti)
+        self._kategorije_prebranih[kategorija] -= 1
         self.posodobi_prebrano_stara(prebrana, kategorija)
         
 
@@ -276,6 +279,9 @@ class Knjigozer:
         if len(self._kategorije_prebranih) == 0:
             raise ValueError(
                 'Ustvarili niste še nobene kategorije prebranih knjig!')
+        for prebrana in self.prebrane:
+            if kategorija in prebrana.kategorija:
+                self.posodobi_prebrano_stara(prebrana, kategorija)
         del self._kategorije_prebranih[kategorija]
 
 
@@ -305,9 +311,7 @@ class Knjigozer:
             } for prebrana in self.prebrane],
             'kategorije prebranih knjig': [{
                 'ime': kategorija, 
-                'knjige': [{
-                    'knjiga': (knjiga.trenutna.neprebrana.avtor, knjiga.trenutna.neprebrana.naslov)
-                } for knjiga in self._kategorije_prebranih[kategorija]],
+                'število knjig': self._kategorije_prebranih[kategorija],
             } for kategorija in self._kategorije_prebranih]
         }
 
@@ -325,10 +329,9 @@ class Knjigozer:
                 prebrana['datum'], prebrana['avtor'], prebrana['naslov'], prebrana['strani'], prebrana['ocena'], prebrana['kategorije'])
         for kategorija in slovar_knjig['kategorije prebranih knjig']:
             nova_kategorija = knjigozer.nova_kategorija(kategorija['ime'])
-            for knjiga in kategorija['knjige']:
-                iskana = tuple(knjiga['knjiga'])
-                najdena = knjigozer._iskalnik_prebranih[iskana]
-                v_kategorijo = knjigozer.v_kategorijo(kategorija['ime'], najdena)
+            for prebrana in slovar_knjig['prebrane knjige']:
+                if kategorija['ime'] in prebrana['kategorije']:
+                    knjigozer.povecana_kategorija(kategorija['ime'])
         return knjigozer
 
     def shrani_knjige(self, ime_datoteke):

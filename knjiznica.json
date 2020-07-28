@@ -3,6 +3,10 @@
         {
             "avtor": "Gaiman, Neil",
             "naslov": "The Graveyard Book"
+        },
+        {
+            "avtor": "Morgenstern, Erin",
+            "naslov": "The Night Circus"
         }
     ],
     "trenutna branja": [
@@ -11,22 +15,20 @@
             "naslov": "Mythos",
             "napredek": 82,
             "strani": 416
+        },
+        {
+            "avtor": "Schwab, V. E.",
+            "naslov": "A Darker Shade Of Magic",
+            "napredek": 201,
+            "strani": 398
         }
     ],
     "prebrane knjige": [
         {
-            "avtor": "Tartt, Donna",
-            "naslov": "The Goldfinch",
-            "strani": 771,
-            "datum": "2019-08-20",
-            "ocena": "7/7",
-            "kategorije": []
-        },
-        {
             "avtor": "Miller, Madeline",
             "naslov": "Circe",
             "strani": 393,
-            "datum": "2019-07-01",
+            "datum": "2020-07-28",
             "ocena": "6/7",
             "kategorije": []
         },
@@ -34,28 +36,23 @@
             "avtor": "Bardugo, Leigh",
             "naslov": "Ninth House",
             "strani": 459,
-            "datum": "2020-07-27",
+            "datum": "2020-07-28",
             "ocena": "5/7",
+            "kategorije": []
+        },
+        {
+            "avtor": "Tartt, Donna",
+            "naslov": "The Goldfinch",
+            "strani": 771,
+            "datum": "2019-08-20",
+            "ocena": "7/7",
             "kategorije": []
         }
     ],
     "kategorije prebranih knjig": [
         {
-            "ime": "Favourites",
-            "knjige": [
-                {
-                    "knjiga": [
-                        "Tartt, Donna",
-                        "The Goldfinch"
-                    ]
-                },
-                {
-                    "knjiga": [
-                        "Bardugo, Leigh",
-                        "Ninth House"
-                    ]
-                }
-            ]
+            "ime": "Najljubše",
+            "število knjig": 0
         }
     ]
 }
