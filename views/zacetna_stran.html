@@ -34,8 +34,61 @@
     % end
 </ul>
 
-<form action="/dodaj/" method="POST">
-    Avtor: <input type="text" name="avtor">
-    Naslov: <input type="text" name="naslov">
+<form action="/dodaj-neprebrano/" method="POST">
+    <label for="avtor">Avtor: </label>
+    <input type="text" id="avtor" name="avtor">
+    <label for="naslov">Naslov: </label>
+    <input type="text" id="naslov" name="naslov">
     <input type="submit" value="Dodajte k neprebranim knjigam">
 </form>
+
+<form action="/dodaj-trenutno/" method="POST">
+    <label for="avtor">Avtor: </label>
+    <input type="text" id="avtor" name="avtor">
+    <label for="naslov">Naslov: </label>
+    <input type="text" id="naslov" name="naslov">
+    <label for="strani">Število strani: </label>
+    <input type="text" id="strani" name="strani">
+    <label for="napredek">Število prebranih strani: </label>
+    <input type="text" id="napredek" name="napredek">
+    <input type="submit" value="Dodajte k trenutnim branjem">
+</form>
+
+<form action="/dodaj-prebrano/" method="POST">
+    <label for="avtor">Avtor: </label>
+    <input type="text" id="avtor" name="avtor">
+    <label for="naslov">Naslov: </label>
+    <input type="text" id="naslov" name="naslov">
+    <label for="strani">Število strani: </label>
+    <input type="text" id="strani" name="strani">
+    <label for="naslov">Ocena: </label>
+    <input type="text" id="ocena" name="ocena">
+    <input type="submit" value="Dodajte k prebranim knjigam">
+</form>
+
+<form action="/izberi-trenutno/" method="POST">
+    % include('_izberi_neprebrano.html', id='neprebrana', oznaka='Izberite neprebrano knjigo')
+    
+    <label for="strani">Število strani: </label>
+    <input type="text" id="strani" name="strani">
+    <label for="napredek">Število prebranih strani: </label>
+    <input type="text" id="napredek" name="napredek">
+    <input type="submit" value="Dodajte k trenutnim branjem">
+</form>
+
+<form action="/dokoncana/" method="POST">
+    % include('_izberi_trenutno.html', id='trenutna', oznaka='Izberite trenutno branje')
+    
+    <label for="strani">Ocena: </label>
+    <input type="text" id="ocena" name="ocena">
+    <input type="submit" value="Dodajte k prebranim knjigam">
+</form>
+
+<form action="/odstrani-prebrano/" method="POST">
+    % include('_izberi_prebrano.html', id='prebrana', oznaka='Izberite prebrano knjigo')
+    
+    <input type="submit" value="Izbrišite iz vaše knjižnice">
+</form>
+
+
+

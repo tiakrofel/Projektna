@@ -1,0 +1,8 @@
+<label for="{{id}}">{{oznaka}}: </label>
+
+    <select name="{{id}}" id="{{id}}">
+        % for prebrana in knjigozer.prebrane:
+        <option value="{{prebrana.trenutna.neprebrana.avtor}}; {{prebrana.trenutna.neprebrana.naslov}}">{{prebrana.trenutna.neprebrana.avtor}}: {{prebrana.trenutna.neprebrana.naslov}}</option>
+        % end
+    </select>
+    

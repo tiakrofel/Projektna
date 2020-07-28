@@ -1,0 +1,7 @@
+<label for="{{id}}">{{oznaka}}: </label>
+
+    <select name="{{id}}" id="{{id}}">
+        % for trenutna in knjigozer.trenutne:
+        <option value="{{trenutna.neprebrana.avtor}}; {{trenutna.neprebrana.naslov}}">{{trenutna.neprebrana.avtor}}: {{trenutna.neprebrana.naslov}}</option>
+        % end
+    </select>
