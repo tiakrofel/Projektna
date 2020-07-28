@@ -50,6 +50,17 @@ def izberi_trenutno():
     knjigozer.izberi_trenutno(neprebrana, strani, napredek)
     bottle.redirect('/')
 
+@bottle.post('/direktno-prebrana/')
+def direktno_prebrana():
+    datum = date.today().strftime('%Y-%m-%d')
+    poklicana = bottle.request.forms['neprebrana']
+    urejena = tuple(poklicana.split('; '))
+    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    strani = bottle.request.forms['strani']
+    ocena = bottle.request.forms.getunicode('ocena')
+    knjigozer.direktno_prebrana(datum, neprebrana, strani, ocena)
+    bottle.redirect('/')
+
 @bottle.post('/dokoncana/')
 def dokoncana():
     datum = date.today().strftime('%Y-%m-%d')
@@ -60,12 +71,45 @@ def dokoncana():
     knjigozer.dokoncana(datum, trenutna, ocena)
     bottle.redirect('/')
 
+@bottle.post('/odstrani-neprebrano/')
+def odstrani_neprebrano():
+    poklicana = bottle.request.forms['neprebrana']
+    urejena = tuple(poklicana.split('; '))
+    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    knjigozer.odstrani_neprebrano(neprebrana)
+    bottle.redirect('/')
+
+@bottle.post('/odstrani-trenutno/')
+def odstrani_trenutno():
+    poklicana = bottle.request.forms['trenutna']
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    knjigozer.odstrani_trenutno(trenutna)
+    bottle.redirect('/')
+
 @bottle.post('/odstrani-prebrano/')
 def odstrani_prebrano():
     poklicana = bottle.request.forms['prebrana']
     urejena = tuple(poklicana.split('; '))
     prebrana = knjigozer.poisci_prebrano(urejena)
     knjigozer.odstrani_prebrano(prebrana)
+    bottle.redirect('/')
+
+@bottle.post('/posodobi-trenutno/')
+def posodobi_trenutno():
+    poklicana = bottle.request.forms['trenutna']
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    napredek = bottle.request.forms.getunicode('napredek')
+    knjigozer.posodobi_trenutno(trenutna, napredek)
+    bottle.redirect('/')
+
+@bottle.post('/opuscena-trenutna/')
+def opuscena_trenutna():
+    poklicana = bottle.request.forms['trenutna']
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    knjigozer.opuscena_trenutna(trenutna)
     bottle.redirect('/')
 
 bottle.run(debug=True, reloader=True)
