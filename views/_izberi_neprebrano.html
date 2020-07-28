@@ -1,7 +1,6 @@
-<label for="{{id}}">{{oznaka}}: </label>
-
-    <select name="{{id}}" id="{{id}}">
-        % for neprebrana in knjigozer.neprebrane:
-        <option value="{{neprebrana.avtor}}; {{neprebrana.naslov}}">{{neprebrana.avtor}}: {{neprebrana.naslov}}</option>
-        % end
-    </select>
+<select name="{{id}}" id="{{id}}">
+    <option disabled selected value> -- izberite neprebrano knjigo -- </option>
+    % for neprebrana in knjigozer.neprebrane:
+    <option value="{{neprebrana.avtor}}; {{neprebrana.naslov}}">{{neprebrana.avtor}}: {{neprebrana.naslov}}</option>
+    % end
+</select>
