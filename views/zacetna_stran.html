@@ -1,2 +1,36 @@
 % rebase('osnova.html')
 
+<body>
+    <nav class="level">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Število neprebranih knjig</p>
+                <p class="title">{{len(knjigozer.neprebrane)}}</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Število trenutnih branj</p>
+                <p class="title">{{len(knjigozer.trenutne)}}</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Število prebranih knjig</p>
+                <p class="title">{{len(knjigozer.prebrane)}}</p>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <section class="hero is-light is-medium">
+            <div class="hero-body">
+                <h1 class="title has-text-centered">
+                    knjigožer
+                </h1>
+                <h2 class="subtitle has-text-centered">
+                    vaša osebna knjižnica
+                </h2>
+            </div>
+        </section>
+    </div>
+</body>
