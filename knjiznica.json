@@ -53,12 +53,15 @@
             "datum": "2019-08-20",
             "ocena": "7/7",
             "kategorije": []
+        },
+        {
+            "avtor": "Tartt, Donna",
+            "naslov": "The Secret History",
+            "strani": "559",
+            "datum": "2020-07-29",
+            "ocena": "7/7",
+            "kategorije": []
         }
     ],
-    "kategorije prebranih knjig": [
-        {
-            "ime": "Najljubše",
-            "število knjig": 0
-        }
-    ]
+    "kategorije prebranih knjig": []
 }
