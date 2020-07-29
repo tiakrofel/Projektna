@@ -12,7 +12,23 @@ except FileNotFoundError:
 
 @bottle.get('/')
 def osnovna_stran():
+    bottle.redirect('/knjigozer/')
+
+@bottle.get('/knjigozer/')
+def zacetna_stran():
     return bottle.template('zacetna_stran.html', knjigozer=knjigozer)
+
+@bottle.get('/neprebrane/')
+def stran_neprebranih():
+    return bottle.template('neprebrane.html')
+
+@bottle.get('/trenutne/')
+def stran_trenutnih():
+    return bottle.template('trenutne.html')
+
+@bottle.get('/prebrane/')
+def stran_prebranih():
+    return bottle.template('prebrane.html')
 
 @bottle.post('/dodaj-neprebrano/')
 def dodaj_neprebrano():
