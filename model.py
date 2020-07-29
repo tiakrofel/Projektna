@@ -43,34 +43,30 @@ class Knjigozer:
         self._kategorije_prebranih = {}
 
     def ogled_knjig(self):
-        for avtor in sorted(self._slovar_neprebranih):
-            for naslov in self._slovar_neprebranih[avtor]:
-                print(f'{avtor}: {naslov}, neprebrana')
-        for avtor in sorted(self._slovar_trenutnih):
-            for naslov in self._slovar_trenutnih[avtor]:
-                print(f'{avtor}: {naslov}, trenutno branje')
-        for avtor in sorted(self._slovar_prebranih):
-            for naslov in self._slovar_prebranih[avtor]:
-                print(f'{avtor}: {naslov}, prebrana')
+        for (avtor, naslov) in sorted(self._iskalnik_neprebranih):
+            print(f'{avtor}: {naslov}, neprebrana')
+        for (avtor, naslov) in sorted(self._iskalnik_trenutnih):
+            print(f'{avtor}: {naslov}, trenutno branje')
+        for (avtor, naslov) in sorted(self._iskalnik_prebranih):
+            print(f'{avtor}: {naslov}, prebrana')
 
     def ogled_neprebranih(self):
-        for avtor in sorted(self._slovar_neprebranih):
-            for naslov in self._slovar_neprebranih[avtor]:
-                print(f'{avtor}: {naslov}')
+        if len(self.neprebrane) == 0:
+            raise ValueError('Trenutno ne berete nobene knjige!')
+        for (avtor, naslov) in sorted(self._iskalnik_neprebranih):
+            print(f'{avtor}: {naslov}')
 
     def ogled_trenutnih(self):
         if len(self.trenutne) == 0:
             raise ValueError('Trenutno ne berete nobene knjige!')
-        for avtor in sorted(self._slovar_trenutnih):
-            for naslov in self._slovar_trenutnih[avtor]:
-                print(f'{avtor}: {naslov}')
+        for (avtor, naslov) in sorted(self._iskalnik_trenutnih):
+            print(f'{avtor}: {naslov}')
 
     def ogled_prebranih(self):
         if len(self.prebrane) == 0:
             raise ValueError('V vaši knjižnici ni nobene prebrane knjige!')
-        for avtor in sorted(self._slovar_prebranih):
-            for naslov in self._slovar_prebranih[avtor]:
-                print(f'{avtor}: {naslov}')
+        for (avtor, naslov) in sorted(self._iskalnik_prebranih):
+            print(f'{avtor}: {naslov}')
 
     def ogled_kategorij(self):
         if len(self._kategorije_prebranih) == 0:
