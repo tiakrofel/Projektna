@@ -381,6 +381,11 @@ class Neprebrana:
     def __str__(self):
         return f'{self.avtor}: {self.naslov}'
 
+    def __lt__(self, other):
+        if self.avtor == other.avtor:
+            return self.naslov < other.naslov
+        else:
+            return self.avtor < other.avtor
 
 class Trenutna:
 
@@ -395,6 +400,9 @@ class Trenutna:
 
     def __str__(self):
         return f'{self.neprebrana.avtor}: {self.neprebrana.naslov}, stran {self.napredek} od {self.strani}'
+    
+    def __lt__(self, other):
+        return self.neprebrana < other.neprebrana
 
 
 class Prebrana:
@@ -411,3 +419,6 @@ class Prebrana:
 
     def __str__(self):
         return f'{self.trenutna.neprebrana.avtor}: {self.trenutna.neprebrana.naslov}, {self.trenutna.strani} strani'
+
+    def __lt__(self, other):
+        return self.trenutna < other.trenutna

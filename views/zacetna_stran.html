@@ -1,6 +1,6 @@
 % rebase('osnova.html')
 
-<h1><pre>
+<h2><pre>
 88                      88  88                              88 88                                 
 88                      ""  ""                               """                                                              
 88                                                                                          
@@ -11,11 +11,48 @@
 88   `Y8a  88       88  88  88   `"YbbdP"Y8   `"YbbdP"'   888888888   `"Ybbd8"'  88          
                        ,88       aa,    ,88                                                  
                      888P"        "Y8bbdP"                                                   
-</pre></h1>
+</pre></h2>
 
-<h1>Neprebrane knjige</h1>
+<h1>Osebna knjižnica</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>avtor</th>
+            <th>naslov</th>
+            <th>razdelek</th>
+        </tr>
+    </thead>
+    <tbody>
+        % for neprebrana in sorted(knjigozer.neprebrane):
+        <tr>
+            <td style="text-align: center; vertical-align: middle;">{{neprebrana.avtor}}</td>
+            <td style="text-align: center; vertical-align: middle;">{{neprebrana.naslov}}</td>
+            <td style="text-align: center; vertical-align: middle;">neprebrane knjige</td>
+        </tr>
+        % end
+
+        % for trenutna in sorted(knjigozer.trenutne):
+        <tr>
+            <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.avtor}}</td>
+            <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.naslov}}</td>
+            <td style="text-align: center; vertical-align: middle;">trenutna branja</td>
+        </tr>
+        % end
+
+        % for prebrana in sorted(knjigozer.prebrane):
+        <tr>
+            <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
+            <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
+            <td style="text-align: center; vertical-align: middle;">prebrane knjige</td>
+        </tr>
+        %end
+    </tbody>
+</table>
+
+<h2>Neprebrane knjige</h2>
 <ul>
-    % for neprebrana in knjigozer.neprebrane:
+    % for neprebrana in sorted(knjigozer.neprebrane):
     <li>
         {{neprebrana.avtor}}: {{neprebrana.naslov}}
         <form action="/odstrani-neprebrano/" method="POST" style="display: inline;">
@@ -27,7 +64,7 @@
     <li>
         <form action="/dodaj-neprebrano/" method="POST">
             <label for="avtor">Avtor: </label>
-            <input type="text" id="avtor" name="avtor">
+            <input type="text" id="avtor" name="avtor" placeholder="priimek, ime">
             <label for="naslov">Naslov: </label>
             <input type="text" id="naslov" name="naslov">
             <input type="submit" value="Dodajte k neprebranim knjigam">
@@ -43,9 +80,9 @@
 </ul>
 
 
-<h1>Trenutna branja</h1>
+<h2>Trenutna branja</h2>
 <ul>
-    % for trenutna in knjigozer.trenutne:
+    % for trenutna in sorted(knjigozer.trenutne):
     <li>
         {{trenutna.neprebrana.avtor}}: {{trenutna.neprebrana.naslov}}, stran {{trenutna.napredek}} od {{trenutna.strani}}
         <form action="/odstrani-trenutno/" method="POST" style="display: inline;">
@@ -55,13 +92,26 @@
     </li>
     % end
     <li>
+        <form action="/dodaj-trenutno/" method="POST">
+            <label for="avtor">Avtor: </label>
+            <input type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+            <label for="naslov">Naslov: </label>
+            <input type="text" id="naslov" name="naslov">
+            <label for="strani">Strani: </label>
+            <input type="text" id="strani" name="strani">
+            <label for="napredek">Napredek: </label>
+            <input type="text" id="napredek" name="napredek" placeholder="število prebranih strani">
+            <input type="submit" value="Dodajte k trenutnim branjem">
+        </form>
+    </li>
+    <li>
         <form action="/izberi-trenutno/" method="POST">
             % include('_izberi_neprebrano.html', id='neprebrana', oznaka='')
             
-            <label for="strani">Število strani: </label>
+            <label for="strani">Strani: </label>
             <input type="text" id="strani" name="strani">
-            <label for="napredek">Število prebranih strani: </label>
-            <input type="text" id="napredek" name="napredek">
+            <label for="napredek">Napredek: </label>
+            <input type="text" id="napredek" name="napredek" placeholder="število prebranih strani">
             <input type="submit" value="Dodajte k trenutnim branjem">
         </form>
     </li>
@@ -69,31 +119,19 @@
         <form action="/posodobi-trenutno/" method="POST">
             % include('_izberi_trenutno.html', id='trenutna', oznaka='')
             
-            <label for="napredek">Število prebranih strani: </label>
-            <input type="text" id="napredek" name="napredek">
+            <label for="napredek">Napredek: </label>
+            <input type="text" id="napredek" name="napredek" placeholder="število prebranih strani">
             <input type="submit" value="Posodobite trenutno branje">
         </form>        
-    </li>
-    <li>
-        <form action="/dodaj-trenutno/" method="POST">
-            <label for="avtor">Avtor: </label>
-            <input type="text" id="avtor" name="avtor">
-            <label for="naslov">Naslov: </label>
-            <input type="text" id="naslov" name="naslov">
-            <label for="strani">Število strani: </label>
-            <input type="text" id="strani" name="strani">
-            <label for="napredek">Število prebranih strani: </label>
-            <input type="text" id="napredek" name="napredek">
-            <input type="submit" value="Dodajte k trenutnim branjem">
-        </form>
     </li>
 </ul>
 
 
 
-<h1>Prebrane knjige</h1>
+
+<h2>Prebrane knjige</h2>
 <ul>
-    % for prebrana in knjigozer.prebrane:
+    % for prebrana in sorted(knjigozer.prebrane):
     <li>
         {{prebrana.trenutna.neprebrana.avtor}}: {{prebrana.trenutna.neprebrana.naslov}}, {{prebrana.trenutna.strani}} strani
         <form action="/odstrani-prebrano/" method="POST" style="display: inline;">
@@ -103,10 +141,23 @@
     </li>
     % end
     <li>
+        <form action="/dodaj-prebrano/" method="POST">
+            <label for="avtor">Avtor: </label>
+            <input type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+            <label for="naslov">Naslov: </label>
+            <input type="text" id="naslov" name="naslov">
+            <label for="strani">Strani: </label>
+            <input type="text" id="strani" name="strani">
+            <label for="naslov">Ocena: </label>
+            <input type="text" id="ocena" name="ocena">
+            <input type="submit" value="Dodajte k prebranim knjigam">
+        </form>
+    </li>
+    <li>
         <form action="/direktno-prebrana/" method="POST">
             % include('_izberi_neprebrano.html', id='neprebrana', oznaka='')
             
-            <label for="strani">Število strani: </label>
+            <label for="strani">Strani: </label>
             <input type="text" id="strani" name="strani">
             <label for="ocena">Ocena: </label>
             <input type="text" id="ocena" name="ocena">
@@ -118,19 +169,6 @@
             % include('_izberi_trenutno.html', id='trenutna', oznaka='')
             
             <label for="ocena">Ocena: </label>
-            <input type="text" id="ocena" name="ocena">
-            <input type="submit" value="Dodajte k prebranim knjigam">
-        </form>
-    </li>
-    <li>
-        <form action="/dodaj-prebrano/" method="POST">
-            <label for="avtor">Avtor: </label>
-            <input type="text" id="avtor" name="avtor">
-            <label for="naslov">Naslov: </label>
-            <input type="text" id="naslov" name="naslov">
-            <label for="strani">Število strani: </label>
-            <input type="text" id="strani" name="strani">
-            <label for="naslov">Ocena: </label>
             <input type="text" id="ocena" name="ocena">
             <input type="submit" value="Dodajte k prebranim knjigam">
         </form>
