@@ -21,12 +21,6 @@
             "naslov": "A Darker Shade Of Magic",
             "napredek": 201,
             "strani": 398
-        },
-        {
-            "avtor": "Vuong, Ocean",
-            "naslov": "On Earth We're Briefly Gorgeous",
-            "napredek": 3,
-            "strani": 333
         }
     ],
     "prebrane knjige": [
@@ -39,26 +33,10 @@
             "kategorije": []
         },
         {
-            "avtor": "Bardugo, Leigh",
-            "naslov": "Ninth House",
-            "strani": 459,
-            "datum": "2020-07-28",
-            "ocena": "5/7",
-            "kategorije": []
-        },
-        {
             "avtor": "Tartt, Donna",
             "naslov": "The Goldfinch",
             "strani": 771,
             "datum": "2019-08-20",
-            "ocena": "7/7",
-            "kategorije": []
-        },
-        {
-            "avtor": "Tartt, Donna",
-            "naslov": "The Secret History",
-            "strani": "559",
-            "datum": "2020-07-29",
             "ocena": "7/7",
             "kategorije": []
         }
