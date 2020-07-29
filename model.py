@@ -1,5 +1,32 @@
 import json
 
+class Uporabnik:
+    def __init__(self, uporabnisko_ime, zasifrirano_geslo, knjigozer):
+        self.uporabnisko_ime = uporabnisko_ime
+        self.zasifrirano_geslo = zasifrirano_geslo
+        self.knjigozer = knjigozer
+    
+    def preveri_geslo(self, zasifrirano_geslo):
+        if self.zasifrirano_geslo != zasifrirano_geslo:
+            raise ValueError('Geslo je napačno!')
+    
+    def shrani_knjige(self, ime_datoteke):
+        slovar_knjig = {
+            'uporabnisko_ime': self.uporabnisko_ime,
+            'zasifrirano_geslo': self.zasifrirano_geslo,
+            'knjigozer': self.knjigozer.slovar_knjig()
+        }
+        with open(ime_datoteke, 'w') as datoteka:
+            json.dump(slovar_knjig, datoteka, ensure_ascii=False, indent=4)
+    
+    @classmethod
+    def nalozi_knjige(cls, ime_datoteke):
+        with open(ime_datoteke) as datoteka:
+            slovar_knjig = json.load(datoteka)
+        uporabnisko_ime = slovar_knjig['uporabnisko_ime']
+        zasifrirano_geslo = slovar_knjig['zasifrirano_geslo']
+        knjigozer = Knjigozer.nalozi_iz_slovarja_knjig(slovar_knjig['knjigozer'])
+        return cls(uporabnisko_ime, zasifrirano_geslo, knjigozer)
 
 class Knjigozer:
 

@@ -1,6 +1,6 @@
 import bottle
 from datetime import date
-from model import Knjigozer
+from model import Knjigozer, Uporabnik
 
 DATOTEKA_S_KNJIGAMI = 'knjiznica.json'
 
