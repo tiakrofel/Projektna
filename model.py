@@ -182,7 +182,7 @@ class Knjigozer:
         self._iskalnik_trenutnih[(
             neprebrana.avtor, neprebrana.naslov)] = izbrana
         return izbrana
-
+    
     def posodobi_trenutno(self, trenutna, napredek):
         if len(self.trenutne) == 0:
             raise ValueError('Trenutno ne berete nobene knjige!')
@@ -211,6 +211,9 @@ class Knjigozer:
         self.pri_brisanju_trenutnih(
             trenutna.neprebrana.avtor, trenutna.neprebrana.naslov)
         return opuscena
+    
+    def prebran_del(self, trenutna):
+        return trenutna.napredek / trenutna.strani
 
     def dokoncana(self, datum, trenutna, ocena, kategorija=[]):
         if len(self.trenutne) == 0:
