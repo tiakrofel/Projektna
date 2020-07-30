@@ -46,8 +46,8 @@ def dodaj_neprebrano():
 def dodaj_trenutno():
     avtor = bottle.request.forms.getunicode('avtor')
     naslov = bottle.request.forms.getunicode('naslov')
-    strani = bottle.request.forms['strani']
-    napredek = bottle.request.forms['napredek']
+    strani = int(bottle.request.forms['strani'])
+    napredek = int(bottle.request.forms['napredek'])
     knjigozer.dodaj_trenutno(avtor, naslov, strani, napredek)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
     bottle.redirect('/trenutne/')
