@@ -16,6 +16,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <form action="/dodaj-trenutno/" method="POST">
+                        <tr>
+                            <td>
+                                <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+                            </td>
+                            <td>
+                                <input class="input is-small is-rounded" type="text" id="naslov" name="naslov" placeholder="naslov">
+                            </td>
+                            <td>
+                                <input class="input is-small is-rounded" type="text" id="napredek" name="napredek" placeholder="število prebranih strani">
+                            </td>
+                            <td>
+                                <input class="input is-small is-rounded" type="text" id="strani" name="strani" placeholder="število vseh strani knjige">
+                            </td>
+                            <td style="text-align: right; vertical-align: middle;">
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="submit" class="button is-small is-success is-light" value="dodaj k trenutnim branjem">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </form>
                     % for trenutna in sorted(knjigozer.trenutne):
                     <tr>
                         <td style="text-align: center;">{{trenutna.neprebrana.avtor}}</td>
