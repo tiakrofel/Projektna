@@ -18,17 +18,21 @@ def osnovna_stran():
 def zacetna_stran():
     return bottle.template('zacetna_stran.html', knjigozer=knjigozer)
 
+@bottle.get('/prijava/')
+def prijava_get():
+    return bottle.template('prijava.html')
+
 @bottle.get('/neprebrane/')
 def stran_neprebranih():
-    return bottle.template('neprebrane.html')
+    return bottle.template('neprebrane.html', knjigozer=knjigozer)
 
 @bottle.get('/trenutne/')
 def stran_trenutnih():
-    return bottle.template('trenutne.html')
+    return bottle.template('trenutne.html', knjigozer=knjigozer)
 
 @bottle.get('/prebrane/')
 def stran_prebranih():
-    return bottle.template('prebrane.html')
+    return bottle.template('prebrane.html', knjigozer=knjigozer)
 
 @bottle.post('/dodaj-neprebrano/')
 def dodaj_neprebrano():
@@ -36,7 +40,7 @@ def dodaj_neprebrano():
     naslov = bottle.request.forms.getunicode('naslov')
     knjigozer.dodaj_neprebrano(avtor, naslov)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/neprebrane/')
 
 @bottle.post('/dodaj-trenutno/')
 def dodaj_trenutno():
@@ -46,7 +50,7 @@ def dodaj_trenutno():
     napredek = bottle.request.forms['napredek']
     knjigozer.dodaj_trenutno(avtor, naslov, strani, napredek)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/dodaj-prebrano/')
 def dodaj_prebrano():
@@ -57,7 +61,7 @@ def dodaj_prebrano():
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.dodaj_prebrano(datum, avtor, naslov, strani, ocena)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/prebrane/')
 
 @bottle.post('/izberi-trenutno/')
 def izberi_trenutno():
@@ -68,7 +72,7 @@ def izberi_trenutno():
     napredek = bottle.request.forms.getunicode('napredek')
     knjigozer.izberi_trenutno(neprebrana, strani, napredek)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/direktno-prebrana/')
 def direktno_prebrana():
@@ -80,7 +84,7 @@ def direktno_prebrana():
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.direktno_prebrana(datum, neprebrana, strani, ocena)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/neprebrane/')
 
 @bottle.post('/dokoncana/')
 def dokoncana():
@@ -91,7 +95,7 @@ def dokoncana():
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.dokoncana(datum, trenutna, ocena)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/odstrani-neprebrano/')
 def odstrani_neprebrano():
@@ -100,7 +104,7 @@ def odstrani_neprebrano():
     neprebrana = knjigozer.poisci_neprebrano(urejena)
     knjigozer.odstrani_neprebrano(neprebrana)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/neprebrane/')
 
 @bottle.post('/odstrani-trenutno/')
 def odstrani_trenutno():
@@ -109,7 +113,7 @@ def odstrani_trenutno():
     trenutna = knjigozer.poisci_trenutno(urejena)
     knjigozer.odstrani_trenutno(trenutna)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/odstrani-prebrano/')
 def odstrani_prebrano():
@@ -118,7 +122,7 @@ def odstrani_prebrano():
     prebrana = knjigozer.poisci_prebrano(urejena)
     knjigozer.odstrani_prebrano(prebrana)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/prebrane/')
 
 @bottle.post('/posodobi-trenutno/')
 def posodobi_trenutno():
@@ -128,7 +132,7 @@ def posodobi_trenutno():
     napredek = bottle.request.forms.getunicode('napredek')
     knjigozer.posodobi_trenutno(trenutna, napredek)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/opuscena-trenutna/')
 def opuscena_trenutna():
@@ -137,6 +141,6 @@ def opuscena_trenutna():
     trenutna = knjigozer.poisci_trenutno(urejena)
     knjigozer.opuscena_trenutna(trenutna)
     knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
-    bottle.redirect('/')
+    bottle.redirect('/trenutne/')
 
 bottle.run(debug=True, reloader=True)
