@@ -1,19 +1,88 @@
+% strani = [
+% 'osebna knjižnica',
+% 'urejanje neprebranih',
+% 'urejanje trenutnih',
+% 'urejanje prebranih',
+% ]
+% naslov_strani = {
+% 'osebna knjižnica': 'Osebna knjižnica',
+% 'urejanje neprebranih': 'Neprebrane knjige',
+% 'urejanje trenutnih': 'Trenutna branja',
+% 'urejanje prebranih': 'Prebrane knjige',
+% }
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Knjigožer</title>
+    % if defined('trenutna_stran'):
+    <title>Knjigožer | {{naslov_strani[trenutna_stran]}}</title>
+    % else:
+    <title>Knjigožer | Prijava</title>
+    % end
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
+    <nav class="navbar is-dark is-spaced is-transparent">
+        <div class="container">
+            <div class="navbar-brand">
+                % if defined('trenutna_stran'):
+                <a class="navbar-item is-active" href="/">
+                    % else:
+                    <a class="navbar-item is-active" href="/prijava/">
+                        % end
+                        <span class="icon is-large">
+                            <i class="fas fa-inverse fa-2x fa-book-reader"></i>
+                        </span>
+                        <span class="title has-text-light">
+                            knjigožer
+                        </span>
+                    </a>
+            </div>
+            % if defined('trenutna_stran'):
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item is-active" href="/neprebrane/">
+                        <span class="icon is-large">
+                            <i class="fas fa-book-open"></i>
+                        </span>
+                        Neprebrane knjige
+                    </a>
+
+                    <a class="navbar-item is-active" href="/trenutne/">
+                        <span class="icon is-large">
+                            <i class="fas fa-bookmark"></i>
+                        </span>
+                        Trenutna branja
+                    </a>
+
+                    <a class="navbar-item is-active" href="/prebrane/">
+                        <span class="icon is-large">
+                            <i class="fas fa-book"></i>
+                        </span>
+                        Prebrane knjige
+                    </a>
+                </div>
+              
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                          <a class="button is-light is-small">
+                            <strong>Odjava</strong>
+                          </a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            % end
+        </div>
+    </nav>
     <section class="section">
         {{!base}}
     </section>
 </body>
 
 </html>
-

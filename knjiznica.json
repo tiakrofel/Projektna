@@ -1,12 +1,20 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Gaiman, Neil",
-            "naslov": "The Graveyard Book"
-        },
-        {
             "avtor": "Morgenstern, Erin",
             "naslov": "The Night Circus"
+        },
+        {
+            "avtor": "Clarke, Susanna",
+            "naslov": "Jonathan Strange & Mr Norrell"
+        },
+        {
+            "avtor": "Goodman, Alice",
+            "naslov": "The Lake of Dead Languages"
+        },
+        {
+            "avtor": "Yates, C. J.",
+            "naslov": "Black Chalk"
         }
     ],
     "trenutna branja": [
@@ -15,12 +23,6 @@
             "naslov": "Mythos",
             "napredek": 82,
             "strani": 416
-        },
-        {
-            "avtor": "Schwab, V. E.",
-            "naslov": "A Darker Shade Of Magic",
-            "napredek": 201,
-            "strani": 398
         }
     ],
     "prebrane knjige": [
