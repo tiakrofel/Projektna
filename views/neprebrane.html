@@ -1,2 +1,53 @@
-% rebase('osnova.html')
+% rebase('osnova.html', trenutna_stran='urejanje neprebranih')
 
+<body>
+    <section class="section">
+        <div class="container">
+            <table class="table is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>avtor</th>
+                        <th>naslov</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="/dodaj-neprebrano/" method="POST">
+                    <tr>
+                        <td>
+                            <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+                        </td>
+                        <td>
+                            <input class="input is-small is-rounded" type="text" id="naslov" name="naslov" placeholder="naslov">
+                        </td>
+                        <td style="text-align: right; vertical-align: middle;">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="submit" class="button is-small is-success is-light" value="dodaj k neprebranim knjigam">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </form>
+                    % for neprebrana in sorted(knjigozer.neprebrane):
+                    <tr>
+                        <td style="text-align: center;">{{neprebrana.avtor}}</td>
+                        <td style="text-align: center;">{{neprebrana.naslov}}</td>
+                        <td style="text-align: right;">
+                            <form action="/odstrani-neprebrano/" method="POST">
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="hidden" name="neprebrana"
+                                            value="{{neprebrana.avtor}}; {{neprebrana.naslov}}">
+                                        <input type="submit" class="button is-small is-danger is-light" value="odstrani iz knjižnice">
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    % end
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
