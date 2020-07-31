@@ -15,6 +15,10 @@
         {
             "avtor": "Yates, C. J.",
             "naslov": "Black Chalk"
+        },
+        {
+            "avtor": "Wohlleben, Peter",
+            "naslov": "The Hidden Life of Trees"
         }
     ],
     "trenutna branja": [
@@ -53,6 +57,14 @@
             "naslov": "This Is Going To Hurt",
             "strani": "256",
             "datum": "2020-07-30",
+            "ocena": "5/7",
+            "kategorije": []
+        },
+        {
+            "avtor": "Ogawa, Yoko",
+            "naslov": "Darilo števil",
+            "strani": "180",
+            "datum": "2020-07-31",
             "ocena": "5/7",
             "kategorije": []
         }
