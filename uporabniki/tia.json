@@ -1,0 +1,15 @@
+{
+    "uporabnisko_ime": "tia",
+    "zasifrirano_geslo": "828c241e7b937140034a9013079ce003f73b3ad89e2d5623651169bfa8659dfb946bf5709cce0e64ad88d627b49f093d0d6c0159f8e9f0aa94f15917fb60d69f",
+    "knjigozer": {
+        "neprebrane knjige": [
+            {
+                "avtor": "Schwab, V. E.",
+                "naslov": "A Darker Shade Of Magic"
+            }
+        ],
+        "trenutna branja": [],
+        "prebrane knjige": [],
+        "kategorije prebranih knjig": []
+    }
+}
