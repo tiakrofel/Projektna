@@ -74,6 +74,12 @@ def odjava():
     bottle.response.delete_cookie('uporabnisko_ime', path='/')
     bottle.redirect('/prijava/')
 
+
+@bottle.get('/pomoc/')
+def pomoc():
+    knjigozer = uporabnikov_knjigozer()
+    return bottle.template('pomoc_uporabniku.html', knjigozer=knjigozer)
+
 @bottle.get('/neprebrane/')
 def stran_neprebranih():
     knjigozer = uporabnikov_knjigozer()
