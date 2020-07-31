@@ -5,6 +5,10 @@
         <h1 class="title">
             Neprebrane knjige
         </h1>
+        <h2 class="subtitle">
+            Tukaj lahko na seznam neprebranih knjig dodajate knjige, ki jih še ni v vaši osebni knjižnici.<br>
+            Prav tako lahko knjige, ki so na tem seznamu, brišete.
+        </h2>
         <div class="container">
             <table class="table is-hoverable is-fullwidth">
                 <thead>
@@ -17,10 +21,10 @@
                 <tbody>
                     <form action="/dodaj-neprebrano/" method="POST">
                     <tr>
-                        <td>
+                        <td style="vertical-align: middle;">
                             <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
                         </td>
-                        <td>
+                        <td style="vertical-align: middle;">
                             <input class="input is-small is-rounded" type="text" id="naslov" name="naslov" placeholder="naslov">
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
@@ -34,9 +38,9 @@
                     </form>
                     % for neprebrana in sorted(knjigozer.neprebrane):
                     <tr>
-                        <td style="text-align: center;">{{neprebrana.avtor}}</td>
-                        <td style="text-align: center;">{{neprebrana.naslov}}</td>
-                        <td style="text-align: right;">
+                        <td style="text-align: center; vertical-align: middle;">{{neprebrana.avtor}}</td>
+                        <td style="text-align: center; vertical-align: middle;">{{neprebrana.naslov}}</td>
+                        <td style="text-align: right; vertical-align: middle;">
                             <form action="/odstrani-neprebrano/" method="POST">
                                 <div class="field">
                                     <div class="control">

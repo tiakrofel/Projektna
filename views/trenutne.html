@@ -5,6 +5,10 @@
         <h1 class="title">
             Trenutna branja
         </h1>
+        <h2 class="subtitle">
+            Tukaj lahko na seznam trenutnih branj dodajate knjige, ki jih še ni v vaši osebni knjižnici.<br>
+            Prav tako lahko knjige, ki so na tem seznamu, brišete.
+        </h2>
         <div class="container">
             <table class="table is-hoverable is-fullwidth">
                 <thead>
@@ -41,8 +45,8 @@
                         </form>
                     % for trenutna in sorted(knjigozer.trenutne):
                     <tr>
-                        <td style="text-align: center;">{{trenutna.neprebrana.avtor}}</td>
-                        <td style="text-align: center;">{{trenutna.neprebrana.naslov}}</td>
+                        <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.avtor}}</td>
+                        <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.naslov}}</td>
                         <td colspan="2" style="vertical-align: middle;">
                             <progress class="progress is-dark" value="{{knjigozer.prebran_del(trenutna)}}" max="1"></progress>
                         </td>

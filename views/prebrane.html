@@ -5,6 +5,10 @@
         <h1 class="title">
             Prebrane knjige
         </h1>
+        <h2 class="subtitle">
+            Tukaj lahko na seznam prebranih knjig dodajate knjige, ki jih še ni v vaši osebni knjižnici.<br>
+            Prav tako lahko knjige, ki so na tem seznamu, brišete.
+        </h2>
         <div class="container">
             <table class="table is-hoverable is-fullwidth">
                 <thead>
@@ -42,10 +46,10 @@
                         </form>
                         % for prebrana in sorted(knjigozer.prebrane):
                         <tr>
-                            <td style="text-align: center;">{{prebrana.trenutna.neprebrana.avtor}}</td>
-                            <td style="text-align: center;">{{prebrana.trenutna.neprebrana.naslov}}</td>
-                            <td style="text-align: center;">{{prebrana.trenutna.strani}}</td>
-                            <td style="text-align: center;">{{prebrana.ocena}}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.strani}}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{prebrana.ocena}}</td>
                             <td style="text-align: right;">
                                 <form action="/odstrani-prebrano/" method="POST">
                                     <div class="field">
