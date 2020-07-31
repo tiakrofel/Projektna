@@ -1,24 +1,99 @@
 % rebase('osnova.html', trenutna_stran='osebna knjižnica')
 
-<body>
-    <nav class="level">
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Število neprebranih knjig</p>
-                <p class="title">{{len(knjigozer.neprebrane)}}</p>
-            </div>
+<nav class="level">
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Število neprebranih knjig</p>
+            <p class="title">{{len(knjigozer.neprebrane)}}</p>
         </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Število trenutnih branj</p>
-                <p class="title">{{len(knjigozer.trenutne)}}</p>
-            </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Število trenutnih branj</p>
+            <p class="title">{{len(knjigozer.trenutne)}}</p>
         </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Število prebranih knjig</p>
-                <p class="title">{{len(knjigozer.prebrane)}}</p>
-            </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Število prebranih knjig</p>
+            <p class="title">{{len(knjigozer.prebrane)}}</p>
         </div>
-    </nav>
-</body>
+    </div>
+</nav>
+
+<div class="columns">
+    <div class="column is-one-third has-text-centered">
+        <nav class="panel is-dark">
+            <p class="panel-heading">
+                Neprebrane knjige
+            </p>
+            <p class="panel-tabs">
+                <a class="is-active">
+                    Dodajte novo neprebrano knjigo
+                </a>
+            </p>
+            <div class="panel-block">
+                <div class="container">
+                    <form action="/dodaj-neprebrano/" method="POST">
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="column is-one-third has-text-centered">
+        <nav class="panel is-dark">
+            <p class="panel-heading has-text-centered">
+                Trenutna branja
+            </p>
+            <p class="panel-tabs">
+                <a class="is-active">
+                    Posodobite trenutno branje
+                </a>
+            </p>
+            <div class="panel-block is-centered">
+                <div class="container">
+                    <form action="/izberi-trenutno/" method="POST">
+                        <div class="field">
+                            % include('_izberi_neprebrano.html', id='neprebrana', oznaka='')
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" class="button is-small is-dark is-rounded" id="strani" name="strani" value="označi kot trenutno branje">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="column is-one-third">
+        <nav class="panel is-dark">
+            <p class="panel-heading has-text-centered">
+                Prebrane knjige
+            </p>
+        </nav>
+    </div>
+</div>
+
+
+<!--<form action="/premakni-denar/" method="POST">
+<!--    <div class="field">
+<!--      % include('_izberi_kuverto.html', name='kuverta1', oznaka='iz kuverte', icon='fas fa-sign-out-alt')
+<!--    </div>
+<!--    <div class="field">
+<!--      % include('_izberi_kuverto.html', name='kuverta2', oznaka='v kuverto', icon='fas fa-sign-in-alt')
+<!--    </div>
+<!--    <div class="field has-addons">
+<!--      <div class="control">
+<!--        % include('_izberi_znesek.html', name='znesek')
+<!--      </div>
+<!--      <div class="control">
+<!--        <button class="button is-info is-small">premakni</button>
+<!--      </div>
+<!--    </div>
+<!--  </form>
