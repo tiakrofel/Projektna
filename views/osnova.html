@@ -3,12 +3,14 @@
 % 'urejanje neprebranih',
 % 'urejanje trenutnih',
 % 'urejanje prebranih',
+% 'pomoc pri uporabi',
 % ]
 % naslov_strani = {
-% 'osebna knjižnica': 'Osebna knjižnica',
+% 'osebna knjižnica': 'Vaša osebna knjižnica',
 % 'urejanje neprebranih': 'Neprebrane knjige',
 % 'urejanje trenutnih': 'Trenutna branja',
 % 'urejanje prebranih': 'Prebrane knjige',
+% 'pomoc pri uporabi': 'Pomoč pri uporabi',
 % }
 <!DOCTYPE html>
 <html>
@@ -71,15 +73,15 @@
                     <div class="navbar-item">
                         <div class="field is-grouped">
                             <p class="control">
-                                <a class="button is-light is-small has-text-black" href="/prijava/">
+                                <a class="button is-light is-small has-text-black" href="/pomoc/">
                                     Pomoč pri uporabi
                                 </a>
                             </p>
-                            <form method="POST" action="/odjava/">
-                                <p class="control">
+                            <p class="control">
+                                <form method="POST" action="/odjava/">
                                     <input type="submit" class="button is-light is-small has-text-black" value="Odjava">
-                                </p>
-                            </form>
+                                </form>
+                            </p>
                         </div>
                     </div>
                 </div>

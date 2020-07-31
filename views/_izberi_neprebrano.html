@@ -1,6 +1,8 @@
-<select name="{{id}}" id="{{id}}">
-    <option disabled selected value> -- izberite neprebrano knjigo -- </option>
-    % for neprebrana in knjigozer.neprebrane:
-    <option value="{{neprebrana.avtor}}; {{neprebrana.naslov}}">{{neprebrana.avtor}}: {{neprebrana.naslov}}</option>
+<div class="select is-rounded is-small is-dark" name="{{id}}" id="{{id}}">
+    <select>
+        <option disabled selected value> -- izberite neprebrano knjigo -- </option>
+        % for neprebrana in knjigozer.neprebrane:
+        <option value="{{neprebrana.avtor}}; {{neprebrana.naslov}}">{{neprebrana.avtor}}: {{neprebrana.naslov}}</option>
+    </select>
     % end
-</select>
+</div>
