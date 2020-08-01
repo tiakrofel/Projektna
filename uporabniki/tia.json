@@ -4,20 +4,20 @@
     "knjigozer": {
         "neprebrane knjige": [
             {
-                "avtor": "Schwab, V. E.",
-                "naslov": "A Darker Shade Of Magic"
+                "avtor": "Barnes, Julian",
+                "naslov": "Hrumenje časa"
             },
             {
-                "avtor": "Gaiman, Neil",
-                "naslov": "The Graveyard Book"
+                "avtor": "Rooney, Sally",
+                "naslov": "Normal People"
             }
         ],
         "trenutna branja": [
             {
-                "avtor": "Barnes, Julian",
-                "naslov": "Hrumenje časa",
+                "avtor": "Gaiman, Neil",
+                "naslov": "The Graveyard Book",
                 "napredek": 50,
-                "strani": 184
+                "strani": 100
             }
         ],
         "prebrane knjige": [
@@ -28,8 +28,35 @@
                 "datum": "2020-07-31",
                 "ocena": "5 / 7",
                 "kategorije": []
+            },
+            {
+                "avtor": "Bardugo, Leigh",
+                "naslov": "King of Scars",
+                "strani": 527,
+                "datum": "2020-08-01",
+                "ocena": "4 / 7",
+                "kategorije": []
+            },
+            {
+                "avtor": "Rio, M. L.",
+                "naslov": "If We Were Villains",
+                "strani": "368",
+                "datum": "2020-08-01",
+                "ocena": "5 / 7",
+                "kategorije": [
+                    "Najljubše"
+                ]
             }
         ],
-        "kategorije prebranih knjig": []
+        "kategorije prebranih knjig": [
+            {
+                "ime": "Najljubše",
+                "število knjig": 1
+            },
+            {
+                "ime": "Mitološke",
+                "število knjig": 0
+            }
+        ]
     }
 }

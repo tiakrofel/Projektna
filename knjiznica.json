@@ -25,14 +25,8 @@
         {
             "avtor": "Fry, Stephen",
             "naslov": "Mythos",
-            "napredek": 82,
+            "napredek": 83,
             "strani": 416
-        },
-        {
-            "avtor": "Schwab, V. E.",
-            "naslov": "A Darker Shade Of Magic",
-            "napredek": 232,
-            "strani": 395
         }
     ],
     "prebrane knjige": [
@@ -55,7 +49,7 @@
         {
             "avtor": "Kay, Adam",
             "naslov": "This Is Going To Hurt",
-            "strani": "256",
+            "strani": 256,
             "datum": "2020-07-30",
             "ocena": "5/7",
             "kategorije": []
@@ -63,8 +57,16 @@
         {
             "avtor": "Ogawa, Yoko",
             "naslov": "Darilo števil",
-            "strani": "180",
+            "strani": 180,
             "datum": "2020-07-31",
+            "ocena": "5/7",
+            "kategorije": []
+        },
+        {
+            "avtor": "Schwab, V. E.",
+            "naslov": "A Darker Shade Of Magic",
+            "strani": 395,
+            "datum": "2020-08-01",
             "ocena": "5/7",
             "kategorije": []
         }
