@@ -45,6 +45,11 @@ def zacetna_stran():
     knjigozer = uporabnikov_knjigozer()
     return bottle.template('zacetna_stran.html', knjigozer=knjigozer)
 
+@bottle.get('/posodabljanje/')
+def posodabljanje_knjiznice():
+    knjigozer = uporabnikov_knjigozer()
+    return bottle.template('posodabljanje_knjiznice.html', knjigozer=knjigozer)
+
 @bottle.get('/prijava/')
 def prijava_get():
     return bottle.template('prijava.html')
@@ -133,41 +138,62 @@ def izberi_trenutno():
     poklicana = bottle.request.forms['neprebrana']
     urejena = tuple(poklicana.split('; '))
     neprebrana = knjigozer.poisci_neprebrano(urejena)
-    strani = bottle.request.forms.getunicode('strani')
-    napredek = bottle.request.forms.getunicode('napredek')
+    strani = int(bottle.request.forms.getunicode('strani'))
+    napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.izberi_trenutno(neprebrana, strani, napredek)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/knjigozer/')
+    bottle.redirect('/posodabljanje/')
+
+@bottle.post('/posodobi-trenutno/')
+def posodobi_trenutno():
+    knjigozer = uporabnikov_knjigozer()
+    poklicana = bottle.request.forms.getunicode('trenutna')
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    napredek = int(bottle.request.forms.getunicode('napredek'))
+    knjigozer.posodobi_trenutno(trenutna, napredek)
+    shrani_trenutnega_uporabnika()
+    bottle.redirect('/posodabljanje/')
+
+@bottle.post('/opuscena-trenutna/')
+def opuscena_trenutna():
+    knjigozer = uporabnikov_knjigozer()
+    poklicana = bottle.request.forms.getunicode('trenutna')
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    knjigozer.opuscena_trenutna(trenutna)
+    shrani_trenutnega_uporabnika()
+    bottle.redirect('/trenutne/')
 
 @bottle.post('/direktno-prebrana/')
 def direktno_prebrana():
     knjigozer = uporabnikov_knjigozer()
     datum = date.today().strftime('%Y-%m-%d')
-    poklicana = bottle.request.forms['neprebrana']
+    poklicana = bottle.request.forms.getunicode('neprebrana')
     urejena = tuple(poklicana.split('; '))
     neprebrana = knjigozer.poisci_neprebrano(urejena)
-    strani = bottle.request.forms['strani']
+    strani = int(bottle.request.forms['strani'])
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.direktno_prebrana(datum, neprebrana, strani, ocena)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/neprebrane/')
+    bottle.redirect('/posodabljanje/')
 
 @bottle.post('/dokoncana/')
 def dokoncana():
     knjigozer = uporabnikov_knjigozer()
     datum = date.today().strftime('%Y-%m-%d')
-    poklicana = bottle.request.forms['trenutna']
+    poklicana = bottle.request.forms.getunicode('trenutna')
     urejena = tuple(poklicana.split('; '))
     trenutna = knjigozer.poisci_trenutno(urejena)
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.dokoncana(datum, trenutna, ocena)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/knjigozer/')
+    bottle.redirect('/posodabljanje/')
 
 @bottle.post('/odstrani-neprebrano/')
 def odstrani_neprebrano():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['neprebrana']
+    poklicana = bottle.request.forms.getunicode('neprebrana')
     urejena = tuple(poklicana.split('; '))
     neprebrana = knjigozer.poisci_neprebrano(urejena)
     knjigozer.odstrani_neprebrano(neprebrana)
@@ -177,7 +203,7 @@ def odstrani_neprebrano():
 @bottle.post('/odstrani-trenutno/')
 def odstrani_trenutno():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['trenutna']
+    poklicana = bottle.request.forms.getunicode('trenutna')
     urejena = tuple(poklicana.split('; '))
     trenutna = knjigozer.poisci_trenutno(urejena)
     knjigozer.odstrani_trenutno(trenutna)
@@ -187,32 +213,32 @@ def odstrani_trenutno():
 @bottle.post('/odstrani-prebrano/')
 def odstrani_prebrano():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['prebrana']
+    poklicana = bottle.request.forms.getunicode('prebrana')
     urejena = tuple(poklicana.split('; '))
     prebrana = knjigozer.poisci_prebrano(urejena)
     knjigozer.odstrani_prebrano(prebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/prebrane/')
 
-@bottle.post('/posodobi-trenutno/')
-def posodobi_trenutno():
+@bottle.post('/nova-kategorija/')
+def nova_kategorija():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['trenutna']
-    urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
-    napredek = bottle.request.forms.getunicode('napredek')
-    knjigozer.posodobi_trenutno(trenutna, napredek)
+    kategorija = bottle.request.forms.getunicode('kategorija')
+    knjigozer.nova_kategorija(kategorija)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/knjigozer/')
+    bottle.redirect('/posodabljanje/')
 
-@bottle.post('/opuscena-trenutna/')
-def opuscena_trenutna():
+
+@bottle.post('/v-kategorijo/')
+def v_kategorijo():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['trenutna']
+    kategorija = bottle.request.forms.getunicode('kategorija')
+    poklicana = bottle.request.forms.getunicode('prebrana')
     urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
-    knjigozer.opuscena_trenutna(trenutna)
+    prebrana = knjigozer.poisci_prebrano(urejena)
+    knjigozer.v_kategorijo(kategorija, prebrana)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/trenutne/')
+    bottle.redirect('/posodabljanje/')
+    
 
 bottle.run(debug=True, reloader=True)
