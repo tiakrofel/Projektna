@@ -1,0 +1,248 @@
+% rebase('osnova.html', trenutna_stran='posodabljanje knjižnica')
+
+<div class="container has-text-centered">
+    <h1 class="title">
+        Posodabljanje osebne knjižnice
+    </h1>
+    <h2 class="subtitle">
+        Tukaj lahko urejate status knjig, ki ste jih že dodali v osebno knjižnico.<br>
+        Prav tako lahko prebrane knjige razvrščate v poljubne kategorije.
+    </h2>
+    <div class="container">
+        <a class="button is-active" href="/knjigozer/">
+            Oglejte si osebno knjižnico
+        </a>
+        <a class="button is-active" href="/neprebrane/">
+            Dodajte in uredite neprebrane knjige
+        </a>
+        <a class="button is-active" href="/trenutne/">
+            Dodajte in uredite trenutna branje
+        </a>
+        <a class="button is-active" href="/prebrane/">
+            Dodajte in uredite prebrane knjige
+        </a>
+    </div>
+</div>
+
+<section class="section">
+    <div class="columns">
+        <div class="column is-one-third has-text-centered">
+            <nav class="panel is-dark">
+                <p class="panel-heading">
+                    Izberite novo trenutno branje
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/izberi-trenutno/" method="POST">
+                            <div class="field">
+                                % include('_izberi_neprebrano.html', name='neprebrana')
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Napredek:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="napredek"
+                                                name="napredek" placeholder="število prebranih strani">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Strani:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="strani"
+                                                name="strani" placeholder="število vseh strani knjige">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="submit" class="button is-small is-dark is-rounded"
+                                        value="označi kot trenutno branje">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Prenesite neprebrano knjigo k prebranim
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/direktno-prebrana/" method="POST">
+                            <div class="field">
+                                % include('_izberi_neprebrano.html', name='neprebrana')
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Strani:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="strani"
+                                                name="strani" placeholder="število vseh strani knjige">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Ocena:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="ocena"
+                                                name="ocena" placeholder="na kratko ocenite knjigo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-dark is-rounded" type="submit"
+                                        value="označi kot prebrano knjigo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="column is-one-third has-text-centered">
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Posodobite trenutno branje
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/posodobi-trenutno/" method="POST">
+                            <div class="field">
+                                % include('_izberi_trenutno.html', name='trenutna')
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Napredek:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="napredek"
+                                                name="napredek" placeholder="posodobljeno število prebranih strani">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-dark is-rounded" type="submit"
+                                        value="posodobi trenutno branje">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Ustvarite novo kategorijo prebranih knjig
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/nova-kategorija/" method="POST">
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Kategorija:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="kategorija"
+                                                name="kategorija" placeholder="ime nove kategorije">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-dark is-rounded" type="submit"
+                                        value="dodaj kategorijo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="column is-one-third has-text-centered">
+            <nav class="panel is-dark">
+                <p class="panel-heading">
+                    Dokončano trenutno branje
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/dokoncana/" method="POST">
+                            <div class="field">
+                                % include('_izberi_trenutno.html', name='trenutna')
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Ocena:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="ocena"
+                                                name="ocena" placeholder="na kratko ocenite knjigo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="submit" class="button is-small is-dark is-rounded"
+                                        value="označi kot prebrano knjigo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Kategorizirajte prebrano knjigo
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/v-kategorijo/" method="POST">
+                            <div class="field">
+                                % include('_izberi_prebrano.html', name='prebrana')
+                            </div>
+                            <div class="field">
+                                % include('_izberi_kategorijo.html', name='kategorija')
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-rounded is-dark" type="submit"
+                                        value="dodaj knjigo v izbrano kategorijo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>

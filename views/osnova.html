@@ -1,5 +1,6 @@
 % strani = [
 % 'osebna knjižnica',
+% 'posodabljanje knjižnice',
 % 'urejanje neprebranih',
 % 'urejanje trenutnih',
 % 'urejanje prebranih',
@@ -7,6 +8,7 @@
 % ]
 % naslov_strani = {
 % 'osebna knjižnica': 'Vaša osebna knjižnica',
+% 'posodabljanje knjižnica': 'Posodabljenje osebne knjižnice',
 % 'urejanje neprebranih': 'Neprebrane knjige',
 % 'urejanje trenutnih': 'Trenutna branja',
 % 'urejanje prebranih': 'Prebrane knjige',
@@ -89,9 +91,31 @@
             % end
         </div>
     </nav>
+    % if defined('trenutna_stran') and trenutna_stran != 'pomoc pri uporabi':
     <section class="section">
-        {{!base}}
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <a class="heading is-active has-text-dark" href="/neprebrane/">Število neprebranih knjig</a>
+                    <a class="title is-active has-text-dark" href="/neprebrane/">{{len(knjigozer.neprebrane)}}</a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <a class="heading is-active has-text-dark" href="/trenutne/">Število trenutnih branj</a>
+                    <a class="title is-active has-text-dark" href="/trenutne/">{{len(knjigozer.trenutne)}}</a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <a class="heading is-active has-text-dark" href="/prebrane/">Število prebranih knjig</a>
+                    <a class="title is-active has-text-dark" href="/prebrane/">{{len(knjigozer.prebrane)}}</a>
+                </div>
+            </div>
+        </nav>
     </section>
+    % end
+    {{!base}}
 </body>
 
 </html>

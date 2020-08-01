@@ -1,6 +1,6 @@
 % rebase('osnova.html', trenutna_stran='urejanje prebranih')
 
-<section class="section">
+<div class="container has-text-centered">
     <h1 class="title">
         Prebrane knjige
     </h1>
@@ -8,6 +8,14 @@
         Tukaj lahko na seznam prebranih knjig dodajate knjige, ki jih še ni v vaši osebni knjižnici.<br>
         Prav tako lahko knjige, ki so na tem seznamu, urejate.
     </h2>
+    <div class="container">
+        <a class="button is-active" href="/posodabljanje/">
+            Posodobite osebno knjižnico
+        </a>
+    </div>
+</div>
+
+<section class="section">
     <div class="container">
         <table class="table is-hoverable is-fullwidth">
             <thead>
@@ -23,45 +31,51 @@
                 <form action="/dodaj-prebrano/" method="POST">
                     <tr>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
+                            <input class="input is-small is-rounded" type="text" id="avtor" name="avtor"
+                                placeholder="priimek, ime">
                         </td>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="naslov" name="naslov" placeholder="naslov">
+                            <input class="input is-small is-rounded" type="text" id="naslov" name="naslov"
+                                placeholder="naslov">
                         </td>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="strani" name="strani" placeholder="število vseh strani knjige">
+                            <input class="input is-small is-rounded" type="text" id="strani" name="strani"
+                                placeholder="število vseh strani knjige">
                         </td>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="ocena" name="ocena" placeholder="na kratko ocenite knjigo">
+                            <input class="input is-small is-rounded" type="text" id="ocena" name="ocena"
+                                placeholder="na kratko ocenite knjigo">
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                             <div class="field">
                                 <div class="control">
-                                    <input type="submit" class="button is-small is-success is-light" value="dodaj k prebranim knjigam">
+                                    <input type="submit" class="button is-small is-success is-light"
+                                        value="dodaj k prebranim knjigam">
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    </form>
-                    % for prebrana in sorted(knjigozer.prebrane):
-                    <tr>
-                        <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
-                        <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
-                        <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.strani}}</td>
-                        <td style="text-align: center; vertical-align: middle;">{{prebrana.ocena}}</td>
-                        <td style="text-align: right;">
-                            <form action="/odstrani-prebrano/" method="POST">
-                                <div class="field">
-                                    <div class="control">
-                                        <input type="hidden" name="prebrana"
-                                            value="{{prebrana.trenutna.neprebrana.avtor}}; {{prebrana.trenutna.neprebrana.naslov}}">
-                                        <input type="submit" class="button is-small is-danger is-light" value="odstrani iz knjižnice">
-                                    </div>
+                </form>
+                % for prebrana in sorted(knjigozer.prebrane):
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.strani}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.ocena}}</td>
+                    <td style="text-align: right; vertical-align: middle;">
+                        <form action="/odstrani-prebrano/" method="POST">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="hidden" name="prebrana"
+                                        value="{{prebrana.trenutna.neprebrana.avtor}}; {{prebrana.trenutna.neprebrana.naslov}}">
+                                    <input type="submit" class="button is-small is-danger is-light"
+                                        value="odstrani iz knjižnice">
                                 </div>
-                            </form>
-                        </td>
-                    </tr>
-                    %end
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                %end
             </tbody>
         </table>
     </div>

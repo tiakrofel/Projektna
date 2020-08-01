@@ -1,99 +1,69 @@
 % rebase('osnova.html', trenutna_stran='osebna knjižnica')
 
-<nav class="level">
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Število neprebranih knjig</p>
-            <p class="title">{{len(knjigozer.neprebrane)}}</p>
-        </div>
-    </div>
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Število trenutnih branj</p>
-            <p class="title">{{len(knjigozer.trenutne)}}</p>
-        </div>
-    </div>
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Število prebranih knjig</p>
-            <p class="title">{{len(knjigozer.prebrane)}}</p>
-        </div>
-    </div>
-</nav>
-
-<div class="columns">
-    <div class="column is-one-third has-text-centered">
-        <nav class="panel is-dark">
-            <p class="panel-heading">
-                Neprebrane knjige
-            </p>
-            <p class="panel-tabs">
-                <a class="is-active">
-                    Dodajte novo neprebrano knjigo
-                </a>
-            </p>
-            <div class="panel-block">
-                <div class="container">
-                    <form action="/dodaj-neprebrano/" method="POST">
-                        <div class="field">
-                            <div class="control">
-                                <input class="input is-small is-rounded" type="text" id="avtor" name="avtor" placeholder="priimek, ime">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="column is-one-third has-text-centered">
-        <nav class="panel is-dark">
-            <p class="panel-heading has-text-centered">
-                Trenutna branja
-            </p>
-            <p class="panel-tabs">
-                <a class="is-active">
-                    Posodobite trenutno branje
-                </a>
-            </p>
-            <div class="panel-block is-centered">
-                <div class="container">
-                    <form action="/izberi-trenutno/" method="POST">
-                        <div class="field">
-                            % include('_izberi_neprebrano.html', id='neprebrana', oznaka='')
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="button is-small is-dark is-rounded" id="strani" name="strani" value="označi kot trenutno branje">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="column is-one-third">
-        <nav class="panel is-dark">
-            <p class="panel-heading has-text-centered">
-                Prebrane knjige
-            </p>
-        </nav>
+<div class="container has-text-centered">
+    <h1 class="title">
+        Vaša osebna knjižnica
+    </h1>
+    <h2 class="subtitle">
+        Tukaj si lahko ogledate vse knjige, ki so trenutno v vaši knjižnici.
+    </h2>
+    <div class="container">
+        <a class="button is-active" href="/posodabljanje/">
+            Posodobite osebno knjižnico
+        </a>
+        <a class="button is-active" href="/neprebrane/">
+            Dodajte in uredite neprebrane knjige
+        </a>
+        <a class="button is-active" href="/trenutne/">
+            Dodajte in uredite trenutna branje
+        </a>
+        <a class="button is-active" href="/prebrane/">
+            Dodajte in uredite prebrane knjige
+        </a>
     </div>
 </div>
 
-
-<!--<form action="/premakni-denar/" method="POST">
-<!--    <div class="field">
-<!--      % include('_izberi_kuverto.html', name='kuverta1', oznaka='iz kuverte', icon='fas fa-sign-out-alt')
-<!--    </div>
-<!--    <div class="field">
-<!--      % include('_izberi_kuverto.html', name='kuverta2', oznaka='v kuverto', icon='fas fa-sign-in-alt')
-<!--    </div>
-<!--    <div class="field has-addons">
-<!--      <div class="control">
-<!--        % include('_izberi_znesek.html', name='znesek')
-<!--      </div>
-<!--      <div class="control">
-<!--        <button class="button is-info is-small">premakni</button>
-<!--      </div>
-<!--    </div>
-<!--  </form>
+% if len(knjigozer.neprebrane) != 0 or len(knjigozer.trenutne) != 0 or len(knjigozer.prebrane) != 0:
+<section class="section">
+    <div class="container">
+        <table class="table is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>avtor</th>
+                    <th>naslov</th>
+                    <th>napredek</th>
+                </tr>
+            </thead>
+            <tbody>
+                % for neprebrana in sorted(knjigozer.neprebrane):
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">{{neprebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{neprebrana.naslov}}</td>
+                    <td style="text-align: right; vertical-align: middle;">
+                        <progress class="progress is-dark" value="{{0}}" max="1"></progress>
+                    </td>
+                </tr>
+                % end
+                % for trenutna in sorted(knjigozer.trenutne):
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.naslov}}</td>
+                    <td style="text-align: right; vertical-align: middle;">
+                        <progress class="progress" value="{{knjigozer.prebran_del(trenutna)}}" max="1"></progress>
+                    </td>
+                </tr>
+                % end
+                % for prebrana in sorted(knjigozer.prebrane):
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
+                    <td style="text-align: right; vertical-align: middle;">
+                        <progress class="progress" value="{{1}}" max="1"></progress>
+                    </td>
+                </tr>
+                % end
+            </tbody>
+        </table>
+    </div>
+</section>
+% end
