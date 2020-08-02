@@ -4,56 +4,98 @@
     "knjigozer": {
         "neprebrane knjige": [
             {
-                "avtor": "Barnes, Julian",
-                "naslov": "Hrumenje časa"
-            },
-            {
                 "avtor": "Rooney, Sally",
                 "naslov": "Normal People"
+            },
+            {
+                "avtor": "Daisy, Katie",
+                "naslov": "How To Be a Wallflower: A Field Guide"
+            },
+            {
+                "avtor": "Barnes, Julian",
+                "naslov": "Hrumenje časa"
             }
         ],
         "trenutna branja": [
             {
+                "avtor": "Schwab, V. E.",
+                "naslov": "A Darker Shade Of Magic",
+                "napredek": 200,
+                "strani": 400
+            },
+            {
                 "avtor": "Gaiman, Neil",
                 "naslov": "The Graveyard Book",
-                "napredek": 50,
-                "strani": 100
+                "napredek": 40,
+                "strani": 250
+            },
+            {
+                "avtor": "Hardy, G. H.",
+                "naslov": "A Mathematician's Apology",
+                "napredek": 100,
+                "strani": 150
             }
         ],
         "prebrane knjige": [
             {
+                "datum": "2020-07-31",
                 "avtor": "Forman, Gayle",
                 "naslov": "Where She Went",
-                "strani": "297",
-                "datum": "2020-07-31",
                 "ocena": "5 / 7",
                 "kategorije": []
             },
             {
+                "datum": "2020-08-01",
                 "avtor": "Bardugo, Leigh",
                 "naslov": "King of Scars",
-                "strani": 527,
-                "datum": "2020-08-01",
                 "ocena": "4 / 7",
                 "kategorije": []
             },
             {
-                "avtor": "Rio, M. L.",
-                "naslov": "If We Were Villains",
-                "strani": "368",
-                "datum": "2020-08-01",
+                "datum": "2020-08-02",
+                "avtor": "Forman, Gayle",
+                "naslov": "If I Stay",
                 "ocena": "5 / 7",
                 "kategorije": []
             },
             {
-                "avtor": "Forman, Gayle",
-                "naslov": "If I Stay",
-                "strani": "201",
-                "datum": "2020-08-02",
+                "datum": "2020-08-01",
+                "avtor": "Rio, M. L.",
+                "naslov": "If We Were Villains",
                 "ocena": "5 / 7",
-                "kategorije": []
+                "kategorije": [
+                    "Moje najljubše"
+                ]
+            },
+            {
+                "datum": "2020-08-02",
+                "avtor": "Miller, Madeline",
+                "naslov": "The Song of Achilles",
+                "ocena": "6 / 7",
+                "kategorije": [
+                    "Mitološko obarvane",
+                    "Moje najljubše"
+                ]
+            },
+            {
+                "datum": "2020-08-02",
+                "avtor": "Tartt, Donna",
+                "naslov": "The Goldfinch",
+                "ocena": "7 / 7",
+                "kategorije": [
+                    "Moje najljubše"
+                ]
             }
         ],
-        "kategorije prebranih knjig": []
+        "kategorije prebranih knjig": [
+            {
+                "ime": "Moje najljubše",
+                "število knjig": 3
+            },
+            {
+                "ime": "Mitološko obarvane",
+                "število knjig": 1
+            }
+        ]
     }
 }

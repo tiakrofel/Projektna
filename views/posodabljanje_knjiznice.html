@@ -45,7 +45,8 @@
                                     <div class="field">
                                         <div class="control">
                                             <input class="input is-small is-rounded is-dark" type="text" id="napredek"
-                                                name="napredek" placeholder="število prebranih strani">
+                                                name="napredek" placeholder="število prebranih strani" pattern="[0-9]+"
+                                                title='Tukaj je treba vnesti številko.' required>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +59,8 @@
                                     <div class="field">
                                         <div class="control">
                                             <input class="input is-small is-rounded is-dark" type="text" id="strani"
-                                                name="strani" placeholder="število vseh strani knjige">
+                                                name="strani" placeholder="število vseh strani" pattern="[0-9]+"
+                                                title='Tukaj je treba vnesti številko.' required>
                                         </div>
                                     </div>
                                 </div>
@@ -73,54 +75,7 @@
                     </div>
                 </div>
             </nav>
-            <nav class="panel is-dark">
-                <p class="panel-heading has-text-centered">
-                    Prenesite neprebrano knjigo k prebranim
-                </p>
-                <div class="panel-block">
-                    <div class="container">
-                        <form action="/direktno-prebrana/" method="POST">
-                            <div class="field">
-                                % include('_izberi_neprebrano.html', name='neprebrana')
-                            </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label">
-                                    <label class="label">Strani:</label>
-                                </div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <input class="input is-small is-rounded is-dark" type="text" id="strani"
-                                                name="strani" placeholder="število vseh strani knjige">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label">
-                                    <label class="label">Ocena:</label>
-                                </div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <input class="input is-small is-rounded is-dark" type="text" id="ocena"
-                                                name="ocena" placeholder="na kratko ocenite knjigo">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input class="button is-small is-dark is-rounded" type="submit"
-                                        value="označi kot prebrano knjigo">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </nav>
         </div>
-
         <div class="column is-one-third has-text-centered">
             <nav class="panel is-dark">
                 <p class="panel-heading has-text-centered">
@@ -140,7 +95,8 @@
                                     <div class="field">
                                         <div class="control">
                                             <input class="input is-small is-rounded is-dark" type="text" id="napredek"
-                                                name="napredek" placeholder="posodobljeno število prebranih strani">
+                                                name="napredek" placeholder="posodobljeno število prebranih strani"
+                                                pattern="[0-9]+" title='Tukaj je treba vnesti številko.' required>
                                         </div>
                                     </div>
                                 </div>
@@ -155,6 +111,59 @@
                     </div>
                 </div>
             </nav>
+        </div>
+        <div class="column is-one-third has-text-centered">
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Prenesite neprebrano knjigo k prebranim
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/direktno-prebrana/" method="POST">
+                            <div class="field">
+                                % include('_izberi_neprebrano.html', name='neprebrana')
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Strani:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="strani"
+                                                name="strani" placeholder="število vseh strani" pattern="[0-9]+"
+                                                title='Tukaj je treba vnesti številko.' required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">Ocena:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-small is-rounded is-dark" type="text" id="ocena"
+                                                name="ocena" placeholder="na kratko ocenite knjigo" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-dark is-rounded" type="submit"
+                                        value="označi kot prebrano knjigo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third has-text-centered">
             <nav class="panel is-dark">
                 <p class="panel-heading has-text-centered">
                     Ustvarite novo kategorijo prebranih knjig
@@ -170,7 +179,7 @@
                                     <div class="field">
                                         <div class="control">
                                             <input class="input is-small is-rounded is-dark" type="text" id="kategorija"
-                                                name="kategorija" placeholder="ime nove kategorije">
+                                                name="kategorija" placeholder="ime nove kategorije" required>
                                         </div>
                                     </div>
                                 </div>
@@ -185,6 +194,8 @@
                     </div>
                 </div>
             </nav>
+        </div>
+        <div class="column is-one-third has-text-centered">
             <nav class="panel is-dark">
                 <p class="panel-heading has-text-centered">
                     Izbrišite kategorijo prebranih knjig
@@ -225,7 +236,7 @@
                                     <div class="field">
                                         <div class="control">
                                             <input class="input is-small is-rounded is-dark" type="text" id="ocena"
-                                                name="ocena" placeholder="na kratko ocenite knjigo">
+                                                name="ocena" placeholder="na kratko ocenite knjigo" required>
                                         </div>
                                     </div>
                                 </div>
@@ -240,6 +251,10 @@
                     </div>
                 </div>
             </nav>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third has-text-centered">
             <nav class="panel is-dark">
                 <p class="panel-heading has-text-centered">
                     Kategorizirajte prebrano knjigo

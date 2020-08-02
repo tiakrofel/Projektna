@@ -20,10 +20,10 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>avtor</th>
-                    <th>naslov</th>
-                    <th>število strani</th>
-                    <th>ocena</th>
+                    <th style="text-align: center; vertical-align: middle;">avtor</th>
+                    <th style="text-align: center; vertical-align: middle;">naslov</th>
+                    <th style="text-align: center; vertical-align: middle;">ocena</th>
+                    <th style="text-align: center; vertical-align: middle;">kategorije</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,20 +31,19 @@
                 <form action="/dodaj-prebrano/" method="POST">
                     <tr>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="avtor" name="avtor"
-                                placeholder="priimek, ime">
+                            <input class="input is-small is-rounded is-dark" type="text" id="avtor" name="avtor"
+                                placeholder="priimek, ime" pattern="(?=.*[,][ ].*).*" title='Avtorja vnesite v obliki: "priimek, ime".' required>
                         </td>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="naslov" name="naslov"
-                                placeholder="naslov">
+                            <input class="input is-small is-rounded is-dark" type="text" id="naslov" name="naslov"
+                                placeholder="naslov" required>
                         </td>
                         <td>
-                            <input class="input is-small is-rounded" type="text" id="strani" name="strani"
-                                placeholder="število vseh strani knjige">
+                            <input class="input is-small is-rounded is-dark" type="text" id="ocena" name="ocena"
+                            placeholder="na kratko ocenite knjigo" required>
                         </td>
-                        <td>
-                            <input class="input is-small is-rounded" type="text" id="ocena" name="ocena"
-                                placeholder="na kratko ocenite knjigo">
+                        <td style="text-align: center; vertical-align: middle;">
+                            /
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                             <div class="field">
@@ -58,16 +57,27 @@
                 </form>
                 % for prebrana in sorted(knjigozer.prebrane):
                 <tr>
-                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
-                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
-                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.strani}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.naslov}}</td>
                     <td style="text-align: center; vertical-align: middle;">{{prebrana.ocena}}</td>
+                    % if len(prebrana.kategorija) != 0:
+                    <td style="text-align: center; vertical-align: middle;">
+                        % for kategorija in prebrana.kategorija[:-1]:
+                        {{kategorija}},<br/>
+                        % end
+                        {{prebrana.kategorija[-1]}}
+                    </td>
+                    % else:
+                    <td style="text-align: center; vertical-align: middle;">
+                        /
+                    </td>
+                    % end
                     <td style="text-align: right; vertical-align: middle;">
                         <form action="/odstrani-prebrano/" method="POST">
                             <div class="field">
                                 <div class="control">
                                     <input type="hidden" name="prebrana"
-                                        value="{{prebrana.trenutna.neprebrana.avtor}}; {{prebrana.trenutna.neprebrana.naslov}}">
+                                        value="{{prebrana.avtor}}; {{prebrana.naslov}}">
                                     <input type="submit" class="button is-small is-danger is-light"
                                         value="odstrani iz knjižnice">
                                 </div>

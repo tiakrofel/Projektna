@@ -29,9 +29,9 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>avtor</th>
-                    <th>naslov</th>
-                    <th>napredek</th>
+                    <th style="text-align: center; vertical-align: middle;">avtor</th>
+                    <th style="text-align: center; vertical-align: middle;">naslov</th>
+                    <th style="text-align: center; vertical-align: middle;">napredek</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,8 +46,8 @@
                 % end
                 % for trenutna in sorted(knjigozer.trenutne):
                 <tr>
-                    <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.avtor}}</td>
-                    <td style="text-align: center; vertical-align: middle;">{{trenutna.neprebrana.naslov}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{trenutna.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{trenutna.naslov}}</td>
                     <td style="text-align: right; vertical-align: middle;">
                         <progress class="progress" value="{{knjigozer.prebran_del(trenutna)}}" max="1"></progress>
                     </td>
@@ -55,8 +55,8 @@
                 % end
                 % for prebrana in sorted(knjigozer.prebrane):
                 <tr>
-                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.avtor}}</td>
-                    <td style="text-align: center; vertical-align: middle;">{{prebrana.trenutna.neprebrana.naslov}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.avtor}}</td>
+                    <td style="text-align: center; vertical-align: middle;">{{prebrana.naslov}}</td>
                     <td style="text-align: right; vertical-align: middle;">
                         <progress class="progress" value="{{1}}" max="1"></progress>
                     </td>

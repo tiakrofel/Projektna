@@ -20,8 +20,8 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>avtor</th>
-                    <th>naslov</th>
+                    <th style="text-align: center; vertical-align: middle;">avtor</th>
+                    <th style="text-align: center; vertical-align: middle;">naslov</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,12 +29,12 @@
                 <form action="/dodaj-neprebrano/" method="POST">
                     <tr>
                         <td style="vertical-align: middle;">
-                            <input class="input is-small is-rounded" type="text" id="avtor" name="avtor"
-                                placeholder="priimek, ime">
+                            <input class="input is-small is-rounded is-dark" type="text" id="avtor" name="avtor"
+                                placeholder="priimek, ime" pattern="(?=.*[,][ ].*).*" title='Avtorja vnesite v obliki: "priimek, ime".' required> 
                         </td>
                         <td style="vertical-align: middle;">
-                            <input class="input is-small is-rounded" type="text" id="naslov" name="naslov"
-                                placeholder="naslov">
+                            <input class="input is-small is-rounded is-dark" type="text" id="naslov" name="naslov"
+                                placeholder="naslov" required>
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                             <div class="field">
