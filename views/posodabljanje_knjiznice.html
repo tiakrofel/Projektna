@@ -185,11 +185,31 @@
                     </div>
                 </div>
             </nav>
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Izbrišite kategorijo prebranih knjig
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/odstrani-kategorijo/" method="POST">
+                            <div class="field">
+                                % include('_izberi_kategorijo.html', name='kategorija')
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-dark is-rounded" type="submit"
+                                        value="izbriši kategorijo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="column is-one-third has-text-centered">
             <nav class="panel is-dark">
                 <p class="panel-heading">
-                    Dokončano trenutno branje
+                    Označite trenutno branje kot prebrano
                 </p>
                 <div class="panel-block">
                     <div class="container">

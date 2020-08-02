@@ -43,20 +43,17 @@
                 "strani": "368",
                 "datum": "2020-08-01",
                 "ocena": "5 / 7",
-                "kategorije": [
-                    "Najljubše"
-                ]
-            }
-        ],
-        "kategorije prebranih knjig": [
-            {
-                "ime": "Najljubše",
-                "število knjig": 1
+                "kategorije": []
             },
             {
-                "ime": "Mitološke",
-                "število knjig": 0
+                "avtor": "Forman, Gayle",
+                "naslov": "If I Stay",
+                "strani": "201",
+                "datum": "2020-08-02",
+                "ocena": "5 / 7",
+                "kategorije": []
             }
-        ]
+        ],
+        "kategorije prebranih knjig": []
     }
 }
