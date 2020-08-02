@@ -239,6 +239,14 @@ def v_kategorijo():
     knjigozer.v_kategorijo(kategorija, prebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/posodabljanje/')
+
+@bottle.post('/odstrani-kategorijo/')
+def odstrani_kategorijo():
+    knjigozer = uporabnikov_knjigozer()
+    kategorija = bottle.request.forms.getunicode('kategorija')
+    knjigozer.odstrani_kategorijo(kategorija)
+    shrani_trenutnega_uporabnika()
+    bottle.redirect('/posodabljanje/')
     
 
 bottle.run(debug=True, reloader=True)
