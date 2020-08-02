@@ -126,16 +126,15 @@ def dodaj_prebrano():
     datum = date.today().strftime('%Y-%m-%d')
     avtor = bottle.request.forms.getunicode('avtor')
     naslov = bottle.request.forms.getunicode('naslov')
-    strani = bottle.request.forms['strani']
     ocena = bottle.request.forms.getunicode('ocena')
-    knjigozer.dodaj_prebrano(datum, avtor, naslov, strani, ocena)
+    knjigozer.dodaj_prebrano(datum, avtor, naslov, ocena)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/prebrane/')
 
 @bottle.post('/izberi-trenutno/')
 def izberi_trenutno():
     knjigozer = uporabnikov_knjigozer()
-    poklicana = bottle.request.forms['neprebrana']
+    poklicana = bottle.request.forms.getunicode('neprebrana')
     urejena = tuple(poklicana.split('; '))
     neprebrana = knjigozer.poisci_neprebrano(urejena)
     strani = int(bottle.request.forms.getunicode('strani'))
@@ -172,9 +171,8 @@ def direktno_prebrana():
     poklicana = bottle.request.forms.getunicode('neprebrana')
     urejena = tuple(poklicana.split('; '))
     neprebrana = knjigozer.poisci_neprebrano(urejena)
-    strani = int(bottle.request.forms['strani'])
     ocena = bottle.request.forms.getunicode('ocena')
-    knjigozer.direktno_prebrana(datum, neprebrana, strani, ocena)
+    knjigozer.direktno_prebrana(datum, neprebrana, ocena)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/posodabljanje/')
 
