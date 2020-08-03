@@ -2,8 +2,8 @@
     <div class="select is-fullwidth is-small is-rounded is-dark">
         <select name="{{name}}" required>
             <option disabled selected value> -- izberite kategorijo -- </option>
-            % for kategorija in knjigozer._kategorije_prebranih:
-            <option value="{{kategorija}}">{{kategorija}}</option>
+            % for kategorija in knjigozer.kategorije:
+            <option value="{{kategorija}}">{{kategorija.ime}}</option>
             % end
         </select>
     </div>

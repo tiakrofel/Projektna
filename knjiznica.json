@@ -1,75 +1,40 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Morgenstern, Erin",
-            "naslov": "The Night Circus"
-        },
-        {
-            "avtor": "Clarke, Susanna",
-            "naslov": "Jonathan Strange & Mr Norrell"
-        },
-        {
             "avtor": "Goodman, Alice",
             "naslov": "The Lake of Dead Languages"
-        },
-        {
-            "avtor": "Yates, C. J.",
-            "naslov": "Black Chalk"
         },
         {
             "avtor": "Wohlleben, Peter",
             "naslov": "The Hidden Life of Trees"
         }
     ],
-    "trenutna branja": [
-        {
-            "avtor": "Fry, Stephen",
-            "naslov": "Mythos",
-            "napredek": 83,
-            "strani": 416
-        }
-    ],
+    "trenutna branja": [],
     "prebrane knjige": [
         {
-            "avtor": "Miller, Madeline",
-            "naslov": "Circe",
-            "strani": 393,
-            "datum": "2020-07-28",
-            "ocena": "6/7",
-            "kategorije": []
-        },
-        {
-            "avtor": "Tartt, Donna",
-            "naslov": "The Goldfinch",
-            "strani": 771,
-            "datum": "2019-08-20",
-            "ocena": "7/7",
-            "kategorije": []
-        },
-        {
-            "avtor": "Kay, Adam",
-            "naslov": "This Is Going To Hurt",
-            "strani": 256,
-            "datum": "2020-07-30",
-            "ocena": "5/7",
-            "kategorije": []
-        },
-        {
+            "datum": "2020-07-31",
             "avtor": "Ogawa, Yoko",
             "naslov": "Darilo števil",
-            "strani": 180,
-            "datum": "2020-07-31",
-            "ocena": "5/7",
-            "kategorije": []
+            "ocena": "5/7"
         },
         {
+            "datum": "2020-08-01",
             "avtor": "Schwab, V. E.",
             "naslov": "A Darker Shade Of Magic",
-            "strani": 395,
-            "datum": "2020-08-01",
-            "ocena": "5/7",
-            "kategorije": []
+            "ocena": "5/7"
+        },
+        {
+            "datum": "2020-07-28",
+            "avtor": "Miller, Madeline",
+            "naslov": "Circe",
+            "ocena": "6/7"
+        },
+        {
+            "datum": "2020-08-03",
+            "avtor": "Clarke, Susanna",
+            "naslov": "Jonathan Strange & Mr Norrell",
+            "ocena": "5/7"
         }
     ],
-    "kategorije prebranih knjig": []
+    "kategorije": []
 }

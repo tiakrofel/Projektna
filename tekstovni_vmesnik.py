@@ -28,7 +28,7 @@ def modro(niz):
     return f'\033[1;94m{niz}\033[0m'
 
 
-def rdeče(niz):
+def rdece(niz):
     return f'\033[1;91m{niz}\033[0m'
 
 
@@ -44,35 +44,35 @@ def uporabnikova_izbira(slovar):
     while True:
         izbral = vnos_stevila('Vnesite številko pred vašo izbiro: ')
         if len(slovar) == 1 and izbral != 1:
-            print(rdeče('Na tem mestu lahko izberete le 1 \n'))
+            print(rdece('Na tem mestu lahko izberete le 1 \n'))
         elif len(slovar) == 0:
             print(
-                rdeče('Na tem seznamu ni nobenega elementa, ki bi ga lahko izbrali. \n'))
+                rdece('Na tem seznamu ni nobenega elementa, ki bi ga lahko izbrali. \n'))
             zacetna_stran()
         elif 1 <= izbral <= len(slovar):
             return slovar[str(izbral)][1]
         else:
-            print(rdeče('Izbrati morate eno izmed ponujenih možnosti. \n'))
+            print(rdece('Izbrati morate eno izmed ponujenih možnosti. \n'))
 
 
 def izbira(seznam):
     if len(seznam) == 0:
-        print(rdeče('S tega seznama ne morete izbrati nobenega elementa, saj je prazen. Za izhod vnesite 0.'))
+        print(rdece('S tega seznama ne morete izbrati nobenega elementa, saj je prazen. Za izhod vnesite Ctrl+C.'))
     for zaporedna_st, besedilo in enumerate(seznam, 1):
-        print(f'{zaporedna_st}) {besedilo}')
+        print(f'{zaporedna_st}. {besedilo}')
     while True:
         izbrana_moznost = vnos_stevila('> ')
         if 1 <= izbrana_moznost <= len(seznam):
             return seznam[izbrana_moznost - 1]
         else:
             if len(seznam) == 0:
-                print(rdeče('Na tem seznamu ni še nobenega objekta, ki bi ga lahko izbrali. \n'))
+                print(rdece('Na tem seznamu ni še nobenega objekta, ki bi ga lahko izbrali. \n'))
                 break
             elif len(seznam) == 1:
-                print(rdeče(
+                print(rdece(
                     f'Ker je na tem seznamu le en objekt, lahko vnesete le število {len(seznam)}. \n'))
             else:
-                print(rdeče(f'Vnesti je treba število med 1 in {len(seznam)}. \n'))
+                print(rdece(f'Vnesti je treba število med 1 in {len(seznam)}. \n'))
 
 
 def vnos_avtorja():
@@ -90,7 +90,7 @@ def vnos_stevila(spodbuda):
         if stevilo.isdigit():
             return int(stevilo)
         else:
-            print(rdeče('Vnesti bo treba številko.'))
+            print(rdece('Vnesti bo treba številko.'))
 
 
 def vnos_napredka(strani):
@@ -98,9 +98,9 @@ def vnos_napredka(strani):
     while True:
         napredek = vnos_stevila('Vnesite število že prebranih strani: ')
         if int(napredek) > int(strani):
-            print(rdeče('Število strani, ki ste jih že prebrali, ne more biti večje od števila vseh strani v knjigi. \n'))
+            print(rdece('Število strani, ki ste jih že prebrali, ne more biti večje od števila vseh strani v knjigi. \n'))
         elif int(napredek) == int(strani):
-            print(rdeče('Vaš napredek v knjigi je enak številu vseh strani knjige, vi pa trenutno vnašate trenutno branje in ne že prebrane knjige. \n'))
+            print(rdece('Vaš napredek v knjigi je enak številu vseh strani knjige, vi pa trenutno vnašate trenutno branje in ne že prebrane knjige. \n'))
         else:
             return int(napredek)
 
@@ -133,7 +133,7 @@ def osnovne_moznosti():
             print(80 * '-')
             naslednji_korak()
         except ValueError as e:
-            print(rdeče(e.args[0]))
+            print(rdece(e.args[0]))
             print()
         except KeyboardInterrupt:
             print()
@@ -149,7 +149,7 @@ def urejanje_neprebranih():
     print(krepko('Vse vaše neprebrane knjige:'))
     print()
     if len(knjigozer.neprebrane) == 0:
-            print(rdeče('V vaši knjižnici ni nobene neprebrane knjige!'))
+            print(rdece('V vaši knjižnici ni nobene neprebrane knjige!'))
     else:
         knjigozer.ogled_neprebranih()
     print()
@@ -169,11 +169,11 @@ def urejanje_neprebranih():
             input('Za nadaljevanje pritisnite Enter.')
             knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
-            print(rdeče(e.args[0]))
+            print(rdece(e.args[0]))
             print()
         except KeyboardInterrupt:
             print()
-            return
+            break
 
 
 def dodaj_neprebrano():
@@ -218,11 +218,11 @@ def urejanje_trenutnih():
             input('Za nadaljevanje pritisnite Enter.')
             knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
-            print(rdeče(e.args[0]))
+            print(rdece(e.args[0]))
             print()
         except KeyboardInterrupt:
             print()
-            return
+            break
 
 
 def izberi_trenutno():
@@ -304,11 +304,11 @@ def urejanje_prebranih():
             input('Za nadaljevanje pritisnite Enter.')
             knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
-            print(rdeče(e.args[0]))
+            print(rdece(e.args[0]))
             print()
         except KeyboardInterrupt:
             print()
-            return
+            break
 
 
 def dodaj_prebrano():
@@ -316,9 +316,8 @@ def dodaj_prebrano():
     datum = date.today()
     avtor = vnos_avtorja()
     naslov = input('Vnesite naslov knjige: ')
-    strani = vnos_stevila('Vnesite število strani knjige: ')
     ocena = input('Na kratko ocenite knjigo: ')
-    knjigozer.dodaj_prebrano(datum, avtor, naslov, strani, ocena)
+    knjigozer.dodaj_prebrano(datum, avtor, naslov, ocena)
     print(modro('Knjiga je bila dodana med prebrane knjige. \n'))
 
 
@@ -327,9 +326,8 @@ def direktno_prebrana():
     print('Izberite knjigo, ki ste jo prebrali: ')
     prebrana = izbira(knjigozer.neprebrane)
     datum = date.today()
-    strani = vnos_stevila('Vnesite število strani knjige: ')
     ocena = input('Na kratko ocenite knjigo: ')
-    knjigozer.direktno_prebrana(datum, prebrana, strani, ocena)
+    knjigozer.direktno_prebrana(datum, prebrana, ocena)
     print(modro('Knjiga je bila prenešena k prebranim knjigam. \n'))
 
 
@@ -363,62 +361,65 @@ def urejanje_kategorij():
             input('Za nadaljevanje pritisnite Enter.')
             knjigozer.shrani_knjige(DATOTEKA_S_KNJIGAMI)
         except ValueError as e:
-            print(rdeče(e.args[0]))
+            print(rdece(e.args[0]))
             print()
         except KeyboardInterrupt:
             print()
-            return
+            break
 
 
 def ogled_knjig_kategorije():
     print()
     knjigozer.ogled_kategorij()
     print('Izberite kategorijo: ')
-    kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
+    kategorija = izbira(knjigozer.kategorije)
     knjigozer.ogled_knjig_kategorije(kategorija)
-
 
 def nova_kategorija():
     print()
-    kategorija = input('Vnesite ime vaše nove kategorije: ')
-    knjigozer.nova_kategorija(kategorija)
+    ime = input('Vnesite ime vaše nove kategorije: ')
+    knjigozer.nova_kategorija(ime)
     print(modro(
-        f'Kategorija "{kategorija}" je bila uspešno dodana med vaše kategorije prebranih knjig. \n'))
+        f'Kategorija "{ime}" je bila uspešno dodana med vaše kategorije prebranih knjig. \n'))
 
 
 def v_kategorijo():
     print()
     print('Izberite kategorijo: ')
-    kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
-    print(f'Izberite knjigo, ki jo želite dodati v kategorijo "{kategorija}": ')
-    prebrana = izbira(knjigozer.prebrane)
-    knjigozer.v_kategorijo(kategorija, prebrana)
-    print(modro(f'Knjiga je bila dodana v kategorijo "{kategorija}". \n'))
+    if len(knjigozer.kategorije) == 0:
+        print(rdece(f'V vaši knjižnici ni še nobene kategorije!'))
+    else:
+        kategorija = izbira(knjigozer.kategorije)
+        print(f'Izberite knjigo, ki jo želite dodati v kategorijo "{kategorija.ime}": ')
+        prebrana = izbira(knjigozer.prebrane)
+        knjigozer.v_kategorijo(kategorija, prebrana)
+        print(modro(f'Knjiga je bila dodana v kategorijo "{kategorija.ime}". \n'))
 
 
 def iz_kategorije():
     print()
     print('Izberite kategorijo: ')
-    kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
-    if knjigozer._kategorije_prebranih[kategorija] == 0:
-        print(rdeče(f'V kategoriji "{kategorija}" ni nobene knjige!'))
+    kategorija = izbira(knjigozer.kategorije)
+    if len(knjigozer.kategorije) == 0:
+        print(rdece(f'V kategoriji "{kategorija.ime}" ni nobene knjige!'))
     else:
-        print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija}": ')
+        print(f'Izberite knjigo, ki jo želite izbrisati iz kategorije "{kategorija.ime}": ')
         seznam = []
-        for prebrana in knjigozer.prebrane:
-            if kategorija in prebrana.kategorija:
-                seznam.append(prebrana)
+        for knjiga in kategorija.knjige:
+            seznam.append(knjiga)
         prebrana = izbira(seznam)
         knjigozer.iz_kategorije(kategorija, prebrana)
-        print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija}". \n'))
+        print(modro(f'Knjiga je bila izbrisana iz kategorije "{kategorija.ime}". \n'))
 
 
 def odstrani_kategorijo():
     print()
+    if len(knjigozer.kategorije) == 0:
+        print(rdece('V vaši knjižnici ni nobene kategorije, ki bi jo lahko izbrisali'))
     print('Izberite kategorijo, ki jo želite izbrisati: ')
-    kategorija = izbira(list(knjigozer._kategorije_prebranih.keys()))
+    kategorija = izbira(knjigozer.kategorije)
     knjigozer.odstrani_kategorijo(kategorija)
-    print(modro(f'Kategorija "{kategorija}" je bila izbrisana. \n'))
+    print(modro(f'Kategorija "{kategorija.ime}" je bila izbrisana. \n'))
 
 
 def ogled_kategorij():

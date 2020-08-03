@@ -1,0 +1,10 @@
+<div class="control">
+    <div class="select is-fullwidth is-small is-rounded is-dark">
+        <select name="{{name}}">
+            <option disabled selected value> -- po želji izberite kategorijo -- </option>
+            % for kategorija in knjigozer._kategorije_prebranih:
+            <option value="{{kategorija}}">{{kategorija}}</option>
+            % end
+        </select>
+    </div>
+</div>

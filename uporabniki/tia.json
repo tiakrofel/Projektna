@@ -2,103 +2,24 @@
     "uporabnisko_ime": "tia",
     "zasifrirano_geslo": "828c241e7b937140034a9013079ce003f73b3ad89e2d5623651169bfa8659dfb946bf5709cce0e64ad88d627b49f093d0d6c0159f8e9f0aa94f15917fb60d69f",
     "knjigozer": {
-        "neprebrane knjige": [
-            {
-                "avtor": "Rooney, Sally",
-                "naslov": "Normal People"
-            },
-            {
-                "avtor": "Daisy, Katie",
-                "naslov": "How To Be a Wallflower: A Field Guide"
-            },
-            {
-                "avtor": "Barnes, Julian",
-                "naslov": "Hrumenje časa"
-            },
-            {
-                "avtor": "Clarke, Susanna",
-                "naslov": "Jonathan Strange & Mr Norrell"
-            }
-        ],
+        "neprebrane knjige": [],
         "trenutna branja": [
             {
                 "avtor": "Schwab, V. E.",
                 "naslov": "A Darker Shade Of Magic",
-                "napredek": 200,
-                "strani": 400
-            },
-            {
-                "avtor": "Gaiman, Neil",
-                "naslov": "The Graveyard Book",
-                "napredek": 40,
-                "strani": 250
-            },
-            {
-                "avtor": "Hardy, G. H.",
-                "naslov": "A Mathematician's Apology",
                 "napredek": 100,
-                "strani": 150
+                "strani": 300
             }
         ],
-        "prebrane knjige": [
+        "prebrane knjige": [],
+        "kategorije": [
             {
-                "datum": "2020-07-31",
-                "avtor": "Forman, Gayle",
-                "naslov": "Where She Went",
-                "ocena": "5 / 7",
-                "kategorije": []
+                "ime": "Otroške",
+                "knjige": []
             },
             {
-                "datum": "2020-08-01",
-                "avtor": "Bardugo, Leigh",
-                "naslov": "King of Scars",
-                "ocena": "4 / 7",
-                "kategorije": []
-            },
-            {
-                "datum": "2020-08-02",
-                "avtor": "Forman, Gayle",
-                "naslov": "If I Stay",
-                "ocena": "5 / 7",
-                "kategorije": []
-            },
-            {
-                "datum": "2020-08-01",
-                "avtor": "Rio, M. L.",
-                "naslov": "If We Were Villains",
-                "ocena": "5 / 7",
-                "kategorije": [
-                    "Moje najljubše"
-                ]
-            },
-            {
-                "datum": "2020-08-02",
-                "avtor": "Miller, Madeline",
-                "naslov": "The Song of Achilles",
-                "ocena": "6 / 7",
-                "kategorije": [
-                    "Mitološko obarvane",
-                    "Moje najljubše"
-                ]
-            },
-            {
-                "datum": "2020-08-02",
-                "avtor": "Tartt, Donna",
-                "naslov": "The Goldfinch",
-                "ocena": "7 / 7",
-                "kategorije": [
-                    "Moje najljubše"
-                ]
-            }
-        ],
-        "kategorije prebranih knjig": [
-            {
-                "ime": "Moje najljubše",
-                "število knjig": 3
-            },
-            {
-                "ime": "Mitološko obarvane",
-                "število knjig": 1
+                "ime": "Najljubše",
+                "knjige": []
             }
         ]
     }

@@ -25,7 +25,7 @@ for ime_datoteke in os.listdir(imenik_s_podatki):
 
 def trenutni_uporabnik():
     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=skrivnost)
-    if uporabnisko_ime is None:
+    if uporabnisko_ime is None or uporabnisko_ime not in uporabniki:
         bottle.redirect('/prijava/')
     return uporabniki[uporabnisko_ime]
 
@@ -79,11 +79,15 @@ def odjava():
     bottle.response.delete_cookie('uporabnisko_ime', path='/')
     bottle.redirect('/prijava/')
 
-
 @bottle.get('/pomoc/')
 def pomoc():
     knjigozer = uporabnikov_knjigozer()
     return bottle.template('pomoc_uporabniku.html', knjigozer=knjigozer)
+
+@bottle.get('/iskalnik/')
+def iskalnik():
+    knjigozer = uporabnikov_knjigozer()
+    return bottle.template('iskalnik.html', knjigozer=knjigozer)
 
 @bottle.get('/neprebrane/')
 def stran_neprebranih():
@@ -99,6 +103,11 @@ def stran_trenutnih():
 def stran_prebranih():
     knjigozer = uporabnikov_knjigozer()
     return bottle.template('prebrane.html', knjigozer=knjigozer)
+
+@bottle.get('/kategorije/')
+def stran_kategorij():
+    knjigozer = uporabnikov_knjigozer()
+    return bottle.template('kategorije_prebranih.html', knjigozer=knjigozer)
 
 @bottle.post('/dodaj-neprebrano/')
 def dodaj_neprebrano():
@@ -221,30 +230,44 @@ def odstrani_prebrano():
 @bottle.post('/nova-kategorija/')
 def nova_kategorija():
     knjigozer = uporabnikov_knjigozer()
-    kategorija = bottle.request.forms.getunicode('kategorija')
-    knjigozer.nova_kategorija(kategorija)
+    ime = bottle.request.forms.getunicode('kategorija')
+    knjigozer.nova_kategorija(ime)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/kategorije/')
 
 
 @bottle.post('/v-kategorijo/')
 def v_kategorijo():
     knjigozer = uporabnikov_knjigozer()
-    kategorija = bottle.request.forms.getunicode('kategorija')
+    ime = bottle.request.forms.getunicode('kategorija')
+    kategorija = knjigozer.poisci_kategorijo(ime)
     poklicana = bottle.request.forms.getunicode('prebrana')
     urejena = tuple(poklicana.split('; '))
     prebrana = knjigozer.poisci_prebrano(urejena)
     knjigozer.v_kategorijo(kategorija, prebrana)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/kategorije/')
+
+@bottle.post('/iz-kategorije/')
+def iz_kategorijo():
+    knjigozer = uporabnikov_knjigozer()
+    ime = bottle.request.forms.getunicode('kategorija')
+    kategorija = knjigozer.poisci_kategorijo(ime)
+    poklicana = bottle.request.forms.getunicode('prebrana')
+    urejena = tuple(poklicana.split('; '))
+    prebrana = knjigozer.poisci_prebrano(urejena)
+    knjigozer.iz_kategorije(kategorija, prebrana)
+    shrani_trenutnega_uporabnika()
+    bottle.redirect('/kategorije/')
 
 @bottle.post('/odstrani-kategorijo/')
 def odstrani_kategorijo():
     knjigozer = uporabnikov_knjigozer()
-    kategorija = bottle.request.forms.getunicode('kategorija')
+    ime = bottle.request.forms.getunicode('kategorija')
+    kategorija = knjigozer.poisci_kategorijo(ime)
     knjigozer.odstrani_kategorijo(kategorija)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/kategorije/')
     
 
 bottle.run(debug=True, reloader=True)

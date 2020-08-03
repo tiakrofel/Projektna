@@ -125,20 +125,6 @@
                             </div>
                             <div class="field is-horizontal">
                                 <div class="field-label">
-                                    <label class="label">Strani:</label>
-                                </div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <input class="input is-small is-rounded is-dark" type="text" id="strani"
-                                                name="strani" placeholder="število vseh strani" pattern="[0-9]+"
-                                                title='Tukaj je treba vnesti številko.' required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label">
                                     <label class="label">Ocena:</label>
                                 </div>
                                 <div class="field-body">
@@ -272,6 +258,31 @@
                                 <div class="control">
                                     <input class="button is-small is-rounded is-dark" type="submit"
                                         value="dodaj knjigo v izbrano kategorijo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="column is-one-third has-text-centered">
+            <nav class="panel is-dark">
+                <p class="panel-heading has-text-centered">
+                    Odstranite prebrano knjigo iz kategorije
+                </p>
+                <div class="panel-block">
+                    <div class="container">
+                        <form action="/iz-kategorije/" method="POST">
+                            <div class="field">
+                                % include('_izberi_prebrano.html', name='prebrana')
+                            </div>
+                            <div class="field">
+                                % include('_izberi_kategorijo.html', name='kategorija')
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="button is-small is-rounded is-dark" type="submit"
+                                        value="odstranite knjigo iz izbrane kategorije">
                                 </div>
                             </div>
                         </form>

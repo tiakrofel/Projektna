@@ -12,6 +12,9 @@
         <a class="button is-active" href="/posodabljanje/">
             Posodobite osebno knjižnico
         </a>
+        <a class="button is-active" href="/kategorije/">
+            Dodajte in uredite kategorije prebranih knjig
+        </a>
     </div>
 </div>
 
@@ -60,18 +63,11 @@
                     <td style="text-align: center; vertical-align: middle;">{{prebrana.avtor}}</td>
                     <td style="text-align: center; vertical-align: middle;">{{prebrana.naslov}}</td>
                     <td style="text-align: center; vertical-align: middle;">{{prebrana.ocena}}</td>
-                    % if len(prebrana.kategorija) != 0:
                     <td style="text-align: center; vertical-align: middle;">
-                        % for kategorija in prebrana.kategorija[:-1]:
-                        {{kategorija}},<br/>
+                        % for kategorija in prebrana.kategorije():
+                        {{kategorija.ime}}<br/>
                         % end
-                        {{prebrana.kategorija[-1]}}
                     </td>
-                    % else:
-                    <td style="text-align: center; vertical-align: middle;">
-                        /
-                    </td>
-                    % end
                     <td style="text-align: right; vertical-align: middle;">
                         <form action="/odstrani-prebrano/" method="POST">
                             <div class="field">
