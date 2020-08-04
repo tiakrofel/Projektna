@@ -173,6 +173,18 @@ def opuscena_trenutna():
     shrani_trenutnega_uporabnika()
     bottle.redirect('/trenutne/')
 
+@bottle.post('/ponovno-brana/')
+def ponovno_brana():
+    knjigozer = uporabnikov_knjigozer()
+    poklicana = bottle.request.forms.getunicode('prebrana')
+    urejena = tuple(poklicana.split('; '))
+    prebrana = knjigozer.poisci_prebrano(urejena)
+    strani = int(bottle.request.forms.getunicode('strani'))
+    napredek = int(bottle.request.forms.getunicode('napredek'))
+    knjigozer.ponovno_brana(prebrana, strani, napredek)
+    shrani_trenutnega_uporabnika()
+    bottle.redirect('/posodabljanje/')
+
 @bottle.post('/direktno-prebrana/')
 def direktno_prebrana():
     knjigozer = uporabnikov_knjigozer()

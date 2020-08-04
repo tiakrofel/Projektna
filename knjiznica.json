@@ -1,40 +1,35 @@
 {
-    "neprebrane knjige": [
+    "neprebrane knjige": [],
+    "trenutna branja": [
         {
-            "avtor": "Goodman, Alice",
-            "naslov": "The Lake of Dead Languages"
-        },
-        {
-            "avtor": "Wohlleben, Peter",
-            "naslov": "The Hidden Life of Trees"
+            "avtor": "B, B",
+            "naslov": "B",
+            "napredek": 20,
+            "strani": 100
         }
     ],
-    "trenutna branja": [],
     "prebrane knjige": [
         {
-            "datum": "2020-07-31",
-            "avtor": "Ogawa, Yoko",
-            "naslov": "Darilo števil",
-            "ocena": "5/7"
+            "datum": "2020-08-04",
+            "avtor": "Q, Q",
+            "naslov": "Q",
+            "ocena": "Q"
         },
         {
-            "datum": "2020-08-01",
-            "avtor": "Schwab, V. E.",
-            "naslov": "A Darker Shade Of Magic",
-            "ocena": "5/7"
-        },
-        {
-            "datum": "2020-07-28",
-            "avtor": "Miller, Madeline",
-            "naslov": "Circe",
-            "ocena": "6/7"
-        },
-        {
-            "datum": "2020-08-03",
-            "avtor": "Clarke, Susanna",
-            "naslov": "Jonathan Strange & Mr Norrell",
-            "ocena": "5/7"
+            "datum": "2020-08-04",
+            "avtor": "W, W",
+            "naslov": "W",
+            "ocena": "W"
         }
     ],
-    "kategorije": []
+    "kategorije": [
+        {
+            "ime": "R",
+            "knjige": []
+        },
+        {
+            "ime": "1",
+            "knjige": []
+        }
+    ]
 }

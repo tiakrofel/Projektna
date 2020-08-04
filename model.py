@@ -235,11 +235,14 @@ class Knjigozer:
     def odstrani_prebrano(self, prebrana):
         if len(self.prebrane) == 0:
             raise ValueError('V vaši knjižnici ni nobene prebrane knjige!')
+        seznam = []
         for kategorija in self._kategorije_prebranih[prebrana]:
+            seznam.append(kategorija)
+        for kategorija in seznam:
             self.iz_kategorije(kategorija, prebrana)
         del self._kategorije_prebranih[prebrana]
-        self.prebrane.remove(prebrana)
         self.pri_brisanju_prebranih(prebrana.avtor, prebrana.naslov)
+        self.prebrane.remove(prebrana)
 
     def poisci_neprebrano(self, vrednost):
         return self._iskalnik_neprebranih[vrednost]
@@ -267,14 +270,17 @@ class Knjigozer:
 
     def v_kategorijo(self, kategorija, prebrana):
         if prebrana in kategorija.knjige:
-            return ValueError('Ta knjiga je že v tej kategoriji!')
-        seznam = kategorija.knjige
+            raise ValueError('Ta knjiga je že v tej kategoriji!')
+        seznam = []
+        for knjiga in kategorija.knjige:
+            seznam.append(knjiga)
         seznam.append(prebrana)
         nova = Kategorija(kategorija.ime, seznam, self)
-        self.kategorije.remove(kategorija)
+        self.odstrani_kategorijo(kategorija)
         self.kategorije.append(nova)
-        self._iskalnik_kategorij[kategorija.ime] = nova
-        self._kategorije_prebranih[prebrana].append(nova)
+        self._iskalnik_kategorij[nova.ime] = nova
+        for knjiga in nova.knjige:
+            self._kategorije_prebranih[knjiga].append(nova)
         return nova
 
     def iz_kategorije(self, kategorija, prebrana):
@@ -282,11 +288,16 @@ class Knjigozer:
             raise ValueError(f'V kategoriji "{kategorija}" ni nobene knjige!')
         if prebrana not in kategorija.knjige:
             raise ValueError(f'Te knjige ni v kategoriji "{kategorija}"!')
-        seznam = kategorija.knjige
-        seznam.remove(prebrana)
+        seznam = []
+        for knjiga in kategorija.knjige:
+            if knjiga != prebrana:
+                seznam.append(knjiga)
         nova = Kategorija(kategorija.ime, seznam, self)
+        self.odstrani_kategorijo(kategorija)
+        self.kategorije.append(nova)
         self._iskalnik_kategorij[kategorija.ime] = nova
-        self._kategorije_prebranih[prebrana].remove(kategorija)
+        for knjiga in nova.knjige:
+            self._kategorije_prebranih[knjiga].append(nova)
         return nova
 
     def odstrani_kategorijo(self, kategorija):

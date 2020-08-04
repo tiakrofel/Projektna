@@ -66,8 +66,30 @@
                         <td style="text-align: right; vertical-align: middle;">
                             <div class="field">
                                 <div class="control">
-                                    <input type="submit" class="button is-small is-success is-light"
+                                    <input type="submit" class="button is-small is-link is-light"
                                         value="dodaj v kategorijo">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </form>
+                <form action="/iz-kategorije/" method="POST">
+                    <tr>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div class="field">
+                                % include('_izberi_kategorijo.html', name='kategorija')
+                            </div>
+                        </td>
+                        <td>
+                            <div class="field">
+                                % include('_izberi_prebrano.html', name='prebrana')
+                            </div>    
+                        </td>
+                        <td style="text-align: right; vertical-align: middle;">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="submit" class="button is-small is-warning is-light"
+                                        value="izbriši iz kategorije">
                                 </div>
                             </div>
                         </td>

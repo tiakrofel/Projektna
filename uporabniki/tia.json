@@ -2,23 +2,45 @@
     "uporabnisko_ime": "tia",
     "zasifrirano_geslo": "828c241e7b937140034a9013079ce003f73b3ad89e2d5623651169bfa8659dfb946bf5709cce0e64ad88d627b49f093d0d6c0159f8e9f0aa94f15917fb60d69f",
     "knjigozer": {
-        "neprebrane knjige": [],
+        "neprebrane knjige": [
+            {
+                "avtor": "Schwab, V. E.",
+                "naslov": "A Gathering Of Shadows"
+            }
+        ],
         "trenutna branja": [
             {
                 "avtor": "Schwab, V. E.",
-                "naslov": "A Darker Shade Of Magic",
-                "napredek": 100,
-                "strani": 300
+                "naslov": "A Darker Shade of Magic",
+                "napredek": 252,
+                "strani": 400
             }
         ],
-        "prebrane knjige": [],
+        "prebrane knjige": [
+            {
+                "datum": "2020-08-04",
+                "avtor": "Hardy, G. H.",
+                "naslov": "A Mathematician's Apology",
+                "ocena": "6 / 7"
+            },
+            {
+                "datum": "2020-08-04",
+                "avtor": "Kay, Adam",
+                "naslov": "This Is Going To Hurt",
+                "ocena": "6 / 7"
+            }
+        ],
         "kategorije": [
             {
-                "ime": "Otroške",
+                "ime": "Mitološko obarvane",
                 "knjige": []
             },
             {
                 "ime": "Najljubše",
+                "knjige": []
+            },
+            {
+                "ime": "Moje",
                 "knjige": []
             }
         ]
