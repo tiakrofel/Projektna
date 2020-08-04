@@ -5,11 +5,9 @@ import hashlib
 from datetime import date
 from model import Knjigozer, Uporabnik
 
-# DATOTEKA_S_KNJIGAMI = 'knjiznica.json'
-
 imenik_s_podatki = 'uporabniki'
 uporabniki = {}
-skrivnost = 'TO JE ENA HUDA SKRIVNOST'
+skrivnost = 'SKRIVNOST'
 
 if not os.path.isdir(imenik_s_podatki):
     os.mkdir(imenik_s_podatki)
@@ -17,11 +15,6 @@ if not os.path.isdir(imenik_s_podatki):
 for ime_datoteke in os.listdir(imenik_s_podatki):
     uporabnik = Uporabnik.nalozi_knjige(os.path.join(imenik_s_podatki, ime_datoteke))
     uporabniki[uporabnik.uporabnisko_ime] = uporabnik
-
-# try:
-#     knjigozer = Knjigozer.nalozi_knjige(DATOTEKA_S_KNJIGAMI)
-# except FileNotFoundError:
-#     knjigozer = Knjigozer()
 
 def trenutni_uporabnik():
     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=skrivnost)
@@ -83,11 +76,6 @@ def odjava():
 def pomoc():
     knjigozer = uporabnikov_knjigozer()
     return bottle.template('pomoc_uporabniku.html', knjigozer=knjigozer)
-
-@bottle.get('/iskalnik/')
-def iskalnik():
-    knjigozer = uporabnikov_knjigozer()
-    return bottle.template('iskalnik.html', knjigozer=knjigozer)
 
 @bottle.get('/neprebrane/')
 def stran_neprebranih():
