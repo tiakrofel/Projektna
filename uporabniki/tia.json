@@ -22,25 +22,15 @@
                 "avtor": "Hardy, G. H.",
                 "naslov": "A Mathematician's Apology",
                 "ocena": "6 / 7"
-            },
-            {
-                "datum": "2020-08-04",
-                "avtor": "Kay, Adam",
-                "naslov": "This Is Going To Hurt",
-                "ocena": "6 / 7"
             }
         ],
         "kategorije": [
             {
-                "ime": "Mitološko obarvane",
-                "knjige": []
-            },
-            {
-                "ime": "Najljubše",
-                "knjige": []
-            },
-            {
                 "ime": "Moje",
+                "knjige": []
+            },
+            {
+                "ime": "Mitološko obarvane",
                 "knjige": []
             }
         ]
