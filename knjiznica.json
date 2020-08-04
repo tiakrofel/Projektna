@@ -1,35 +1,55 @@
 {
-    "neprebrane knjige": [],
+    "neprebrane knjige": [
+        {
+            "avtor": "Clarke, Susanna",
+            "naslov": "Jonathan Strange & Mr Norrell"
+        },
+        {
+            "avtor": "Potočnik, Hubert",
+            "naslov": "Stopinje in sledovi živali"
+        },
+        {
+            "avtor": "Carroll, Lewis",
+            "naslov": "Alice's Advenutes in Wonderland"
+        }
+    ],
     "trenutna branja": [
         {
-            "avtor": "B, B",
-            "naslov": "B",
-            "napredek": 20,
-            "strani": 100
+            "avtor": "Fry, Stephen",
+            "naslov": "Mythos",
+            "napredek": 100,
+            "strani": 200
+        },
+        {
+            "avtor": "Schwab, V. E.",
+            "naslov": "A Darker Shade of Magic",
+            "napredek": 300,
+            "strani": 400
         }
     ],
     "prebrane knjige": [
         {
             "datum": "2020-08-04",
-            "avtor": "Q, Q",
-            "naslov": "Q",
-            "ocena": "Q"
+            "avtor": "Alighieri, Dante",
+            "naslov": "Božanska komedija",
+            "ocena": "meh"
         },
         {
             "datum": "2020-08-04",
-            "avtor": "W, W",
-            "naslov": "W",
-            "ocena": "W"
+            "avtor": "Schwab, Gustav",
+            "naslov": "Najlepše antične pripovedke",
+            "ocena": "5/7"
         }
     ],
     "kategorije": [
         {
-            "ime": "R",
-            "knjige": []
-        },
-        {
-            "ime": "1",
-            "knjige": []
+            "ime": "Grška mitologija",
+            "knjige": [
+                {
+                    "avtor": "Schwab, Gustav",
+                    "naslov": "Najlepše antične pripovedke"
+                }
+            ]
         }
     ]
 }
