@@ -148,10 +148,7 @@ def ogled_knjig():
 def urejanje_neprebranih():
     print(krepko('Vse vaše neprebrane knjige:'))
     print()
-    if len(knjigozer.neprebrane) == 0:
-            print(rdece('V vaši knjižnici ni nobene neprebrane knjige!'))
-    else:
-        knjigozer.ogled_neprebranih()
+    knjigozer.ogled_neprebranih()
     print()
     while True:
         try:
