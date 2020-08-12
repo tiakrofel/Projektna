@@ -9,6 +9,19 @@ imenik_s_podatki = 'uporabniki'
 uporabniki = {}
 skrivnost = 'SKRIVNOST'
 
+zacetni_knjigozer = Knjigozer()
+zacetni_knjigozer.dodaj_neprebrano('Shakespeare, William', 'Macbeth')
+zacetni_knjigozer.dodaj_neprebrano('Schwab, Gustav', 'Najlepše antične pripovedke')
+zacetni_knjigozer.dodaj_trenutno('Verne, Jules', 'Potovanje v središče zemlje', 276, 150)
+zacetni_knjigozer.dodaj_trenutno('Tolstoj, Lev Nikolajevič', 'Vojna in mir', 1225, 500)
+prebrana1 = zacetni_knjigozer.dodaj_prebrano(date.today(), 'Tartt, Donna', 'Lišček', 'Odlično branje')
+prebrana2 = zacetni_knjigozer.dodaj_prebrano(date.today(), 'Cankar, Ivan', 'Hlapci', '2 / 10')
+prebrana3 = zacetni_knjigozer.dodaj_prebrano(date.today(), 'Ogawa, Yoko', 'Darilo števil', 'Čudovita knjiga')
+kategorija1 = zacetni_knjigozer.nova_kategorija('Knjige slovenskih avtorjev')
+kategorija2 = zacetni_knjigozer.nova_kategorija('Nagrajene knjige')
+zacetni_knjigozer.v_kategorijo(kategorija1, prebrana2)
+zacetni_knjigozer.v_kategorijo(kategorija2, prebrana1)
+
 if not os.path.isdir(imenik_s_podatki):
     os.mkdir(imenik_s_podatki)
 
@@ -28,6 +41,24 @@ def uporabnikov_knjigozer():
 def shrani_trenutnega_uporabnika():
     uporabnik = trenutni_uporabnik()
     uporabnik.shrani_knjige(os.path.join('uporabniki', f'{uporabnik.uporabnisko_ime}.json'))
+
+def poklicana_neprebrana(poklicana):
+    knjigozer = uporabnikov_knjigozer()
+    urejena = tuple(poklicana.split('; '))
+    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    return neprebrana
+
+def poklicana_trenutna(poklicana):
+    knjigozer = uporabnikov_knjigozer()
+    urejena = tuple(poklicana.split('; '))
+    trenutna = knjigozer.poisci_trenutno(urejena)
+    return trenutna
+
+def poklicana_prebrana(poklicana):
+    knjigozer = uporabnikov_knjigozer()
+    urejena = tuple(poklicana.split('; '))
+    prebrana = knjigozer.poisci_prebrano(urejena)
+    return prebrana
 
 @bottle.get('/')
 def osnovna_stran():
@@ -58,7 +89,7 @@ def prijava_post():
         uporabnik = Uporabnik(
             uporabnisko_ime,
             zasifrirano_geslo,
-            Knjigozer()
+            zacetni_knjigozer
         )
         uporabniki[uporabnisko_ime] = uporabnik
     else:
@@ -132,8 +163,7 @@ def dodaj_prebrano():
 def izberi_trenutno():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('neprebrana')
-    urejena = tuple(poklicana.split('; '))
-    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    neprebrana = poklicana_neprebrana(poklicana)
     strani = int(bottle.request.forms.getunicode('strani'))
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.izberi_trenutno(neprebrana, strani, napredek)
@@ -144,8 +174,7 @@ def izberi_trenutno():
 def posodobi_trenutno():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('trenutna')
-    urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
+    trenutna = poklicana_trenutna(poklicana)
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.posodobi_trenutno(trenutna, napredek)
     shrani_trenutnega_uporabnika()
@@ -155,8 +184,7 @@ def posodobi_trenutno():
 def opuscena_trenutna():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('trenutna')
-    urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
+    trenutna = poklicana_trenutna(poklicana)
     knjigozer.opuscena_trenutna(trenutna)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/trenutne/')
@@ -165,8 +193,7 @@ def opuscena_trenutna():
 def ponovno_brana():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('prebrana')
-    urejena = tuple(poklicana.split('; '))
-    prebrana = knjigozer.poisci_prebrano(urejena)
+    prebrana = poklicana_prebrana(poklicana)
     strani = int(bottle.request.forms.getunicode('strani'))
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.ponovno_brana(prebrana, strani, napredek)
@@ -178,8 +205,7 @@ def direktno_prebrana():
     knjigozer = uporabnikov_knjigozer()
     datum = date.today().strftime('%Y-%m-%d')
     poklicana = bottle.request.forms.getunicode('neprebrana')
-    urejena = tuple(poklicana.split('; '))
-    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    neprebrana = poklicana_neprebrana(poklicana)
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.direktno_prebrana(datum, neprebrana, ocena)
     shrani_trenutnega_uporabnika()
@@ -190,8 +216,7 @@ def dokoncana():
     knjigozer = uporabnikov_knjigozer()
     datum = date.today().strftime('%Y-%m-%d')
     poklicana = bottle.request.forms.getunicode('trenutna')
-    urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
+    trenutna = poklicana_trenutna(poklicana)
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.dokoncana(datum, trenutna, ocena)
     shrani_trenutnega_uporabnika()
@@ -201,8 +226,7 @@ def dokoncana():
 def odstrani_neprebrano():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('neprebrana')
-    urejena = tuple(poklicana.split('; '))
-    neprebrana = knjigozer.poisci_neprebrano(urejena)
+    neprebrana = poklicana_neprebrana(poklicana)
     knjigozer.odstrani_neprebrano(neprebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/neprebrane/')
@@ -211,8 +235,7 @@ def odstrani_neprebrano():
 def odstrani_trenutno():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('trenutna')
-    urejena = tuple(poklicana.split('; '))
-    trenutna = knjigozer.poisci_trenutno(urejena)
+    trenutna = poklicana_trenutna(poklicana)
     knjigozer.odstrani_trenutno(trenutna)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/trenutne/')
@@ -221,8 +244,7 @@ def odstrani_trenutno():
 def odstrani_prebrano():
     knjigozer = uporabnikov_knjigozer()
     poklicana = bottle.request.forms.getunicode('prebrana')
-    urejena = tuple(poklicana.split('; '))
-    prebrana = knjigozer.poisci_prebrano(urejena)
+    prebrana = poklicana_prebrana(poklicana)
     knjigozer.odstrani_prebrano(prebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/prebrane/')
@@ -235,15 +257,13 @@ def nova_kategorija():
     shrani_trenutnega_uporabnika()
     bottle.redirect('/kategorije/')
 
-
 @bottle.post('/v-kategorijo/')
 def v_kategorijo():
     knjigozer = uporabnikov_knjigozer()
     ime = bottle.request.forms.getunicode('kategorija')
     kategorija = knjigozer.poisci_kategorijo(ime)
     poklicana = bottle.request.forms.getunicode('prebrana')
-    urejena = tuple(poklicana.split('; '))
-    prebrana = knjigozer.poisci_prebrano(urejena)
+    prebrana = poklicana_prebrana(poklicana)
     knjigozer.v_kategorijo(kategorija, prebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/kategorije/')
@@ -254,8 +274,7 @@ def iz_kategorijo():
     ime = bottle.request.forms.getunicode('kategorija')
     kategorija = knjigozer.poisci_kategorijo(ime)
     poklicana = bottle.request.forms.getunicode('prebrana')
-    urejena = tuple(poklicana.split('; '))
-    prebrana = knjigozer.poisci_prebrano(urejena)
+    prebrana = poklicana_prebrana(poklicana)
     knjigozer.iz_kategorije(kategorija, prebrana)
     shrani_trenutnega_uporabnika()
     bottle.redirect('/kategorije/')
