@@ -282,13 +282,15 @@ class Knjigozer:
         elif ime == '':
             raise ValueError('Niste vnesli vseh zahtevanih podatkov!')
         knjige = []
-        kategorija = Kategorija(ime, knjige, self)
-        self.kategorije.append(kategorija)
-        self._iskalnik_kategorij[ime] = kategorija
-        return kategorija
+        nova = Kategorija(ime, knjige, self)
+        self.kategorije.append(nova)
+        self._iskalnik_kategorij[ime] = nova
+        return nova
 
     def v_kategorijo(self, kategorija, prebrana):
-        if prebrana in kategorija.knjige:
+        if kategorija not in self.kategorije:
+            raise ValueError('Te kategorije ni v vaši knjižnici!')
+        elif prebrana in kategorija.knjige:
             raise ValueError('Ta knjiga je že v tej kategoriji!')
         seznam = []
         for knjiga in kategorija.knjige:
@@ -375,7 +377,8 @@ class Knjigozer:
             for knjiga in kategorija['knjige']:
                 prava = knjigozer._iskalnik_prebranih[(
                     knjiga['avtor'], knjiga['naslov'])]
-                knjigozer.v_kategorijo(nova_kategorija, prava)
+                posodobljena = knjigozer.v_kategorijo(nova_kategorija, prava)
+                nova_kategorija = posodobljena
         return knjigozer
 
     def shrani_knjige(self, ime_datoteke):
