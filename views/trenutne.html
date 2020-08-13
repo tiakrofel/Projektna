@@ -6,7 +6,8 @@
             Trenutna branja
         </h1>
         <h2 class="subtitle">
-            Tukaj lahko na seznam trenutnih branj dodajate knjige, ki jih še ni v vaši osebni knjižnici.<br>
+            Tukaj lahko na seznam trenutnih branj dodajate knjige,
+            ki jih še ni v vaši osebni knjižnici.<br>
             Prav tako lahko knjige, ki so na tem seznamu, urejate.
         </h2>
         <div class="container">
@@ -30,17 +31,20 @@
                     <form action="/dodaj-trenutno/" method="POST">
                         <tr>
                             <td>
-                                <input class="input is-small is-rounded is-dark" type="text" id="avtor" name="avtor"
+                                <input class="input is-small is-rounded is-dark" type="text" 
+                                    id="avtor" name="avtor"
                                     placeholder="priimek, ime" pattern="(?=.*[,][ ].*).*"
                                     title='Avtorja vnesite v obliki: "priimek, ime"' required>
                             </td>
                             <td>
-                                <input class="input is-small is-rounded is-dark" type="text" id="naslov" name="naslov"
+                                <input class="input is-small is-rounded is-dark" type="text" 
+                                    id="naslov" name="naslov"
                                     placeholder="naslov" required>
                             </td>
                             <td>
-                                <input class="input is-small is-rounded is-dark" type="text" id="napredek"
-                                    name="napredek" placeholder="število prebranih strani" pattern="[0-9]+"
+                                <input class="input is-small is-rounded is-dark" type="text" 
+                                    id="napredek" name="napredek" 
+                                    placeholder="število prebranih strani" pattern="[0-9]+"
                                     title='Tukaj je treba vnesti številko' required>
                             </td>
                             <td>

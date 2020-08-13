@@ -38,8 +38,8 @@
         <div class="container">
             <div class="navbar-brand">
                 % if defined('trenutna_stran'):
-                <a class="navbar-item is-active has-tooltip-bottom" data-tooltip="Oglejte si osebno knjižnico"
-                    href="/">
+                <a class="navbar-item is-active has-tooltip-bottom" 
+                    data-tooltip="Oglejte si osebno knjižnico" href="/">
                     % else:
                     <a class="navbar-item is-active" href="/prijava/">
                         % end
@@ -62,8 +62,8 @@
                         Neprebrane knjige
                     </a>
 
-                    <a class="navbar-item is-active has-tooltip-bottom" data-tooltip="Uredite trenutna branja"
-                        href="/trenutne/">
+                    <a class="navbar-item is-active has-tooltip-bottom" 
+                        data-tooltip="Uredite trenutna branja" href="/trenutne/">
                         <span class="icon is-large">
                             <i class="fas fa-bookmark"></i>
                         </span>
@@ -89,7 +89,8 @@
                             </p>
                             <p class="control">
                             <form method="POST" action="/odjava/">
-                                <input type="submit" class="button is-light is-small has-text-black" value="Odjava">
+                                <input type="submit" 
+                                    class="button is-light is-small has-text-black" value="Odjava">
                             </form>
                             </p>
                         </div>
@@ -105,7 +106,8 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading has-text-dark">Število neprebranih knjig</p>
-                    <a class="title is-active has-text-dark has-tooltip-bottom" data-tooltip="Uredite neprebrane knjige"
+                    <a class="title is-active has-text-dark has-tooltip-bottom" 
+                        data-tooltip="Uredite neprebrane knjige"
                         href="/neprebrane/">{{len(knjigozer.neprebrane)}}</a>
                 </div>
             </div>
