@@ -200,7 +200,7 @@ def izberi_trenutno():
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.izberi_trenutno(neprebrana, strani, napredek)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/')
 
 
 @bottle.post('/posodobi-trenutno/')
@@ -211,7 +211,7 @@ def posodobi_trenutno():
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.posodobi_trenutno(trenutna, napredek)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/')
 
 
 @bottle.post('/opuscena-trenutna/')
@@ -233,7 +233,7 @@ def ponovno_brana():
     napredek = int(bottle.request.forms.getunicode('napredek'))
     knjigozer.ponovno_brana(prebrana, strani, napredek)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/')
 
 
 @bottle.post('/direktno-prebrana/')
@@ -245,7 +245,7 @@ def direktno_prebrana():
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.direktno_prebrana(datum, neprebrana, ocena)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/')
 
 
 @bottle.post('/dokoncana/')
@@ -257,7 +257,7 @@ def dokoncana():
     ocena = bottle.request.forms.getunicode('ocena')
     knjigozer.dokoncana(datum, trenutna, ocena)
     shrani_trenutnega_uporabnika()
-    bottle.redirect('/posodabljanje/')
+    bottle.redirect('/')
 
 
 @bottle.post('/odstrani-neprebrano/')
