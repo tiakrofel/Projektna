@@ -331,7 +331,10 @@ class Knjigozer:
         del self._iskalnik_kategorij[kategorija.ime]
 
     def __str__(self):
-        return f'Neprebrane knjige: {self.neprebrane}, trenutna branja: {self.trenutne}, prebrane knjige: {self.prebrane}, kategorije: {self.kategorije}'
+        return f'''Neprebrane knjige: {self.neprebrane}, 
+                trenutna branja: {self.trenutne}, 
+                prebrane knjige: {self.prebrane}, 
+                kategorije: {self.kategorije}'''
 
     def slovar_knjig(self):
         return {
