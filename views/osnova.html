@@ -38,8 +38,8 @@
         <div class="container">
             <div class="navbar-brand">
                 % if defined('trenutna_stran'):
-                <a class="navbar-item is-active has-tooltip-bottom"
-                    data-tooltip="Oglejte si vašo osebno knjižnico" href="/">
+                <a class="navbar-item is-active has-tooltip-bottom" data-tooltip="Oglejte si osebno knjižnico"
+                    href="/">
                     % else:
                     <a class="navbar-item is-active" href="/prijava/">
                         % end
@@ -62,8 +62,8 @@
                         Neprebrane knjige
                     </a>
 
-                    <a class="navbar-item is-active has-tooltip-bottom"
-                        data-tooltip="Uredite trenutna branja" href="/trenutne/">
+                    <a class="navbar-item is-active has-tooltip-bottom" data-tooltip="Uredite trenutna branja"
+                        href="/trenutne/">
                         <span class="icon is-large">
                             <i class="fas fa-bookmark"></i>
                         </span>
@@ -104,20 +104,24 @@
         <nav class="level">
             <div class="level-item has-text-centered">
                 <div>
-                    <a class="heading is-active has-text-dark" href="/neprebrane/">Število neprebranih knjig</a>
-                    <a class="title is-active has-text-dark" href="/neprebrane/">{{len(knjigozer.neprebrane)}}</a>
+                    <p class="heading has-text-dark">Število neprebranih knjig</p>
+                    <a class="title is-active has-text-dark has-tooltip-bottom" data-tooltip="Uredite neprebrane knjige"
+                        href="/neprebrane/">{{len(knjigozer.neprebrane)}}</a>
                 </div>
             </div>
             <div class="level-item has-text-centered">
                 <div>
-                    <a class="heading is-active has-text-dark" href="/trenutne/">Število trenutnih branj</a>
-                    <a class="title is-active has-text-dark" href="/trenutne/">{{len(knjigozer.trenutne)}}</a>
+                    <p class="heading has-text-dark">Število trenutnih branj</p>
+                    <a class="title is-active has-text-dark has-tooltip-bottom" data-tooltip="Uredite trenutna branja"
+                        href="/trenutne/">{{len(knjigozer.trenutne)}}</a>
                 </div>
             </div>
             <div class="level-item has-text-centered">
                 <div>
-                    <a class="heading is-active has-text-dark" href="/prebrane/">Število prebranih knjig</a>
-                    <a class="title is-active has-text-dark" href="/prebrane/">{{len(knjigozer.prebrane)}}</a>
+                    <p class="heading has-text-dark">Število prebranih knjig</p>
+                    <a class="title is-active has-text-dark has-tooltip-bottom"
+                        data-tooltip="Uredite prebrane knjige in kategorije"
+                        href="/prebrane/">{{len(knjigozer.prebrane)}}</a>
                 </div>
             </div>
         </nav>
