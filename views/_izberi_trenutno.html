@@ -2,7 +2,7 @@
     <div class="select is-fullwidth is-rounded is-dark is-small">
         <select name="{{name}}" required>
             <option disabled selected value> -- izberite trenutno branje -- </option>
-            % for trenutna in knjigozer.trenutne:
+            % for trenutna in sorted(knjigozer.trenutne):
             <option value="{{trenutna.avtor}}; {{trenutna.naslov}}">{{trenutna.avtor}}: {{trenutna.naslov}}</option>
             % end
         </select>
