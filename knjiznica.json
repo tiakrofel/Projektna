@@ -1,50 +1,56 @@
 {
     "neprebrane knjige": [
         {
-            "avtor": "Clarke, Susanna",
-            "naslov": "Jonathan Strange & Mr Norrell"
-        },
-        {
             "avtor": "Potočnik, Hubert",
             "naslov": "Stopinje in sledovi živali"
         },
         {
-            "avtor": "Carroll, Lewis",
-            "naslov": "Alice's Advenutes in Wonderland"
+            "avtor": "Clarke, Susanna",
+            "naslov": "Jonathan Strange & Mr Norrell"
         }
     ],
     "trenutna branja": [
         {
-            "avtor": "Fry, Stephen",
-            "naslov": "Mythos",
-            "napredek": 100,
-            "strani": 200
+            "avtor": "Alighieri, Dante",
+            "naslov": "Božanska komedija",
+            "napredek": 200,
+            "strani": 1000
         },
         {
-            "avtor": "Schwab, V. E.",
-            "naslov": "A Darker Shade of Magic",
-            "napredek": 300,
-            "strani": 400
+            "avtor": "Fry, Stephen",
+            "naslov": "Mythos",
+            "napredek": 150,
+            "strani": 200
         }
     ],
     "prebrane knjige": [
         {
-            "datum": "2020-08-04",
-            "avtor": "Alighieri, Dante",
-            "naslov": "Božanska komedija",
-            "ocena": "meh"
+            "datum": "2020-08-13",
+            "avtor": "Carroll, Lewis",
+            "naslov": "Alice's Advenutes in Wonderland",
+            "ocena": "9 / 10"
         },
         {
-            "datum": "2020-08-04",
+            "datum": "2020-08-13",
+            "avtor": "Stiefvater, Maggie",
+            "naslov": "All The Crooked Saints",
+            "ocena": "Prijetno branje"
+        },
+        {
+            "datum": "2020-08-13",
             "avtor": "Schwab, Gustav",
             "naslov": "Najlepše antične pripovedke",
-            "ocena": "5/7"
+            "ocena": "Odličen uvod v grško mitologijo"
         }
     ],
     "kategorije": [
         {
-            "ime": "Grška mitologija",
+            "ime": "Vredne ponovnega branja",
             "knjige": [
+                {
+                    "avtor": "Carroll, Lewis",
+                    "naslov": "Alice's Advenutes in Wonderland"
+                },
                 {
                     "avtor": "Schwab, Gustav",
                     "naslov": "Najlepše antične pripovedke"
