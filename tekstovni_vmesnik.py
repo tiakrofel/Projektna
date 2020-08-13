@@ -228,7 +228,7 @@ def urejanje_trenutnih():
                 izberi_trenutno),
                 '2': ('med trenutna branja dodajte eno izmed vaših prebranih knjig', 
                 ponovno_brana),
-                '3': ('med trenutna branja dodajte eno izmed knjig, ki še ni zabeležena v vaši knjižnici', 
+                '3': ('med trenutna branja dodajte knjigo, ki še ni zabeležena v vaši knjižnici', 
                 dodaj_trenutno),
                 '4': ('zabeležite napredek v enem izmed trenutnih branj', 
                 posodobi_trenutno),
